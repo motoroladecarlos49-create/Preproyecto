@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cyrlyqyqrgupl"
+path="res://.godot/imported/dialago.dialogue-849e63f05999b414e93911391dbf6232.tres"
+
+[deps]
+
+source_file="res://Dialagos/dialago.dialogue"
+dest_files=["res://.godot/imported/dialago.dialogue-849e63f05999b414e93911391dbf6232.tres"]
+
+[params]
+
+defaults=true
