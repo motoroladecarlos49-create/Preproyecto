@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1mdplcxq44wo"
-path="res://.godot/imported/250 sin título_20261009140950.png-9806b313840ea30840a47a29881637f5.ctex"
+uid="uid://diq5ng61sq35x"
+path="res://.godot/imported/lanterna_icono.png-01dcea70d3768d7dcab6821af0a3a022.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imagenes/250 sin título_20261009140950.png"
-dest_files=["res://.godot/imported/250 sin título_20261009140950.png-9806b313840ea30840a47a29881637f5.ctex"]
+source_file="res://Imagenes/texturas_items/lanterna_icono.png"
+dest_files=["res://.godot/imported/lanterna_icono.png-01dcea70d3768d7dcab6821af0a3a022.ctex"]
 
 [params]
 

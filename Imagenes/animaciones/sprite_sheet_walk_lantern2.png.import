@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oa3wrq5g84ll"
-path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-db3384adf141148f3035b636ea4c4c49.ctex"
+uid="uid://crbplcm20yrlt"
+path="res://.godot/imported/sprite_sheet_walk_lantern2.png-af4273990f1fc771e31c70a9bbbda24e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imagenes/2d_lights_and_shadows_neutral_point_light.webp"
-dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-db3384adf141148f3035b636ea4c4c49.ctex"]
+source_file="res://Imagenes/animaciones/sprite_sheet_walk_lantern2.png"
+dest_files=["res://.godot/imported/sprite_sheet_walk_lantern2.png-af4273990f1fc771e31c70a9bbbda24e.ctex"]
 
 [params]
 

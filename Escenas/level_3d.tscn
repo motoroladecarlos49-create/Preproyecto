@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bbcmtuwdx3hmj"]
+
+[ext_resource type="Texture2D" path="res://Imagenes/2d_lights_and_shadows_neutral_point_light.webp" id="1_i8hrn"]
+[ext_resource type="PackedScene" uid="uid://bccooec3fhrtm" path="res://Escenas/player3D.tscn" id="1_usqj6"]
+[ext_resource type="Texture2D" path="res://Imagenes/S.webp" id="2_drlo1"]
+[ext_resource type="Texture2D" path="res://Imagenes/crosshair-000.png" id="4_6joj8"]
+
+[sub_resource type="Environment" id="Environment_p77xk"]
+background_mode = 1
+background_color = Color(0.681699, 0.6816991, 0.68169886, 1)
+background_energy_multiplier = 0.01
+ambient_light_color = Color(0.74837965, 0.74837965, 0.74837965, 1)
+ambient_light_energy = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4e70g"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vbfun"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbfun"]
+albedo_color = Color(0.3647059, 0.6666667, 1, 1)
+emission_enabled = true
+emission = Color(0.10795795, 0.41044873, 0.73676986, 1)
+emission_energy_multiplier = 28.45
+emission_on_uv2 = true
+emission_texture = ExtResource("1_i8hrn")
+anisotropy = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vbfun"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nyvdy"]
+albedo_texture = ExtResource("2_drlo1")
+uv1_scale = Vector3(80, 80, 80)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_drlo1"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8g73"]
+albedo_color = Color(0.5562695, 0.3055066, 0.44073597, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_usqj6"]
+
+[node name="level3D" type="Node3D" unique_id=509898034]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1730620130]
+environment = SubResource("Environment_p77xk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1762197757]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0, 0, 0, 1)
+light_energy = 0.62
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="Cubo" type="RigidBody3D" parent="." unique_id=1835411590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0407023, 0.9762316, 0.6201104)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubo" unique_id=74250312]
+shape = SubResource("BoxShape3D_4e70g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubo" unique_id=530964736]
+mesh = SubResource("BoxMesh_vbfun")
+surface_material_override/0 = SubResource("StandardMaterial3D_vbfun")
+
+[node name="Plano" type="MeshInstance3D" parent="." unique_id=1248750785]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_vbfun")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyvdy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plano" unique_id=1758869594]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plano/StaticBody3D" unique_id=223574540]
+shape = SubResource("ConcavePolygonShape3D_drlo1")
+
+[node name="Player" parent="." unique_id=1410393463 instance=ExtResource("1_usqj6")]
+transform = Transform3D(-0.18279798, 0, -0.23787577, 0, 0.29999998, 0, 0.23787577, 0, -0.18279798, 0, 1.3825023, 0)
+
+[node name="Cubo2" type="RigidBody3D" parent="." unique_id=893215564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10963702, 0.8469744, 2.58918)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubo2" unique_id=1182200858]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_vbfun")
+surface_material_override/0 = SubResource("StandardMaterial3D_r8g73")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubo2" unique_id=1290976132]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_usqj6")
+
+[node name="Mira" type="CanvasLayer" parent="." unique_id=179485503]
+
+[node name="CenterContainer" type="CenterContainer" parent="Mira" unique_id=1480346523]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Mira/CenterContainer" unique_id=1375945522]
+layout_mode = 2
+texture = ExtResource("4_6joj8")

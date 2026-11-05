@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlq2pn6l1obxb"
-path="res://.godot/imported/Prota.jpeg-9fac79c72af99a835c733abf37f32c29.ctex"
+uid="uid://b1mdplcxq44wo"
+path="res://.godot/imported/250 sin título_20261009140950.png-e6898b3f83f84bc83b00413bb6a0d75d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imagenes/Prota.jpeg"
-dest_files=["res://.godot/imported/Prota.jpeg-9fac79c72af99a835c733abf37f32c29.ctex"]
+source_file="res://Imagenes/animaciones/250 sin título_20261009140950.png"
+dest_files=["res://.godot/imported/250 sin título_20261009140950.png-e6898b3f83f84bc83b00413bb6a0d75d.ctex"]
 
 [params]
 

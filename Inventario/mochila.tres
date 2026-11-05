@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Mochila" format=3 uid="uid://ddj71y3f8haia"]
+
+[ext_resource type="Script" uid="uid://d2cuhp7pyfmxx" path="res://Inventario/inventario.gd" id="1_shmvh"]
+
+[resource]
+script = ExtResource("1_shmvh")
+metadata/_custom_type_script = "uid://d2cuhp7pyfmxx"

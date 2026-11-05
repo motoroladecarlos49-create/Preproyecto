@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cplu4e2dlx3ql"]
+
+[ext_resource type="Script" uid="uid://d07v72uojwd7v" path="res://items/linterna_mundo.gd" id="1_2jadm"]
+[ext_resource type="Resource" uid="uid://bu0vn1pnroq03" path="res://items/linterna.tres" id="2_avbck"]
+[ext_resource type="Texture2D" uid="uid://diq5ng61sq35x" path="res://Imagenes/texturas_items/lanterna_icono.png" id="2_vgdyb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
+size = Vector2(38, 86)
+
+[node name="LinternaMundo" type="Area2D" unique_id=1475707383]
+script = ExtResource("1_2jadm")
+data = ExtResource("2_avbck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=779878007]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1785491067]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_vgdyb")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

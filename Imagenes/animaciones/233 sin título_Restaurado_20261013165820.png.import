@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l4h3spsua8nj"
-path="res://.godot/imported/adentro.jpg-17f71bfceea12d0ea691dad830e63dcd.ctex"
+uid="uid://byhkuk88e8occ"
+path="res://.godot/imported/233 sin título_Restaurado_20261013165820.png-7848ae83842e21b1f394bfafe3b9a58f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imagenes/adentro.jpg"
-dest_files=["res://.godot/imported/adentro.jpg-17f71bfceea12d0ea691dad830e63dcd.ctex"]
+source_file="res://Imagenes/animaciones/233 sin título_Restaurado_20261013165820.png"
+dest_files=["res://.godot/imported/233 sin título_Restaurado_20261013165820.png-7848ae83842e21b1f394bfafe3b9a58f.ctex"]
 
 [params]
 

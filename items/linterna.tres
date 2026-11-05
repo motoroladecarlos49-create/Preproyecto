@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bu0vn1pnroq03"]
+
+[ext_resource type="Script" uid="uid://c6hjsj82w85qq" path="res://items/item.gd" id="1_0k0vw"]
+[ext_resource type="Texture2D" uid="uid://diq5ng61sq35x" path="res://Imagenes/texturas_items/lanterna_icono.png" id="1_vwur8"]
+
+[resource]
+script = ExtResource("1_0k0vw")
+nombre = "Linterna"
+icono = ExtResource("1_vwur8")
+apilable = false
+max_cantidad = 1
+metadata/_custom_type_script = "uid://c6hjsj82w85qq"

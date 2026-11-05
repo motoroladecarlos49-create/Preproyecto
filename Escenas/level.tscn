@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cerv0dh4bv3dw"]
 
-[ext_resource type="Texture2D" uid="uid://l4h3spsua8nj" path="res://Imagenes/adentro.jpg" id="1_3kjvw"]
+[ext_resource type="Texture2D" uid="uid://l4h3spsua8nj" path="res://Imagenes/habitaciones-mapa/adentro.jpg" id="1_3kjvw"]
 [ext_resource type="PackedScene" uid="uid://bp3wb2037fc6o" path="res://Escenas/player.tscn" id="1_52a5p"]
+[ext_resource type="PackedScene" uid="uid://cplu4e2dlx3ql" path="res://Escenas/linterna_mundo.tscn" id="1_a1lqj"]
+[ext_resource type="Script" uid="uid://bhjb1qjtnb60o" path="res://Scripts/level.gd" id="1_evxt5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3kjvw"]
 
@@ -25,9 +27,7 @@ size = Vector2(26100, 9855)
 
 [node name="level" type="Node2D" unique_id=945615187]
 scale = Vector2(0.01, 0.01)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1603690487]
-position = Vector2(57200, 32200)
+script = ExtResource("1_evxt5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1787194911]
 physics_material_override = SubResource("PhysicsMaterial_3kjvw")
@@ -64,9 +64,16 @@ shape = SubResource("RectangleShape2D_vbfun")
 position = Vector2(89900, 50500)
 shape = SubResource("RectangleShape2D_fcwek")
 
-[node name="Player" parent="." unique_id=1794548708 instance=ExtResource("1_52a5p")]
+[node name="LinternaMundo" parent="." unique_id=1475707383 instance=ExtResource("1_a1lqj")]
+position = Vector2(82600, 42800)
+scale = Vector2(229.99997, 229.99997)
+
+[node name="player" parent="." unique_id=1794548708 instance=ExtResource("1_52a5p")]
 position = Vector2(59100, 42300)
 scale = Vector2(500, 500)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
 color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1603690487]
+position = Vector2(57200, 32200)

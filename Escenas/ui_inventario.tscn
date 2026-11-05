@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://dwr2plaedyyd8"]
+
+[ext_resource type="Texture2D" uid="uid://db41p2phnsw64" path="res://Imagenes/texturas_items/panel-border-027.png" id="1_2mc5r"]
+[ext_resource type="Script" uid="uid://bpxb1sj3qg68d" path="res://Inventario/ui_inventario.gd" id="1_6oscr"]
+[ext_resource type="PackedScene" uid="uid://c7npqukjy7w1d" path="res://Escenas/espacio.tscn" id="1_ker5q"]
+[ext_resource type="Resource" uid="uid://ddj71y3f8haia" path="res://Inventario/mochila.tres" id="2_1w78w"]
+[ext_resource type="FontFile" uid="uid://c0a0n2n6p0832" path="res://fuente/immortal/IMMORTAL.ttf" id="4_g52vg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hl0mf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dvhv7"]
+texture = ExtResource("1_2mc5r")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+draw_center = false
+
+[node name="UI_inventario" type="Control" unique_id=1844190648]
+modulate = Color(1, 1, 1, 0.7176471)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_6oscr")
+mochila = ExtResource("2_1w78w")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1683587718]
+material = SubResource("ShaderMaterial_hl0mf")
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27517363
+anchor_top = 0.2932099
+anchor_right = 0.7248264
+anchor_bottom = 0.70370394
+offset_top = 1.5258789e-05
+offset_right = -369.99997
+offset_bottom = -190.00009
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.5, 3.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_dvhv7")
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer" unique_id=594266913]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+offset_transform_enabled = true
+columns = 4
+
+[node name="Panel" parent="PanelContainer/GridContainer" unique_id=1884183951 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Panel2" parent="PanelContainer/GridContainer" unique_id=727492677 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel3" parent="PanelContainer/GridContainer" unique_id=85300489 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel4" parent="PanelContainer/GridContainer" unique_id=182826395 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel5" parent="PanelContainer/GridContainer" unique_id=1423027991 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel6" parent="PanelContainer/GridContainer" unique_id=1988227862 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel7" parent="PanelContainer/GridContainer" unique_id=2087230945 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="Panel8" parent="PanelContainer/GridContainer" unique_id=1307661475 instance=ExtResource("1_ker5q")]
+layout_mode = 2
+
+[node name="BtnDrop" type="Button" parent="." unique_id=2071719970]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 150.0
+offset_right = 84.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_g52vg")
+theme_override_font_sizes/font_size = 28
+text = "Drop"
