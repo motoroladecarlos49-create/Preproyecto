@@ -90,6 +90,7 @@ position = Vector2(536.97437, 230.76921)
 shape = SubResource("RectangleShape2D_nyvdy")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
+color = Color(0.5099403, 0.41995478, 0.44029996, 1)
 
 [node name="player" parent="." unique_id=1418956237 instance=ExtResource("2_njrqw")]
 position = Vector2(1588.4618, 549.9999)
