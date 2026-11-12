@@ -157,7 +157,10 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	var colision_jugador: CollisionShape2D = $CollisionShape2D
 	var colision_item: CollisionShape2D = item_suelto.get_node("CollisionShape2D")
 	var desplazamiento_colision = colision_item.global_position - item_suelto.global_position
-	item_suelto.global_position = colision_jugador.global_position - desplazamiento_colision
+	var posicion_alineada = colision_jugador.global_position - desplazamiento_colision
+	# Usa el punto medio entre la alineación de colisiones y el desplazamiento anterior.
+	var posicion_anterior = global_position + Vector2(50, 50)
+	item_suelto.global_position = posicion_alineada.lerp(posicion_anterior, 0.5)
 	item_suelto.z_index = 1
 
 	GameManager.registrar_item_tirado(
