@@ -130,6 +130,11 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 		nuevo_id = item_a_tirar.nombre + "_" + str(Time.get_ticks_usec())
 	item_a_tirar.id_escena = nuevo_id
 
+	# Al soltarlo, deja de estar recogido; si no, linterna_mundo.gd lo elimina.
+	var indice_recogido = GameManager.partida_actual.items_recogidos.find(nuevo_id)
+	if indice_recogido != -1:
+		GameManager.partida_actual.items_recogidos.remove_at(indice_recogido)
+
 	var item_suelto = escena_item_mundo.instantiate()
 	item_suelto.data = item_a_tirar
 	item_suelto.id_unico = nuevo_id
