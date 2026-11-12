@@ -150,9 +150,14 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	item_suelto.data = item_a_tirar
 	item_suelto.id_unico = nuevo_id
 
-	# Primero se agrega al padre; después se fija la posición GLOBAL.
+	# Se agrega primero para que Godot aplique la escala final del objeto.
 	get_parent().add_child(item_suelto)
-	item_suelto.global_position = global_position + Vector2(50, 50)
+	# Alinea el centro de la colisión del objeto con el centro de la
+	# colisión del jugador, en vez de usar un desplazamiento fijo.
+	var colision_jugador: CollisionShape2D = $CollisionShape2D
+	var colision_item: CollisionShape2D = item_suelto.get_node("CollisionShape2D")
+	var desplazamiento_colision = colision_item.global_position - item_suelto.global_position
+	item_suelto.global_position = colision_jugador.global_position - desplazamiento_colision
 	item_suelto.z_index = 1
 
 	GameManager.registrar_item_tirado(
