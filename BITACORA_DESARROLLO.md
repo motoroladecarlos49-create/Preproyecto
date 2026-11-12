@@ -39,6 +39,13 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Commits de código: `1852b79e472e515db687f2cebd7f66af24bbacc8` (GameManager), `1c5daaa0f5d8ffe0ea18b2ba8eb8dba0ed8e05ff` (player).
 - Prueba: pendiente de ejecutar en Godot.
 
+### 2026-11-12 — Soltar objetos a la altura de la colisión
+- Archivo modificado: `Scripts/player.gd`.
+- Cambio: al soltar un objeto, se agrega primero a la escena y luego se calcula su posición para alinear el centro de su `CollisionShape2D` con el centro de la colisión del jugador. Se elimina el desplazamiento fijo `Vector2(50, 50)`.
+- Motivo: que el objeto aparezca a la altura real de la colisión del jugador y que el cálculo respete las escalas de la escena y del objeto.
+- Prueba/estado: cambio subido a GitHub; pendiente de probar dentro de Godot en las distintas habitaciones.
+- Commit de código: f927c7833c316e43e1706f8706cc9b670053bf82.
+
 ## Reglas para futuras modificaciones
 1. Antes de editar, leer la versión actual de los archivos remotos; no asumir que el código sigue igual que en mensajes anteriores.
 2. Hacer cambios pequeños y específicos, conservando el resto del código.
