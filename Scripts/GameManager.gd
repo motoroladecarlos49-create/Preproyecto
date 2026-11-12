@@ -86,10 +86,17 @@ func restaurar_items_tirados(raiz_escena: Node) -> void:
 		objeto.data = registro.get("data") as Item
 		objeto.id_unico = id
 		if objeto.data == null:
-			objeto.queue_free()
+			objeto.free()
 			continue
-		raiz_escena.add_child(objeto)
-		objeto.global_position = registro.get("posicion", Vector2.ZERO)
-		objeto.z_index = 1
+		# La escena todavía puede estar configurando sus hijos desde _ready().
+		# Diferimos el agregado y la posición hasta que termine esa configuración.
+		_agregar_item_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector2.ZERO))
+
+func _agregar_item_restaurado(raiz_escena: Node, objeto: Node2D, posicion: Vector2) -> void:
+	if not is_instance_valid(raiz_escena) or not is_instance_valid(objeto):
+		return
+	raiz_escena.add_child(objeto)
+	objeto.global_position = posicion
+	objeto.z_index = 1
 
 var is_dialogue_active = false
