@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var mochila : Mochila 
 var escena_item_mundo: PackedScene
+var ui_inventario: Control = null
 
 @onready var sprite_normal: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite_lampara: AnimatedSprite2D = $SpriteLampara
@@ -34,12 +35,13 @@ func _ready() -> void:
 	else:
 		mochila = GameManager.mochila_global
 		
-	var ui = find_child("UI_inventario", true, false)
-	if ui != null:
-		ui.mochila = mochila
-		ui.conectar_mochila()
+	ui_inventario = find_child("UI_inventario", true, false) as Control
+	if ui_inventario != null:
+		ui_inventario.mochila = mochila
+		ui_inventario.conectar_mochila()
 	
-	mochila.item_seleccionado_cambiado.connect(_on_mochila_item_seleccionado_cambiado)
+	if not mochila.item_seleccionado_cambiado.is_connected(_on_mochila_item_seleccionado_cambiado):
+		mochila.item_seleccionado_cambiado.connect(_on_mochila_item_seleccionado_cambiado)
 
 	# Recupera los objetos que se habían soltado en esta habitación.
 	GameManager.restaurar_items_tirados(get_parent())
@@ -51,6 +53,10 @@ func _ready() -> void:
 			last_direction = GameManager.direccion_salida
 			update_animation("idle")
 		GameManager.puerta_destino_id = ""
+
+	# La mochila persiste entre escenas, pero el jugador se crea de nuevo.
+	# Aplicamos la selección guardada para recuperar el sprite y su animación.
+	_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
 
 func _process(_delta):
 	if camera:
@@ -154,7 +160,9 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	mochila.remover_item_por_clave(clave)
 
 func get_input() -> void:
-	if GameManager.is_dialogue_active:
+	# Frenar también la velocidad ya acumulada al abrir el inventario.
+	# No alcanza con ignorar nuevas teclas: move_and_slide() seguiría usando velocity.
+	if GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
 		velocity = Vector2.ZERO
 		update_animation("idle")
 		return
