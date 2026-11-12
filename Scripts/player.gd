@@ -41,6 +41,9 @@ func _ready() -> void:
 	
 	mochila.item_seleccionado_cambiado.connect(_on_mochila_item_seleccionado_cambiado)
 
+	# Recupera los objetos que se habían soltado en esta habitación.
+	GameManager.restaurar_items_tirados(get_parent())
+
 	if GameManager.puerta_destino_id != "":
 		var spawn_point = get_parent().find_child(GameManager.puerta_destino_id, true, false)
 		if spawn_point != null:
@@ -81,7 +84,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				
 			var exito = mochila.agregar_item(item_cerca.data)
 			if exito:
-				GameManager.partida_actual.items_recogidos.append(item_cerca.data.id_escena)
+				var id_recogido = item_cerca.id_unico
+				if id_recogido == "":
+					id_recogido = item_cerca.data.id_escena
+				if id_recogido != "" and not GameManager.partida_actual.items_recogidos.has(id_recogido):
+					GameManager.partida_actual.items_recogidos.append(id_recogido)
+				GameManager.quitar_item_tirado(id_recogido)
 				item_cerca.queue_free() 
 				item_cerca = null
 				
@@ -113,37 +121,31 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 		sprite_lampara.visible = false
 	update_animation("idle" if velocity == Vector2.ZERO else "run")
 
-func tirar_item(clave: String, item_a_tirar: Item):
-	if escena_item_mundo == null: return
-	
-	# 1. AVISAMOS AL GAMEMANAGER QUE ESTE ÍTEM VIENE DE SER TIRADO
-	GameManager.item_recien_tirado = true
-	
-	var item_suelto = escena_item_mundo.instantiate()
-	item_suelto.data = item_a_tirar
-	
-	# 2. Usamos el ID original
+func tirar_item(clave: String, item_a_tirar: Item) -> void:
+	if escena_item_mundo == null or item_a_tirar == null:
+		return
+
 	var nuevo_id = item_a_tirar.id_escena
 	if nuevo_id == "":
-		nuevo_id = item_a_tirar.nombre + "_" + str(global_position)
+		nuevo_id = item_a_tirar.nombre + "_" + str(Time.get_ticks_usec())
+	item_a_tirar.id_escena = nuevo_id
+
+	var item_suelto = escena_item_mundo.instantiate()
+	item_suelto.data = item_a_tirar
 	item_suelto.id_unico = nuevo_id
-	
-	# 3. Posición fija (un poco a la derecha y abajo del jugador)
-	var pos_final = global_position + Vector2(50, 50) 
-	item_suelto.global_position = pos_final 
-	
-	# 4. Lo añadimos al árbol (su _ready se ejecutará ahora y verá la bandera)
+
+	# Primero se agrega al padre; después se fija la posición GLOBAL.
 	get_parent().add_child(item_suelto)
-	item_suelto.z_index = 1 
-	
-	# 5. Guardamos en la memoria
-	GameManager.partida_actual.items_tirados.append({"id": nuevo_id, "posicion": pos_final})
-	
-	# 6. Escala
-	var escala_padre = get_parent().scale.x
-	var escala_final = GameManager.obtener_escala_item(escala_padre)
-	item_suelto.scale = Vector2(escala_final, escala_final)
-	
+	item_suelto.global_position = global_position + Vector2(50, 50)
+	item_suelto.z_index = 1
+
+	GameManager.registrar_item_tirado(
+		nuevo_id,
+		item_a_tirar,
+		item_suelto.global_position,
+		get_tree().current_scene.scene_file_path
+	)
+
 	mochila.remover_item_por_clave(clave)
 
 func get_input() -> void:
