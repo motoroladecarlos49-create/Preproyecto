@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://dqjf6k6tflwlq"]
+
+[ext_resource type="PackedScene" uid="uid://disbia323ahnv" path="res://Escenas/puerta.tscn" id="1_4jnyt"]
+[ext_resource type="Texture2D" uid="uid://b0b7gvisl2okj" path="res://Imagenes/habitaciones-mapa/pasillo.jpeg" id="1_njrqw"]
+[ext_resource type="PackedScene" uid="uid://bp3wb2037fc6o" path="res://Escenas/player.tscn" id="2_njrqw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vbfun"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vbfun"]
+a = Vector2(-180.33334, 336.53845)
+b = Vector2(-181.6154, -91.66667)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r8g73"]
+a = Vector2(3.000122, -92.94872)
+b = Vector2(1.7180176, 332.69232)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nyvdy"]
+a = Vector2(-700.1905, 1.4324286)
+b = Vector2(734.4249, 2.71448)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fcwek"]
+a = Vector2(-1787.6061, -4.202759)
+b = Vector2(2362.394, -0.35662842)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4e70g"]
+a = Vector2(-2032.6011, -13.779541)
+b = Vector2(2240.476, 1.6049805)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
+size = Vector2(185.89742, 58.188843)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8g73"]
+size = Vector2(188.46167, 66.66669)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbfun"]
+radius = 37.267757
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyvdy"]
+size = Vector2(147.43593, 37.179443)
+
+[node name="habitacion2" type="Node2D" unique_id=1727733509]
+scale = Vector2(0.26, 0.26)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=896128840]
+position = Vector2(541.00006, 275)
+scale = Vector2(3, 3)
+physics_material_override = SubResource("PhysicsMaterial_vbfun")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=836237033]
+position = Vector2(537.61536, 125)
+scale = Vector2(1, 1.0326877)
+texture = ExtResource("1_njrqw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=73645833]
+position = Vector2(1.2820587, 0)
+shape = SubResource("SegmentShape2D_vbfun")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1565841351]
+position = Vector2(1251.282, 3.8461533)
+shape = SubResource("SegmentShape2D_r8g73")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1727414131]
+position = Vector2(523.70325, -90.534996)
+shape = SubResource("SegmentShape2D_nyvdy")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1511402040]
+position = Vector2(442.45847, 221.27272)
+scale = Vector2(0.33333334, 0.33333334)
+shape = SubResource("SegmentShape2D_fcwek")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=1032027610]
+position = Vector2(499.76443, 328.31116)
+scale = Vector2(0.33333334, 0.33333334)
+shape = SubResource("SegmentShape2D_4e70g")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D" unique_id=60633479]
+position = Vector2(179.28204, 227.95686)
+shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D" unique_id=1089772587]
+position = Vector2(883.1282, 216.02565)
+shape = SubResource("RectangleShape2D_r8g73")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D" unique_id=601531511]
+position = Vector2(1156.8462, 226.28206)
+shape = SubResource("CircleShape2D_vbfun")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D" unique_id=1207664678]
+position = Vector2(536.97437, 230.76921)
+shape = SubResource("RectangleShape2D_nyvdy")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
+
+[node name="player" parent="." unique_id=1418956237 instance=ExtResource("2_njrqw")]
+position = Vector2(1588.4618, 549.9999)
+scale = Vector2(11, 11)
+speed = 100.0
+
+[node name="Camera2D" parent="player" index="0" unique_id=387046182]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 1120
+limit_bottom = 330
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="UI_inventario" parent="player/CanvasLayer" parent_id_path=PackedInt32Array(1418956237, 480012948) index="0" unique_id=1844190648]
+offset_right = 10.0
+offset_bottom = 4.0
+
+[node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("1_4jnyt")]
+position = Vector2(302, 97)
+escena_destino = "res://Escenas/habitacion1.tscn"
+id_puerta_destino = "spawn_habitacion1"
+
+[node name="CollisionShape2D" parent="Puerta" index="0" unique_id=1857541741]
+position = Vector2(1271.077, 472.2308)
+scale = Vector2(5, 5)
+
+[node name="spawn_habitacion2" type="Marker2D" parent="Puerta" unique_id=41924238]
+position = Vector2(1294.1539, 622.2308)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1951364210]
+position = Vector2(4300, 645.098)
+
+[editable path="player"]
+[editable path="Puerta"]

@@ -10,6 +10,12 @@ signal item_seleccionado_cambiado(item: Item)
 var item_seleccionado: Item = null
 
 func agregar_item(item: Item) -> bool:
+	# --- PROTECCIÓN CONTRA NULOS ---
+	if item == null:
+		print("ERROR: Se intentó agregar un ítem nulo a la mochila.")
+		return false
+	# -------------------------------
+	
 	var clave = item.nombre
 	
 	# 1. Intentar apilar
@@ -22,10 +28,13 @@ func agregar_item(item: Item) -> bool:
 			
 	# 2. Comprobar si hay espacio libre
 	if objetos.size() >= capacidad_maxima:
-		return false # Mochila llena
+		return false
 		
 	# 3. Agregar nuevo
 	var nueva_instancia_item = item.duplicate()
+	nueva_instancia_item.nombre = item.nombre
+	nueva_instancia_item.id_escena = item.id_escena # Copiamos el ID original
+	
 	var clave_nueva = clave
 	
 	if not nueva_instancia_item.apilable or objetos.has(clave_nueva):
@@ -47,7 +56,6 @@ func seleccionar_item(clave: String):
 	if clave == "" or not objetos.has(clave):
 		item_seleccionado = null
 	elif objetos[clave] == item_seleccionado:
-		# Si haces clic en el mismo que ya estaba seleccionado, lo deseleccionas
 		item_seleccionado = null 
 	else:
 		item_seleccionado = objetos[clave]

@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bp3wb2037fc6o"]
 
 [ext_resource type="Script" uid="uid://bqbe2etx3uk7p" path="res://Scripts/player.gd" id="1_cnkc8"]
-[ext_resource type="Resource" uid="uid://ddj71y3f8haia" path="res://Inventario/mochila.tres" id="2_xlwfv"]
-[ext_resource type="PackedScene" uid="uid://cplu4e2dlx3ql" path="res://Escenas/linterna_mundo.tscn" id="3_7v5l4"]
 [ext_resource type="Texture2D" uid="uid://oa3wrq5g84ll" path="res://Imagenes/texturas_ambiente/2d_lights_and_shadows_neutral_point_light.webp" id="3_xlwfv"]
 [ext_resource type="PackedScene" uid="uid://dwr2plaedyyd8" path="res://Escenas/ui_inventario.tscn" id="5_xlwfv"]
 [ext_resource type="Texture2D" uid="uid://b1mdplcxq44wo" path="res://Imagenes/animaciones/250 sin título_20261009140950.png" id="6_7v5l4"]
@@ -425,8 +423,8 @@ animations = [{
 [node name="player" type="CharacterBody2D" unique_id=1418956237]
 scale = Vector2(2, 2)
 script = ExtResource("1_cnkc8")
-mochila = ExtResource("2_xlwfv")
-escena_item_mundo = ExtResource("3_7v5l4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=387046182]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=331489252]
 scale = Vector2(0.6, 0.6)
@@ -465,6 +463,15 @@ frame_progress = 0.25969428
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=480012948]
 
 [node name="UI_inventario" parent="CanvasLayer" unique_id=1844190648 instance=ExtResource("5_xlwfv")]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [connection signal="body_entered" from="AreaRecogida" to="." method="_on_area_recogida_body_entered"]
 [connection signal="body_exited" from="AreaRecogida" to="." method="_on_area_recogida_body_exited"]

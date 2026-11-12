@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cerv0dh4bv3dw"]
 
-[ext_resource type="Texture2D" uid="uid://l4h3spsua8nj" path="res://Imagenes/habitaciones-mapa/adentro.jpg" id="1_3kjvw"]
-[ext_resource type="PackedScene" uid="uid://bp3wb2037fc6o" path="res://Escenas/player.tscn" id="1_52a5p"]
-[ext_resource type="PackedScene" uid="uid://cplu4e2dlx3ql" path="res://Escenas/linterna_mundo.tscn" id="1_a1lqj"]
-[ext_resource type="Script" uid="uid://bhjb1qjtnb60o" path="res://Scripts/level.gd" id="1_evxt5"]
+[ext_resource type="Script" uid="uid://bhjb1qjtnb60o" path="res://Scripts/habitacion1.gd" id="1_n7ije"]
+[ext_resource type="Texture2D" uid="uid://l4h3spsua8nj" path="res://Imagenes/habitaciones-mapa/adentro.jpg" id="2_4djtc"]
+[ext_resource type="PackedScene" uid="uid://cplu4e2dlx3ql" path="res://Escenas/linterna_mundo.tscn" id="3_mdmms"]
+[ext_resource type="PackedScene" uid="uid://bp3wb2037fc6o" path="res://Escenas/player.tscn" id="4_oqkj6"]
+[ext_resource type="PackedScene" uid="uid://disbia323ahnv" path="res://Escenas/puerta.tscn" id="5_4djtc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3kjvw"]
 
@@ -25,9 +26,10 @@ size = Vector2(14905, 17105)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcwek"]
 size = Vector2(26100, 9855)
 
-[node name="level" type="Node2D" unique_id=945615187]
+[node name="habitacion1" type="Node2D" unique_id=945615187]
+position = Vector2(-4, 0)
 scale = Vector2(0.01, 0.01)
-script = ExtResource("1_evxt5")
+script = ExtResource("1_n7ije")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1787194911]
 physics_material_override = SubResource("PhysicsMaterial_3kjvw")
@@ -35,7 +37,7 @@ physics_material_override = SubResource("PhysicsMaterial_3kjvw")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=951890621]
 position = Vector2(57416.008, 32296.5)
 scale = Vector2(157.02176, 157.02174)
-texture = ExtResource("1_3kjvw")
+texture = ExtResource("2_4djtc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=465472383]
 position = Vector2(56699.992, 29400)
@@ -64,16 +66,37 @@ shape = SubResource("RectangleShape2D_vbfun")
 position = Vector2(89900, 50500)
 shape = SubResource("RectangleShape2D_fcwek")
 
-[node name="LinternaMundo" parent="." unique_id=1475707383 instance=ExtResource("1_a1lqj")]
-position = Vector2(82600, 42800)
+[node name="LinternaMundo" parent="." unique_id=1475707383 instance=ExtResource("3_mdmms")]
+position = Vector2(89800, 40300.01)
 scale = Vector2(229.99997, 229.99997)
 
-[node name="player" parent="." unique_id=1794548708 instance=ExtResource("1_52a5p")]
-position = Vector2(59100, 42300)
+[node name="player" parent="." unique_id=1794548708 instance=ExtResource("4_oqkj6")]
+position = Vector2(24699.996, 43000)
 scale = Vector2(500, 500)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
-color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+[node name="Camera2D" parent="player" index="0" unique_id=387046182]
+position = Vector2(65.6, -21.799976)
+limit_left = 0
+limit_top = 0
+limit_right = 1148
+limit_bottom = 640
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1603690487]
-position = Vector2(57200, 32200)
+[node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("5_4djtc")]
+position = Vector2(58600, 40400)
+scale = Vector2(200, 200)
+escena_destino = "res://Escenas/habitacion2.tscn"
+id_puerta_destino = "spawn_habitacion2"
+
+[node name="CollisionShape2D" parent="Puerta" index="0" unique_id=1857541741]
+position = Vector2(-2, -18)
+
+[node name="spawn_habitacion1" type="Marker2D" parent="Puerta" unique_id=1209670363]
+position = Vector2(-1.5, -30.5)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
+color = Color(0.06607054, 0.066070534, 0.06607054, 1)
+
+[editable path="player"]
+[editable path="Puerta"]
