@@ -62,3 +62,11 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo:
 - Prueba/estado:
 - Commit:
+
+
+### 2026-11-12 — Ajustar posición intermedia al soltar objetos
+- Archivo modificado: `Scripts/player.gd`.
+- Cambio: la posición del objeto soltado se calcula como el punto medio entre la posición que alinea ambas colisiones y el desplazamiento anterior de `Vector2(50, 50)`.
+- Motivo: dejar el objeto algo más arriba/cerca que con el desplazamiento anterior, sin mantenerlo exactamente centrado sobre la colisión del jugador.
+- Prueba/estado: cambio subido a GitHub; pendiente de probar dentro de Godot y ajustar si la altura visual no resulta adecuada.
+- Commit de código: 92eee59125f5526ec994847e28978002304fe067.
