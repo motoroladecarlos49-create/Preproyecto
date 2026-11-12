@@ -6,6 +6,9 @@ var puerta_destino_id: String = ""
 var direccion_salida: String = "down"
 var mochila_global: Mochila = null
 
+# Estado de la linterna equipada, conservado al cambiar de escena.
+var linterna_encendida: bool = false
+
 # Banderas de tutoriales
 var ya_aviso_inventario: bool = false
 var ya_aviso_recoger: bool = false
