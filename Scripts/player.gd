@@ -80,8 +80,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_linterna"):
 		if tiene_linterna_equipada:
 			flash_light.enabled = not flash_light.enabled
+			GameManager.linterna_encendida = flash_light.enabled
 		else:
 			flash_light.enabled = false
+			GameManager.linterna_encendida = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interactuar"):
@@ -116,6 +118,8 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 		tiene_linterna_equipada = true
 		sprite_normal.visible = false
 		sprite_lampara.visible = true
+		# Recupera el estado de encendido que tenía antes del cambio de escena.
+		flash_light.enabled = GameManager.linterna_encendida
 		if not GameManager.tutorial_lampara_completado:
 			GameManager.tutorial_lampara_completado = true 
 			await get_tree().create_timer(0.2).timeout
@@ -123,6 +127,7 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 	else:
 		tiene_linterna_equipada = false
 		flash_light.enabled = false
+		GameManager.linterna_encendida = false
 		sprite_normal.visible = true
 		sprite_lampara.visible = false
 	update_animation("idle" if velocity == Vector2.ZERO else "run")
