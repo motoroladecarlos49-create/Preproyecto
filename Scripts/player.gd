@@ -125,15 +125,15 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	if escena_item_mundo == null or item_a_tirar == null:
 		return
 
-	var nuevo_id = item_a_tirar.id_escena
-	if nuevo_id == "":
-		nuevo_id = item_a_tirar.nombre + "_" + str(Time.get_ticks_usec())
-	item_a_tirar.id_escena = nuevo_id
+	# Conserva marcado el ID anterior: así la linterna original del mapa
+	# no vuelve a aparecer cuando regreses a esa habitación.
+	var id_anterior = item_a_tirar.id_escena
+	if id_anterior != "" and not GameManager.partida_actual.items_recogidos.has(id_anterior):
+		GameManager.partida_actual.items_recogidos.append(id_anterior)
 
-	# Al soltarlo, deja de estar recogido; si no, linterna_mundo.gd lo elimina.
-	var indice_recogido = GameManager.partida_actual.items_recogidos.find(nuevo_id)
-	if indice_recogido != -1:
-		GameManager.partida_actual.items_recogidos.remove_at(indice_recogido)
+	# Cada objeto soltado recibe un ID propio, distinto al de su ubicación original.
+	var nuevo_id = item_a_tirar.nombre + "_soltado_" + str(Time.get_ticks_usec())
+	item_a_tirar.id_escena = nuevo_id
 
 	var item_suelto = escena_item_mundo.instantiate()
 	item_suelto.data = item_a_tirar
