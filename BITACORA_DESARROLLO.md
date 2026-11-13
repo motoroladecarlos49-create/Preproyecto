@@ -385,3 +385,23 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Alcance: el tema es compartido por `Menus/menu_principal.tscn` y `Menus/menu_pausa.tscn`, por lo que el cambio se aplica a ambos menús sin modificar sus escenas ni scripts.
 - Prueba/estado: cambio subido a GitHub. No se ejecutó Godot desde este entorno; comprobar visualmente ambos controles y confirmar que se puedan arrastrar con normalidad.
 - Commit del tema: `e0628046087cfeb210c97ac0089292905dddecd8`.
+
+
+### 2026-11-13 — Guardar y aplicar las opciones de audio y video
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+- Cambios:
+  - Se agregó una configuración independiente de la partida guardada en `user://configuracion.cfg`.
+  - `GameManager` carga al iniciar el volumen general, la resolución de ventana y el estado de pantalla completa; después aplica esos valores antes de mostrar el menú principal.
+  - Los cambios de volumen, pantalla completa y resolución se aplican desde funciones centralizadas y se guardan inmediatamente.
+  - Ambos menús consultan los mismos valores guardados y utilizan las mismas funciones para aplicar los cambios.
+  - Al elegir una resolución se vuelve al modo ventana, se aplica el tamaño elegido y se centra la ventana. Si se desactiva pantalla completa, se restaura la última resolución de ventana guardada.
+  - La configuración permanece separada del guardado de partida, por lo que iniciar o eliminar una partida no afecta las preferencias.
+- Motivo: corregir que los cambios de pantalla no se aplicaran de forma consistente y que las preferencias se perdieran al cerrar el juego.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; falta comprobar en el proyecto que se apliquen las tres resoluciones, el modo pantalla completa y la persistencia después de cerrar y volver a iniciar.
+- Commits:
+  - `Scripts/GameManager.gd`: `6503ae994f103ac0618da20443cd3b496a5e141d`
+  - `Menus/scripts/menu_principal.gd`: `7451cc3bcec01fbfa9d3a8d09ddf577b46858525` y corrección de indentación `11d1126eea16321f57fdc619a1f890c9879d6cfc`
+  - `Menus/scripts/menu_pausa.gd`: `3b5a266e50f78bc840332ea5fa694c8e672c1acb`
