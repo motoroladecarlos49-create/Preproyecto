@@ -4,7 +4,6 @@
 [ext_resource type="Theme" path="res://Menus/tema_volumen.tres" id="4_tema_volumen"]
 [ext_resource type="FontFile" path="res://fuente/immortal/IMMORTAL.ttf" id="2_fuente"]
 [ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-000.png" id="3_marco"]
-[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="5_divisor"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.075, 0.082, 0.12, 0.97)
@@ -195,16 +194,6 @@ layout_mode = 2
 text = "OPCIONES"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="separador_visual" type="TextureRect" parent="plane/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_divisor")
-expand_mode = 1
-stretch_mode = 0
-modulate = Color(0.9, 0.78, 0.56, 1)
-mouse_filter = 2
 
 [node name="contenedorvolumen" type="HBoxContainer" parent="plane/MarginContainer/VBoxContainer"]
 layout_mode = 2
