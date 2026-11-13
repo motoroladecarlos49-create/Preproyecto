@@ -16,6 +16,7 @@ var ya_aviso_recoger: bool = false
 var ya_aviso_puerta: bool = false
 var tutorial_lampara_completado: bool = false
 var ya_aviso_salida_3d: bool = false
+var tutorial_movimiento_completado: bool = false
 
 var item_recien_tirado: bool = false
 
@@ -143,6 +144,7 @@ func iniciar_partida_nueva() -> void:
 	ya_aviso_puerta = false
 	tutorial_lampara_completado = false
 	ya_aviso_salida_3d = false
+	tutorial_movimiento_completado = false
 	item_recien_tirado = false
 	is_dialogue_active = false
 
@@ -195,6 +197,7 @@ func guardar_partida(jugador: Node2D = null) -> bool:
 	partida_actual.ya_aviso_puerta = ya_aviso_puerta
 	partida_actual.tutorial_lampara_completado = tutorial_lampara_completado
 	partida_actual.ya_aviso_salida_3d = ya_aviso_salida_3d
+	partida_actual.tutorial_movimiento_completado = tutorial_movimiento_completado
 	partida_actual.escena_actual = get_tree().current_scene.scene_file_path if get_tree().current_scene != null else ""
 
 	if jugador != null:
@@ -230,6 +233,7 @@ func cargar_partida() -> bool:
 	ya_aviso_puerta = partida_actual.ya_aviso_puerta
 	tutorial_lampara_completado = partida_actual.tutorial_lampara_completado
 	ya_aviso_salida_3d = partida_actual.ya_aviso_salida_3d
+	tutorial_movimiento_completado = partida_actual.tutorial_movimiento_completado
 	carga_pendiente = true
 
 	if partida_actual.escena_actual == "":
