@@ -531,3 +531,19 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Scripts/puerta.gd`: `d141a7432203791a0f30368b91af9a28d04f5498`
   - `Scripts/player.gd`: `d0e82115800ac09b7f51734f21f609e6c0797d91` (corrección final del bloque de interacción)
   - `Escenas/habitacion2.tscn`: `e3966b4b8fda5ececbc26b56e36ddedab77921b3`
+
+
+### 2026-11-13 — Corregir carga desde el menú de pausa y verificar interacción de puertas
+- Archivo modificado:
+  - `Menus/scripts/menu_pausa.gd`
+- Cambios:
+  - En `_on_cargar_pressed()`, el árbol se despausa antes de llamar a `GameManager.cargar_partida()`.
+  - Si la carga tiene éxito, la función retorna inmediatamente y no intenta acceder al menú, que puede ser liberado al cambiar de escena.
+  - Si la carga falla, se vuelve a pausar el árbol y se muestra el mensaje de error en el menú todavía activo.
+- Puertas:
+  - Se verificó que `project.godot` asigna la acción `interactuar` a la tecla física E.
+  - Se verificó que `Scripts/player.gd` muestra `mensaje_bloqueo` dentro de `_unhandled_input()`, únicamente al recibir la acción `interactuar`; por tanto, Puerta3 y Puerta4 muestran sus mensajes al presionar E, no al acercarse. No fue necesario modificar esta lógica.
+  - Puerta3 conserva «La puerta está cerrada.» y Puerta4 «Necesitas una llave para abrir esta puerta.».
+- Prueba/estado: cambio subido y verificado por lectura de archivos en GitHub. No se ejecutó Godot.
+- Commit:
+  - `Menus/scripts/menu_pausa.gd`: `3e6ae6e1ec004af0c4b7f1b11b22c2a71d0fc84e`
