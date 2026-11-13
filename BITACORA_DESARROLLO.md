@@ -187,3 +187,26 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Solución: declarar una lista compartida y tipada `Array[Vector2i]` y recorrerla directamente para comparar la resolución actual. También se tipó explícitamente el tamaño de ventana como `Vector2i`.
 - Prueba/estado: corrección subida a GitHub. No se ejecutó Godot; queda pendiente confirmar que el parser ya no informa este error.
 - Commit del script: `80f757f4ed43401a9f8dc537858e4abda2cf5c65`.
+
+
+### 2026-11-12 — Rediseñar y ordenar las opciones del menú de pausa
+- Archivos modificados:
+  - `Menus/scripts/menu_pausa.gd`
+  - `Menus/menu_pausa.tscn`
+- Cambios funcionales:
+  - El panel de opciones ahora es independiente del botón «Opciones» y queda centrado en la ventana.
+  - Al abrir opciones se ocultan título, botones y estado del menú de pausa; queda visible el fondo oscurecido y el panel de configuración.
+  - Se agregó «VOLVER A PAUSA». Escape dentro de opciones también vuelve primero al menú de pausa; una nueva pulsación de Escape cierra la pausa.
+  - Se separó la configuración del volumen de la configuración de pantalla para que la resolución y pantalla completa sigan cargándose aunque no exista el bus Master esperado.
+  - El selector de resoluciones se rellena al abrir opciones. Elegir una resolución cambia a modo ventana, aplica el tamaño y centra la ventana.
+  - El volumen refleja también el estado de silencio del bus; el valor cero silencia y los valores superiores restauran el sonido.
+  - Se conserva la lógica de guardado/carga y se muestra el estado de las acciones.
+- Diseño y recursos:
+  - Se utiliza la fuente existente `fuente/immortal/IMMORTAL.ttf` en títulos y botones.
+  - Se incorporan recursos gráficos Kenney Fantasy UI desde `Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-000.png` y `.../Divider/divider-000.png`.
+  - Se añadió un panel oscuro centrado con borde dorado, sombra, botones con estados normal/hover/presionado y una composición más uniforme.
+- Motivo: evitar que las opciones aparezcan como una ventana superpuesta al menú de pausa y mejorar la legibilidad y presentación del menú.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde aquí; probar apertura/cierre de pausa, entrada/salida de opciones, volumen, silencio, pantalla completa, resoluciones, guardado y carga. Confirmar también que la fuente y los recursos gráficos se importen correctamente.
+- Commits:
+  - Escena: `a8cea300d6e9aba30e8fcf72e3357c3fde3b7ef4`
+  - Script (ajuste de tipado incluido): `11147e91a25edb3b123f53c73f7d778bf5528761`
