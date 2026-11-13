@@ -22,6 +22,84 @@ var escala_item_escena2: float = 4.75
 
 const RUTA_GUARDADO: String = "user://partida_guardada.tres"
 
+const RUTA_CONFIGURACION: String = "user://configuracion.cfg"
+
+var volumen_general: float = 1.0
+var resolucion_ventana: Vector2i = Vector2i(1280, 720)
+var pantalla_completa: bool = false
+
+func _ready() -> void:
+	var ventana: Window = get_tree().root
+	resolucion_ventana = ventana.size
+
+	var indice_bus: int = AudioServer.get_bus_index("Master")
+	if indice_bus >= 0:
+		volumen_general = 0.0 if AudioServer.is_bus_mute(indice_bus) else db_to_linear(AudioServer.get_bus_volume_db(indice_bus))
+
+	var configuracion := ConfigFile.new()
+	if configuracion.load(RUTA_CONFIGURACION) == OK:
+		volumen_general = clampf(float(configuracion.get_value("audio", "volumen_general", volumen_general)), 0.0, 1.0)
+		resolucion_ventana = configuracion.get_value("video", "resolucion_ventana", resolucion_ventana)
+		pantalla_completa = bool(configuracion.get_value("video", "pantalla_completa", false))
+
+	_aplicar_volumen_guardado()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	ventana.size = resolucion_ventana
+	ventana.move_to_center()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if pantalla_completa else DisplayServer.WINDOW_MODE_WINDOWED)
+	_guardar_configuracion()
+
+func obtener_volumen_general() -> float:
+	return volumen_general
+
+func obtener_resolucion_ventana() -> Vector2i:
+	return resolucion_ventana
+
+func obtener_pantalla_completa() -> bool:
+	return pantalla_completa
+
+func establecer_volumen_general(valor: float) -> void:
+	volumen_general = clampf(valor, 0.0, 1.0)
+	_aplicar_volumen_guardado()
+	_guardar_configuracion()
+
+func _aplicar_volumen_guardado() -> void:
+	var indice_bus: int = AudioServer.get_bus_index("Master")
+	if indice_bus < 0:
+		return
+	AudioServer.set_bus_volume_db(indice_bus, linear_to_db(maxf(volumen_general, 0.001)))
+	AudioServer.set_bus_mute(indice_bus, volumen_general <= 0.0)
+
+func establecer_pantalla_completa(activada: bool) -> void:
+	pantalla_completa = activada
+	if activada:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		var ventana: Window = get_tree().root
+		ventana.size = resolucion_ventana
+		ventana.move_to_center()
+	_guardar_configuracion()
+
+func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
+	resolucion_ventana = resolucion
+	pantalla_completa = false
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	var ventana: Window = get_tree().root
+	ventana.size = resolucion_ventana
+	ventana.move_to_center()
+	_guardar_configuracion()
+
+func _guardar_configuracion() -> void:
+	var configuracion := ConfigFile.new()
+	configuracion.set_value("audio", "volumen_general", volumen_general)
+	configuracion.set_value("video", "resolucion_ventana", resolucion_ventana)
+	configuracion.set_value("video", "pantalla_completa", pantalla_completa)
+	var error: Error = configuracion.save(RUTA_CONFIGURACION)
+	if error != OK:
+		push_error("No se pudo guardar la configuración. Código: %s" % error)
+
+
 func hay_partida_guardada() -> bool:
 	if not FileAccess.file_exists(RUTA_GUARDADO):
 		return false
