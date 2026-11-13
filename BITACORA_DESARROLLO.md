@@ -178,3 +178,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Alcance: cambio puntual; no se alteró la lógica de opciones ni las demás funciones del menú.
 - Prueba/estado: corrección subida a GitHub. No se ejecutó Godot desde aquí; comprobar que el proyecto ya supera este error de análisis.
 - Commit del script: `5ca11a7f7273e629b9be5aaa73bea7f05819bfed`.
+
+
+### 2026-11-12 — Corregir inferencia de resolución en menú principal
+- Archivo modificado: `Menus/scripts/menu_principal.gd`.
+- Error informado: persistía el error de inferencia de tipo para la variable `resolucion` al configurar las opciones del menú principal.
+- Causa: el menú principal construía un arreglo literal dentro del bucle y Godot no podía inferir el tipo del elemento indexado.
+- Solución: declarar una lista compartida y tipada `Array[Vector2i]` y recorrerla directamente para comparar la resolución actual. También se tipó explícitamente el tamaño de ventana como `Vector2i`.
+- Prueba/estado: corrección subida a GitHub. No se ejecutó Godot; queda pendiente confirmar que el parser ya no informa este error.
+- Commit del script: `80f757f4ed43401a9f8dc537858e4abda2cf5c65`.
