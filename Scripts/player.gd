@@ -114,7 +114,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if escena_destino == "":
 				var mensaje: String = str(puerta_cerca.get("mensaje_bloqueo"))
 				if mensaje != "":
-					MessageManager.mostrar_mensaje(mensaje, 3.0)
+					MessageManager.mostrar_mensaje(mensaje, 1.5)
 			elif escena_destino == "res://Escenas/level_3d.tscn":
 				if id_punto_retorno_2d == "":
 					push_warning("Esta puerta no tiene configurado su punto de regreso 2D.")
