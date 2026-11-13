@@ -151,7 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_textura_volumen")
-stretch_mode = 0
+stretch_mode = 6
 material = SubResource("ShaderMaterial_relleno_volumen")
 
 [node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=531900460]
