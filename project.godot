@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Preproyecto"
-run/main_scene="uid://cerv0dh4bv3dw"
+run/main_scene="res://Menus/menu_principal.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
