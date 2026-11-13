@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://gp00qdcbihco"]
+
+[ext_resource type="Script" path="res://Menus/scripts/menu_pausa.gd" id="1_jd2x8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kso7j"]
+bg_color = Color(0, 0, 0, 0.6784314)
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=977779306]
+process_mode = 3
+script = ExtResource("1_jd2x8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=959168940]
+offset_right = 1255.0
+offset_bottom = 694.0
+color = Color(0, 0, 0, 0.4627451)
+
+[node name="reanudar" type="Button" parent="." unique_id=641955151]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.374
+anchor_right = 0.5
+anchor_bottom = 0.374
+offset_left = -82.0
+offset_top = -38.352005
+offset_right = 76.0
+offset_bottom = 26.647995
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Reanudar"
+
+[node name="menu" type="Button" parent="." unique_id=887618465]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.637
+anchor_right = 0.5
+anchor_bottom = 0.637
+offset_left = -81.0
+offset_top = -35.776
+offset_right = 77.0
+offset_bottom = 28.223999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Menu
+"
+
+[node name="opciones" type="Button" parent="." unique_id=816613110]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -39.0
+offset_right = 77.25
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Opciones"
+
+[node name="plane" type="PanelContainer" parent="opciones" unique_id=12656620]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -154.0
+offset_right = 315.0
+offset_bottom = 221.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kso7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="opciones/plane" unique_id=1364733054]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="opciones/plane/MarginContainer" unique_id=1397220016]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=263758759]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Opciones"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=863964905]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="contenedorp" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=1835461232]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.5
+mouse_default_cursor_shape = 2
+
+[node name="pantallacompleta" type="CheckButton" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorp" unique_id=1286092271]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 19
+button_pressed = true
+text = "Pantalla Completa
+"
+icon_alignment = 1
+
+[node name="botonvolver" type="Button" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=2117726864]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "Volver"
+icon_alignment = 1
+
+[connection signal="pressed" from="reanudar" to="." method="_on_reanudar_pressed"]
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="opciones" to="." method="_on_opciones_pressed"]
+[connection signal="toggled" from="opciones/plane/MarginContainer/VBoxContainer/contenedorp/pantallacompleta" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="opciones/plane/MarginContainer/VBoxContainer/botonvolver" to="." method="_on_botonvolver_pressed"]
