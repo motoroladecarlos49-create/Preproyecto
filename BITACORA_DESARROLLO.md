@@ -278,3 +278,20 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo: mantener el menú con su jerarquía original sin dejar referencias rotas en el script.
 - Prueba/estado: ruta contrastada con `Menus/menu_principal.tscn` en GitHub. No se ejecutó Godot; queda pendiente la prueba funcional de las opciones.
 - Commit: 75ab3999bdc1b6ef84dcd25c6941b42503e51690.
+
+
+### 2026-11-13 — Corregir divisor de opciones de pausa y unificar barras de volumen
+- Archivos modificados:
+  - `Menus/menu_pausa.tscn`
+  - `Menus/scripts/menu_pausa.gd`
+- Menú de pausa:
+  - Se quitó el recurso gráfico `divider-000.png` y el nodo `separador_visual`, que estaban usados como una barra decorativa debajo del título de opciones.
+  - Se conservó el orden y la distribución del resto de los controles.
+  - Se aplicó al `HSlider` de volumen el mismo estilo oscuro/dorado del menú principal: pista oscura, tramo recorrido dorado y esquinas redondeadas.
+- Menú principal:
+  - Se verificó que su `HSlider` ya utiliza el mismo estilo de pista y tramo recorrido; no fue necesario modificarlo en esta corrección.
+- Motivo: reservar la apariencia de barra para el control real de volumen en ambos menús y eliminar la falsa separación visual del panel de pausa.
+- Prueba/estado: cambios subidos y verificados en GitHub. No se ejecutó Godot; probar visualmente ambos sliders y confirmar que el panel de pausa ya no muestra el divisor.
+- Commits:
+  - Escena de pausa: d49b4793413d9e6ba882fe06d40f751a9b2e09d5
+  - Script de pausa: 02caff44214afc68f7c97ec164f0c051d986cd71
