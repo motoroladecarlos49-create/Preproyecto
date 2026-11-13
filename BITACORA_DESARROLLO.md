@@ -602,3 +602,10 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - La mitad derecha conserva el cambio aleatorio entre las imágenes 1 y 2.
 - Pendiente: no se pudo editar el archivo binario de la imagen 3 para quitar su sombra manteniendo el difuminado, porque el conector solo permitió recuperar su contenido codificado y el entorno no pudo descargar el original. Para realizar esa edición exacta, hace falta que adjuntes `3.jpeg` directamente en el chat.
 - Prueba/estado: cambios de escena y script subidos a GitHub. No se ejecutó Godot; queda pendiente revisar el encuadre y la importación de la imagen 3 en el proyecto.
+
+
+### 2026-11-13 — Quitar el título del menú principal
+- Archivo modificado: `Menus/menu_principal.tscn`.
+- Cambio: se eliminó únicamente el nodo Label `texto` que mostraba «RABBIT HOLE» dentro de `contenedorMenu`.
+- Alcance: se conservaron los botones, el contenedor, los fondos y el resto de las opciones del menú.
+- Prueba/estado: cambio subido y verificado mediante lectura posterior del archivo en GitHub. No se ejecutó Godot; queda pendiente comprobar visualmente la distribución del menú sin el título.
