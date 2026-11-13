@@ -131,20 +131,6 @@ func _aplicar_estilo() -> void:
 	check_pantalla.add_theme_font_override("font", FUENTE_MENU)
 	option_button.add_theme_font_override("font", FUENTE_MENU)
 
-	# El volumen se dibuja como un control deslizante real, no como un adorno.
-	var pista := StyleBoxFlat.new()
-	pista.bg_color = Color("#171923")
-	pista.set_corner_radius_all(5)
-	pista.content_margin_top = 3.0
-	pista.content_margin_bottom = 3.0
-	slider_volumen.add_theme_stylebox_override("slider", pista)
-	var tramo := StyleBoxFlat.new()
-	tramo.bg_color = Color("#c5a66d")
-	tramo.set_corner_radius_all(5)
-	tramo.content_margin_top = 3.0
-	tramo.content_margin_bottom = 3.0
-	slider_volumen.add_theme_stylebox_override("grabber_area", tramo)
-	slider_volumen.add_theme_stylebox_override("grabber_area_highlight", tramo.duplicate())
 
 func _estilizar_boton(boton: Button, tamano_fuente: int) -> void:
 	boton.add_theme_font_override("font", FUENTE_MENU)
