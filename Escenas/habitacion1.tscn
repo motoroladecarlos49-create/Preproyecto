@@ -8,23 +8,32 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3kjvw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kjvw"]
-size = Vector2(111310, 44610)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_njrqw"]
+a = Vector2(57900.008, 22700)
+b = Vector2(-25199.992, 22700)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8g73"]
-size = Vector2(43547.258, 5200)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qnld5"]
+a = Vector2(15405.283, 563.33203)
+b = Vector2(-15773.422, 699.3906)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyvdy"]
-size = Vector2(8600, 64510)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bhwcc"]
+a = Vector2(300, 31200)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e70g"]
-size = Vector2(123010, 5200)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7l27e"]
+a = Vector2(52900, -1200)
+b = Vector2(-61500, -800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
 size = Vector2(14905, 17105)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcwek"]
 size = Vector2(26100, 9855)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uof5i"]
+size = Vector2(76.5, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67c60"]
+size = Vector2(43.5, 83)
 
 [node name="habitacion1" type="Node2D" unique_id=945615187]
 position = Vector2(-4, 0)
@@ -42,21 +51,21 @@ texture = ExtResource("2_4djtc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=465472383]
 position = Vector2(56699.992, 29400)
 scale = Vector2(1.0000001, 1.0000001)
-shape = SubResource("RectangleShape2D_3kjvw")
+shape = SubResource("SegmentShape2D_njrqw")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=341404966]
-position = Vector2(16299.999, 55600)
+position = Vector2(17700, 57400)
 rotation = -0.43633235
 scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("RectangleShape2D_r8g73")
+shape = SubResource("SegmentShape2D_qnld5")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=2044299127]
-position = Vector2(119000, 33300)
-shape = SubResource("RectangleShape2D_nyvdy")
+position = Vector2(114700, 33300)
+shape = SubResource("SegmentShape2D_bhwcc")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1621890755]
-position = Vector2(62200, 66800)
-shape = SubResource("RectangleShape2D_4e70g")
+position = Vector2(62200, 65200)
+shape = SubResource("SegmentShape2D_7l27e")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=663236032]
 position = Vector2(37100, 46300)
@@ -71,6 +80,7 @@ position = Vector2(89800, 40300.01)
 scale = Vector2(229.99997, 229.99997)
 
 [node name="player" parent="." unique_id=1794548708 instance=ExtResource("4_oqkj6")]
+visible = false
 position = Vector2(24699.996, 43000)
 scale = Vector2(500, 500)
 
@@ -82,6 +92,12 @@ limit_right = 1148
 limit_bottom = 640
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
+
+[node name="CanvasLayer" parent="player" index="7" unique_id=480012948]
+visible = false
+
+[node name="MenuPausa" parent="player" index="8"]
+visible = false
 
 [node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("5_4djtc")]
 position = Vector2(58600, 40400)
@@ -96,7 +112,25 @@ position = Vector2(-2, -18)
 position = Vector2(-1.5, -30.5)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
+visible = false
 color = Color(0.06607054, 0.066070534, 0.06607054, 1)
+
+[node name="Puerta2" parent="." unique_id=1139194701 instance=ExtResource("5_4djtc")]
+scale = Vector2(200, 200)
+
+[node name="CollisionShape2D" parent="Puerta2" index="0" unique_id=1857541741]
+position = Vector2(83.25, 269)
+shape = SubResource("RectangleShape2D_uof5i")
+
+[node name="Ir" parent="." unique_id=1455470018 instance=ExtResource("5_4djtc")]
+position = Vector2(16650, 53800)
+scale = Vector2(200, 200)
+
+[node name="CollisionShape2D" parent="Ir" index="0" unique_id=1857541741]
+position = Vector2(487.5, 16.5)
+shape = SubResource("RectangleShape2D_67c60")
 
 [editable path="player"]
 [editable path="Puerta"]
+[editable path="Puerta2"]
+[editable path="Ir"]

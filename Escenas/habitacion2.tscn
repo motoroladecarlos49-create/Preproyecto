@@ -26,9 +26,6 @@ b = Vector2(2362.394, -0.35662842)
 a = Vector2(-2032.6011, -13.779541)
 b = Vector2(2240.476, 1.6049805)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
-size = Vector2(185.89742, 58.188843)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8g73"]
 size = Vector2(188.46167, 66.66669)
 
@@ -37,6 +34,9 @@ radius = 37.267757
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyvdy"]
 size = Vector2(147.43593, 37.179443)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
+size = Vector2(185.89742, 58.188843)
 
 [node name="habitacion2" type="Node2D" unique_id=1727733509]
 scale = Vector2(0.26, 0.26)
@@ -73,10 +73,6 @@ position = Vector2(499.76443, 328.31116)
 scale = Vector2(0.33333334, 0.33333334)
 shape = SubResource("SegmentShape2D_4e70g")
 
-[node name="Cajonera" type="CollisionShape2D" parent="StaticBody2D" unique_id=60633479]
-position = Vector2(179.28204, 227.95686)
-shape = SubResource("RectangleShape2D_vbfun")
-
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D" unique_id=1089772587]
 position = Vector2(883.1282, 216.02565)
 shape = SubResource("RectangleShape2D_r8g73")
@@ -93,7 +89,6 @@ shape = SubResource("RectangleShape2D_nyvdy")
 color = Color(0.5099403, 0.41995478, 0.44029996, 1)
 
 [node name="player" parent="." unique_id=1418956237 instance=ExtResource("2_njrqw")]
-visible = false
 position = Vector2(1588.4618, 549.9999)
 scale = Vector2(11, 11)
 speed = 100.0
@@ -107,15 +102,14 @@ limit_bottom = 330
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="CanvasLayer" parent="player" index="7" unique_id=480012948]
-visible = false
+[node name="Cajonera" type="CollisionShape2D" parent="player/AreaRecogida" parent_id_path=PackedInt32Array(1418956237, 127996628) index="1" unique_id=60633479]
+position = Vector2(-46.328697, 37.170063)
+scale = Vector2(0.27272725, 0.27272725)
+shape = SubResource("RectangleShape2D_vbfun")
 
-[node name="UI_inventario" parent="player/CanvasLayer" index="0" unique_id=1844190648]
+[node name="UI_inventario" parent="player/CanvasLayer" parent_id_path=PackedInt32Array(1418956237, 480012948) index="0" unique_id=1844190648]
 offset_right = 10.0
 offset_bottom = 4.0
-
-[node name="MenuPausa" parent="player" index="8"]
-visible = false
 
 [node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("1_4jnyt")]
 position = Vector2(302, 97)
