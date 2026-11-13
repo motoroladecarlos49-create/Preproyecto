@@ -589,3 +589,16 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se conservó la estructura y funcionalidad de los botones y del panel de opciones; se ocultaron los dos fondos anteriores que quedaban por encima de las nuevas capas.
 - Motivo: dar al menú un fondo dinámico y coherente entre ambas mitades, con apariciones breves y no periódicas de la segunda imagen.
 - Prueba/estado: archivos actualizados en GitHub y verificados mediante lectura posterior. No se ejecutó Godot; queda pendiente comprobar visualmente el recorte de ambas imágenes en las resoluciones disponibles y ajustar el efecto si el encuadre no coincide con el diseño esperado.
+
+
+### 2026-11-13 — Fondo fijo con imagen 3 en la zona de botones
+- Archivos modificados:
+  - `Menus/menu_principal.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Se asignó `Imagenes/fondo/3.jpeg` como fondo fijo de la mitad izquierda, donde se ubican los botones.
+  - Se desactivó la capa de glitch de esa mitad y se retiraron sus animaciones del script.
+  - La mitad derecha conserva el cambio aleatorio entre las imágenes 1 y 2.
+- Pendiente: no se pudo editar el archivo binario de la imagen 3 para quitar su sombra manteniendo el difuminado, porque el conector solo permitió recuperar su contenido codificado y el entorno no pudo descargar el original. Para realizar esa edición exacta, hace falta que adjuntes `3.jpeg` directamente en el chat.
+- Prueba/estado: cambios de escena y script subidos a GitHub. No se ejecutó Godot; queda pendiente revisar el encuadre y la importación de la imagen 3 en el proyecto.
