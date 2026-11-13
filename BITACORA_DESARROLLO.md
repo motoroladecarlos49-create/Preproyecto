@@ -303,3 +303,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Alcance: no se modifica la lógica de volumen, resolución, pantalla completa ni la distribución de los controles.
 - Prueba/estado: cambio subido a GitHub. No se ejecutó Godot; queda pendiente comprobar visualmente ambos controles de volumen dentro del proyecto.
 - Commit del script: `992a29bc17ee187cb7481b4eeadebe9c9a93870b`.
+
+### 2026-11-13 — Crear un tema compartido explícito para las barras de volumen
+- Archivos creados/modificados:
+  - Creado `Menus/tema_volumen.tres`, un recurso Theme compartido con pista oscura y tramo activo dorado para HSlider.
+  - Modificados `Menus/menu_principal.tscn` y `Menus/menu_pausa.tscn` para asignar ese Theme directamente a cada control de volumen y darles 30 px de altura mínima.
+  - Modificados `Menus/scripts/menu_principal.gd` y `Menus/scripts/menu_pausa.gd` para quitar los estilos duplicados en código; la apariencia queda centralizada en el recurso Theme.
+- Motivo: los estilos aplicados por script no se estaban reflejando visualmente. Se cambia a un recurso Theme explícito asignado desde ambas escenas, con una pista de 16 px de alto, esquinas redondeadas y tramo activo dorado.
+- Alcance: no se cambia la lógica de audio ni el orden/ubicación de los controles.
+- Prueba/estado: archivos subidos a GitHub y pendientes de importación/prueba visual en Godot. No se ejecutó el motor desde aquí.
+- Commits:
+  - `Menus/scripts/menu_principal.gd`: `1a1a1ede138c5b7b3e25536d296c39f205c5dc4a`
+  - `Menus/scripts/menu_pausa.gd`: `4f58f4498ae6cf8fde47a0907ad70e9ad101361b`
+  - `Menus/menu_principal.tscn`: `baa18fb4b633eb976a30670b572e57b436b13b71`
+  - `Menus/menu_pausa.tscn`: `1c844047016318cc0cbb6ea6258e9abfe8dc2f6c`
+- Commit del Theme: `d195e65c0a3a5aa093518c1297d892d24fe08c02`.
