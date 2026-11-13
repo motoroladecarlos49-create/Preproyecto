@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dt4ner0leki2x"]
 
 [ext_resource type="Script" path="res://Menus/scripts/menu_principal.gd" id="1_script"]
+[ext_resource type="Theme" path="res://Menus/tema_volumen.tres" id="2_tema_volumen"]
 
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
@@ -130,6 +131,8 @@ text = "Volumen General"
 [node name="slidervolumen" type="HSlider" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen" unique_id=12814396]
 layout_mode = 2
 size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 30)
+theme = ExtResource("2_tema_volumen")
 
 [node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=531900460]
 layout_mode = 2
