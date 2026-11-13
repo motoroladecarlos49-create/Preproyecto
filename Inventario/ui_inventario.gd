@@ -2,9 +2,11 @@ extends Control
 
 @onready var grid_container: GridContainer = $PanelContainer/GridContainer
 @onready var btn_drop: Button = $BtnDrop
+@onready var btn_save: Button = $BtnSave
+@onready var btn_load: Button = $BtnLoad
 
 var mochila: Mochila
-var player: CharacterBody2D 
+var player: CharacterBody2D
 var modo_drop: bool = false
 
 func _ready() -> void:
@@ -17,8 +19,10 @@ func _ready() -> void:
 
 	for slot in grid_container.get_children():
 		slot.gui_input.connect(_on_slot_gui_input.bind(slot))
-	
+
 	btn_drop.pressed.connect(_on_btn_drop_pressed)
+	btn_save.pressed.connect(_on_btn_save_pressed)
+	btn_load.pressed.connect(_on_btn_load_pressed)
 	hide()
 
 func conectar_mochila():
@@ -31,9 +35,9 @@ func conectar_mochila():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventario"):
-		if mochila == null: return
+		if mochila == null:
+			return
 		visible = not visible
-		
 		if visible:
 			redibujar_inventario()
 			if mochila.objetos.size() > 0 and not GameManager.tutorial_lampara_completado:
@@ -45,6 +49,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_btn_drop_pressed():
 	modo_drop = not modo_drop
 	btn_drop.modulate = Color(1, 0.3, 0.3) if modo_drop else Color(1, 1, 1)
+
+func _on_btn_save_pressed() -> void:
+	if GameManager.guardar_partida(player):
+		MessageManager.mostrar_mensaje("Partida guardada", 2.0)
+	else:
+		MessageManager.mostrar_mensaje("No se pudo guardar la partida", 2.0)
+
+func _on_btn_load_pressed() -> void:
+	if GameManager.cargar_partida():
+		MessageManager.mostrar_mensaje("Cargando partida...", 2.0)
+	else:
+		MessageManager.mostrar_mensaje("No hay una partida válida para cargar", 2.0)
 
 func _on_slot_gui_input(event: InputEvent, slot: Panel):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -58,16 +74,15 @@ func _on_slot_gui_input(event: InputEvent, slot: Panel):
 				mochila.seleccionar_item(slot.clave_item)
 
 func redibujar_inventario():
-	if mochila == null: return
+	if mochila == null:
+		return
 	var claves = mochila.objetos.keys()
 	var slots = grid_container.get_children()
-	
 	for i in range(slots.size()):
 		if i < claves.size():
 			slots[i].llenar_espacio(mochila.objetos[claves[i]], claves[i])
 		else:
 			slots[i].vaciar_valores()
-	
 	actualizar_resaltado(mochila.item_seleccionado)
 
 func actualizar_resaltado(item_actual: Item):
