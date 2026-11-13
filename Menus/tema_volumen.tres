@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3]
+[gd_resource type="Theme" load_steps=6 format=3]
 
 [ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="1_divider"]
 
@@ -14,16 +14,20 @@ content_margin_bottom = 5.0
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tramo"]
 texture = ExtResource("1_divider")
 modulate_color = Color(0.9, 0.78, 0.56, 1)
-axis_stretch_horizontal = 0
+axis_stretch_horizontal = 1
 axis_stretch_vertical = 0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tramo_hover"]
 texture = ExtResource("1_divider")
 modulate_color = Color(1, 0.9, 0.68, 1)
-axis_stretch_horizontal = 0
+axis_stretch_horizontal = 1
 axis_stretch_vertical = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_indicador"]
 
 [resource]
 HSlider/styles/slider = SubResource("StyleBoxFlat_pista")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_tramo")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_tramo_hover")
+HSlider/styles/grabber = SubResource("StyleBoxEmpty_indicador")
+HSlider/styles/grabber_highlight = SubResource("StyleBoxEmpty_indicador")
