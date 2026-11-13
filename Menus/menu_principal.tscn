@@ -1,114 +1,154 @@
-[gd_scene format=3 uid="uid://dt4ner0leki2x"]
+[gd_scene format=3]
 
-[ext_resource type="Script" path="res://Menus/scripts/menu_principal.gd" id="1_bj1uy"]
+[ext_resource type="Script" path="res://Menus/scripts/menu_principal.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-000.png" id="2_marco"]
+[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="3_divisor"]
 
-[sub_resource type="Theme" id="Theme_bj1uy"]
-default_font_size = 30
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.075, 0.082, 0.12, 0.97)
+border_color = Color(0.66, 0.55, 0.36, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.55)
+shadow_size = 16
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
 
-[node name="menu_principal" type="Control" unique_id=1325911669]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1151.0
-offset_bottom = 650.0
-script = ExtResource("1_bj1uy")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=340491058]
-layout_mode = 1
+[node name="menu_principal" type="Control"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -584.0
-offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2556589, 0.25565878, 0.25565878, 1)
+script = ExtResource("1_script")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1366499672]
-layout_mode = 0
-offset_right = 1150.0
-offset_bottom = 644.0
-mouse_default_cursor_shape = 2
+[node name="fondo" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.016, 0.03, 1)
+mouse_filter = 2
 
-[node name="contenedorMenu" type="VBoxContainer" parent="." unique_id=1091975248]
-layout_mode = 1
-offset_right = 569.0
-offset_bottom = 650.0
-theme = SubResource("Theme_bj1uy")
-theme_override_constants/separation = 25
+[node name="contenedorMenu" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -235.0
+offset_right = 230.0
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="texto" type="Label" parent="contenedorMenu" unique_id=115748759]
+[node name="adorno_izquierdo" type="TextureRect" parent="contenedorMenu"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+texture = ExtResource("2_marco")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
+
+[node name="texto" type="Label" parent="contenedorMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 58
 text = "RABBIT HOLE"
 horizontal_alignment = 1
 
-[node name="botonjugar" type="Button" parent="contenedorMenu" unique_id=138661878]
+[node name="adorno_divisor" type="TextureRect" parent="contenedorMenu"]
+custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 35
-action_mode = 0
-text = "Nueva partida"
-icon_alignment = 1
+texture = ExtResource("3_divisor")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
 
-[node name="botonopciones" type="Button" parent="contenedorMenu" unique_id=1615922789]
+[node name="botonjugar" type="Button" parent="contenedorMenu"]
+custom_minimum_size = Vector2(330, 58)
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 35
-text = "Opciones"
+text = "NUEVA PARTIDA"
 
-[node name="botonsalir" type="Button" parent="contenedorMenu" unique_id=2009839831]
+[node name="botonopciones" type="Button" parent="contenedorMenu"]
+custom_minimum_size = Vector2(330, 58)
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 35
-text = "Salir"
+text = "OPCIONES"
 
-[node name="submenuOpciones" type="PanelContainer" parent="." unique_id=1400177163]
-custom_minimum_size = Vector2(400, 250)
-layout_mode = 1
-anchors_preset = 4
+[node name="botonsalir" type="Button" parent="contenedorMenu"]
+custom_minimum_size = Vector2(330, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "SALIR"
+
+[node name="submenuOpciones" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -327.0
-offset_right = 571.0
-offset_bottom = 523.0
+offset_left = -310.0
+offset_top = -245.0
+offset_right = 310.0
+offset_bottom = 245.0
+grow_horizontal = 2
 grow_vertical = 2
+custom_minimum_size = Vector2(620, 490)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="MarginContainer" type="MarginContainer" parent="submenuOpciones" unique_id=179506460]
+[node name="MarginContainer" type="MarginContainer" parent="submenuOpciones"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
 
-[node name="VBoxOpciones" type="VBoxContainer" parent="submenuOpciones/MarginContainer" unique_id=24543644]
+[node name="VBoxOpciones" type="VBoxContainer" parent="submenuOpciones/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 18
+alignment = 1
 
-[node name="texto2" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=2098131350]
+[node name="texto2" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
 text = "OPCIONES"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="submenuOpciones/MarginContainer/VBoxOpciones/texto2" unique_id=1026558421]
-autoplay = true
-
-[node name="HSeparator" type="HSeparator" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=215005949]
+[node name="separador_visual" type="TextureRect" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+texture = ExtResource("3_divisor")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
 
-[node name="contenedorvolumen" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=600012234]
+[node name="contenedorvolumen" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
 layout_mode = 2
-mouse_default_cursor_shape = 2
+theme_override_constants/separation = 18
 
-[node name="texto3" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen" unique_id=1874371133]
+[node name="texto3" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 17
-text = "Volumen General"
+text = "Volumen general"
+vertical_alignment = 1
 
-[node name="slidervolumen" type="HSlider" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen" unique_id=12814396]
+[node name="slidervolumen" type="HSlider" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 0.0
@@ -116,41 +156,39 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=531900460]
+[node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
 layout_mode = 2
+alignment = 1
 
-[node name="pantallacompleta" type="CheckButton" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla" unique_id=416441248]
+[node name="pantallacompleta" type="CheckButton" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 17
-button_pressed = true
-text = "Pantalla Completa"
+text = "Pantalla completa"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=1785990151]
+[node name="contenedorresolucion" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
 layout_mode = 2
+theme_override_constants/separation = 18
 
-[node name="Label" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones/HBoxContainer" unique_id=1386042920]
+[node name="texto_resolucion" type="Label" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorresolucion"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-text = "Resolucion "
+text = "Resolución"
+vertical_alignment = 1
 
-[node name="optionbutton" type="OptionButton" parent="submenuOpciones/MarginContainer/VBoxOpciones/HBoxContainer" unique_id=882271228]
+[node name="optionbutton" type="OptionButton" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorresolucion"]
 layout_mode = 2
-item_count = 3
-popup/item_0/text = "1600x900"
-popup/item_0/id = 0
-popup/item_1/text = "1280x720"
-popup/item_1/id = 1
-popup/item_2/text = "720x480"
-popup/item_2/id = 2
+size_flags_horizontal = 3
 
-[node name="botoncerrar" type="Button" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=1731218922]
+[node name="botoncerrar" type="Button" parent="submenuOpciones/MarginContainer/VBoxOpciones"]
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "Cerrar"
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "VOLVER AL MENÚ"
 
 [connection signal="pressed" from="contenedorMenu/botonjugar" to="." method="_on_botonjugar_pressed"]
 [connection signal="pressed" from="contenedorMenu/botonopciones" to="." method="_on_botonopciones_pressed"]
 [connection signal="pressed" from="contenedorMenu/botonsalir" to="." method="_on_botonsalir_pressed"]
 [connection signal="value_changed" from="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen" to="." method="_on_slidervolumen_value_changed"]
 [connection signal="toggled" from="submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla/pantallacompleta" to="." method="_on_fullscreen_toggled"]
-[connection signal="item_selected" from="submenuOpciones/MarginContainer/VBoxOpciones/HBoxContainer/optionbutton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="submenuOpciones/MarginContainer/VBoxOpciones/contenedorresolucion/optionbutton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="submenuOpciones/MarginContainer/VBoxOpciones/botoncerrar" to="." method="_on_botoncerrar_pressed"]
