@@ -168,3 +168,13 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se retiran Guardar y Cargar del inventario; el botón Tirar y la gestión de objetos permanecen.
 - Motivo: concentrar las acciones de partida y configuración en la pausa, manteniendo el inventario enfocado en los objetos.
 - Prueba/estado: cambios subidos a GitHub; no se ejecutó Godot. Probar apertura/cierre con Escape, guardado/carga desde pausa, ajustes de volumen/pantalla/resolución y confirmar que el inventario conserva Tirar.
+
+
+### 2026-11-12 — Corregir tipado del recorrido de resoluciones en pausa
+- Archivo modificado: `Menus/scripts/menu_pausa.gd`.
+- Error informado: Godot no podía inferir el tipo de la variable `resolucion` dentro del `for` que recorre el arreglo de resoluciones.
+- Causa: aunque el arreglo está declarado como `Array[Vector2i]`, el analizador no estaba infiriendo el tipo del elemento del bucle.
+- Solución: declarar explícitamente el tipo del iterador: `for resolucion: Vector2i in resoluciones:`.
+- Alcance: cambio puntual; no se alteró la lógica de opciones ni las demás funciones del menú.
+- Prueba/estado: corrección subida a GitHub. No se ejecutó Godot desde aquí; comprobar que el proyecto ya supera este error de análisis.
+- Commit del script: `5ca11a7f7273e629b9be5aaa73bea7f05819bfed`.
