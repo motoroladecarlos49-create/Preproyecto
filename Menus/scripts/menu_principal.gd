@@ -88,6 +88,7 @@ func _configurar_opciones() -> void:
 	if bus_index >= 0:
 		var volumen_actual: float = 0.0 if AudioServer.is_bus_mute(bus_index) else db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 		slider_volumen.set_value_no_signal(volumen_actual)
+		_actualizar_relleno_volumen(volumen_actual)
 
 	check_pantalla.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 	option_button.clear()
@@ -98,6 +99,7 @@ func _configurar_opciones() -> void:
 			option_button.select(i)
 
 func _on_slidervolumen_value_changed(value: float) -> void:
+	_actualizar_relleno_volumen(value)
 	if bus_index < 0:
 		return
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(value, 0.001)))
@@ -153,3 +155,9 @@ func _estilizar_boton(boton: Button, tamano_fuente: int) -> void:
 	var pressed := normal.duplicate() as StyleBoxFlat
 	pressed.bg_color = Color("#171923")
 	boton.add_theme_stylebox_override("pressed", pressed)
+
+
+func _actualizar_relleno_volumen(value: float) -> void:
+	var relleno: TextureRect = slider_volumen.get_node("relleno_textura")
+	var material_relleno: ShaderMaterial = relleno.material as ShaderMaterial
+	material_relleno.set_shader_parameter("fill_amount", clampf(value, 0.0, 1.0))
