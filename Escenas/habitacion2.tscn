@@ -133,6 +133,18 @@ scale = Vector2(5, 5)
 [node name="spawn_retorno_3d" type="Marker2D" parent="Puerta2" unique_id=1951364210]
 position = Vector2(3657.6926, 700)
 
+[node name="Puerta3" parent="." unique_id=1909165495 instance=ExtResource("1_4jnyt")]
+position = Vector2(649.9999, 603.84607)
+scale = Vector2(5, 5)
+
+[node name="Puerta4" parent="." unique_id=697342636 instance=ExtResource("1_4jnyt")]
+
+[node name="CollisionShape2D" parent="Puerta4" index="0" unique_id=1857541741]
+position = Vector2(2730.7695, 584.6154)
+scale = Vector2(5, 5)
+
 [editable path="player"]
 [editable path="Puerta"]
 [editable path="Puerta2"]
+[editable path="Puerta3"]
+[editable path="Puerta4"]
