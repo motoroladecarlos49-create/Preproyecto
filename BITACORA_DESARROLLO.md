@@ -356,3 +356,22 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Como ambos menús usan el tema compartido, el ajuste afecta a los dos controles de volumen.
 - Prueba/estado: actualización subida a GitHub. No se ejecutó Godot; queda pendiente comprobar que el control se pueda arrastrar normalmente aunque el asa sea invisible y que el mosaico de la textura se vea natural en distintos niveles de volumen.
 - Commit del tema: `8b07719f8a60b9b7789a153c83bacf1ddf560ae8`.
+
+
+### 2026-11-13 — Mostrar una sola textura recortada según el volumen
+- Archivos modificados:
+  - `Menus/tema_volumen.tres`
+  - `Menus/menu_principal.tscn`
+  - `Menus/menu_pausa.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+  - Creado `Menus/relleno_volumen.gdshader`
+  - `BITACORA_DESARROLLO.md`
+- Cambio:
+  - Se elimina el modo mosaico que repetía la textura.
+  - Se incorpora una única `TextureRect` superpuesta al HSlider, con un shader que recorta la imagen horizontalmente según el valor del volumen.
+  - La imagen conserva una escala fija respecto al ancho completo del control; al cambiar el volumen se revela u oculta una parte, sin repetir la textura ni cambiar su escala para cada valor.
+  - El indicador circular permanece oculto y la textura superpuesta ignora el mouse para que el HSlider siga recibiendo la interacción.
+  - Ambos menús actualizan el recorte al mover el slider y al sincronizar el volumen actual al abrir las opciones.
+- Motivo: representar el progreso con una sola imagen continua, sin duplicarla en mosaico ni estirarla dinámicamente al cambiar el valor.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar la importación del shader, el aspecto de la textura en ambos menús y la interacción del HSlider.
