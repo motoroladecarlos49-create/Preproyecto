@@ -148,3 +148,23 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se quitó el reinicio forzado de `get_tree().paused` en `_ready()`, para no alterar el estado global al instanciar el menú.
 - Motivo: hacer fiable la apertura/cierre con Esc y evitar que el menú quede parcialmente dibujado o detrás del inventario.
 - Prueba/estado: cambios subidos a GitHub; no se ejecutó Godot, por lo que queda pendiente probar Escape, Reanudar, Opciones y Menú principal en ejecución.
+
+
+### 2026-11-12 — Centralizar guardado y opciones en el menú de pausa
+- Archivos modificados:
+  - `Menus/scripts/menu_pausa.gd`
+  - `Menus/menu_pausa.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/menu_principal.tscn`
+  - `Inventario/ui_inventario.gd`
+  - `Escenas/ui_inventario.tscn`
+- Cambios:
+  - Escape actúa como interruptor: una pulsación abre la pausa y otra pulsación la cierra; no hace falta mantener la tecla.
+  - Se trasladan los botones Guardar y Cargar desde el inventario al menú de pausa. Guardar usa el jugador actual como referencia; Cargar se deshabilita cuando no existe un guardado válido.
+  - Se muestra un mensaje de resultado dentro del menú de pausa.
+  - Las opciones de pausa ahora incluyen volumen general, pantalla completa y resolución (1600x900, 1280x720 y 720x480), igual que el menú principal.
+  - Se sincronizan los controles con los ajustes actuales al abrir opciones.
+  - Se corrige el rango del volumen a 0..1 en ambos menús para que la conversión lineal/decibelios sea correcta.
+  - Se retiran Guardar y Cargar del inventario; el botón Tirar y la gestión de objetos permanecen.
+- Motivo: concentrar las acciones de partida y configuración en la pausa, manteniendo el inventario enfocado en los objetos.
+- Prueba/estado: cambios subidos a GitHub; no se ejecutó Godot. Probar apertura/cierre con Escape, guardado/carga desde pausa, ajustes de volumen/pantalla/resolución y confirmar que el inventario conserva Tirar.
