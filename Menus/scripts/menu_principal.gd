@@ -11,7 +11,7 @@ const FUENTE_MENU: Font = preload("res://fuente/immortal/IMMORTAL.ttf")
 @onready var titulo_opciones: Label = $submenuOpciones/MarginContainer/VBoxOpciones/texto2
 @onready var slider_volumen: HSlider = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen
 @onready var check_pantalla: CheckButton = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla/pantallacompleta
-@onready var option_button: OptionButton = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorresolucion/optionbutton
+@onready var option_button: OptionButton = $submenuOpciones/MarginContainer/VBoxOpciones/HBoxContainer/optionbutton
 @onready var boton_volver: Button = $submenuOpciones/MarginContainer/VBoxOpciones/botoncerrar
 
 var bus_index: int = AudioServer.get_bus_index("Master")
