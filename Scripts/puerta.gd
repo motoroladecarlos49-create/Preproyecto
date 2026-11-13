@@ -4,6 +4,7 @@ extends Area2D
 @export var id_puerta_destino: String = "" 
 @export var direccion_salida_destino: String = "down" 
 @export var id_punto_retorno_2d: String = ""
+@export var mensaje_bloqueo: String = ""
 
 func _on_area_entered(area):
 	if area.name == "AreaRecogida":
