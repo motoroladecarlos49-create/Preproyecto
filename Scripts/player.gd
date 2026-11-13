@@ -17,6 +17,7 @@ var item_cerca: Node = null
 var puerta_cerca: Node = null
 var escena_destino: String = ""
 var id_puerta: String = ""
+var id_punto_retorno_2d: String = ""
 var direccion_salida: String = "down"
 var tiene_linterna_equipada: bool = false
 
@@ -111,9 +112,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				print("Mochila llena.")
 		elif puerta_cerca != null:
 			if escena_destino != "":
-				GameManager.puerta_destino_id = id_puerta
-				GameManager.direccion_salida = direccion_salida
-				get_tree().change_scene_to_file(escena_destino)
+				if escena_destino == "res://Escenas/level_3d.tscn":
+					if id_punto_retorno_2d == "":
+						push_warning("Esta puerta no tiene configurado su punto de regreso 2D.")
+						return
+					GameManager.preparar_regreso_2d(get_tree().current_scene.scene_file_path, id_punto_retorno_2d)
+					GameManager.puerta_destino_id = ""
+				else:
+					GameManager.puerta_destino_id = id_puerta
+					GameManager.direccion_salida = direccion_salida
+				var error: Error = get_tree().change_scene_to_file(escena_destino)
+				if error != OK:
+					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
 
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 	if item_actual != null and item_actual.nombre == "Linterna":
