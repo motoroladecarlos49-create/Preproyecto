@@ -73,7 +73,7 @@ position = Vector2(499.76443, 328.31116)
 scale = Vector2(0.33333334, 0.33333334)
 shape = SubResource("SegmentShape2D_4e70g")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D" unique_id=60633479]
+[node name="Cajonera" type="CollisionShape2D" parent="StaticBody2D" unique_id=60633479]
 position = Vector2(179.28204, 227.95686)
 shape = SubResource("RectangleShape2D_vbfun")
 
@@ -85,7 +85,7 @@ shape = SubResource("RectangleShape2D_r8g73")
 position = Vector2(1156.8462, 226.28206)
 shape = SubResource("CircleShape2D_vbfun")
 
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D" unique_id=1207664678]
+[node name="Armario" type="CollisionShape2D" parent="StaticBody2D" unique_id=1207664678]
 position = Vector2(536.97437, 230.76921)
 shape = SubResource("RectangleShape2D_nyvdy")
 
@@ -93,6 +93,7 @@ shape = SubResource("RectangleShape2D_nyvdy")
 color = Color(0.5099403, 0.41995478, 0.44029996, 1)
 
 [node name="player" parent="." unique_id=1418956237 instance=ExtResource("2_njrqw")]
+visible = false
 position = Vector2(1588.4618, 549.9999)
 scale = Vector2(11, 11)
 speed = 100.0
@@ -106,9 +107,15 @@ limit_bottom = 330
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="UI_inventario" parent="player/CanvasLayer" parent_id_path=PackedInt32Array(1418956237, 480012948) index="0" unique_id=1844190648]
+[node name="CanvasLayer" parent="player" index="7" unique_id=480012948]
+visible = false
+
+[node name="UI_inventario" parent="player/CanvasLayer" index="0" unique_id=1844190648]
 offset_right = 10.0
 offset_bottom = 4.0
+
+[node name="MenuPausa" parent="player" index="8"]
+visible = false
 
 [node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("1_4jnyt")]
 position = Vector2(302, 97)
