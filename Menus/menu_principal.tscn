@@ -1,37 +1,37 @@
 [gd_scene format=3 uid="uid://dt4ner0leki2x"]
 
-[ext_resource type="Script" path="res://Menus/scripts/menu_principal.gd" id="1_script"]
-[ext_resource type="Theme" path="res://Menus/tema_volumen.tres" id="2_tema_volumen"]
-[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="3_textura_volumen"]
-[ext_resource type="Shader" path="res://Menus/relleno_volumen.gdshader" id="4_shader_volumen"]
-
-[ext_resource type="Texture2D" path="res://Imagenes/fondo/1.jpeg" id="5_fondo_1"]
-[ext_resource type="Texture2D" path="res://Imagenes/fondo/2.jpeg" id="6_fondo_2"]
-[ext_resource type="Texture2D" path="res://Imagenes/fondo/3.jpeg" id="7_fondo_3"]
+[ext_resource type="Script" uid="uid://g4lj7f0o14qf" path="res://Menus/scripts/menu_principal.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://db32rqkp2o756" path="res://Menus/tema_volumen.tres" id="2_tema_volumen"]
+[ext_resource type="Texture2D" uid="uid://br3ki3d8jb32" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="3_textura_volumen"]
+[ext_resource type="Shader" uid="uid://cirnysgwnck7p" path="res://Menus/relleno_volumen.gdshader" id="4_shader_volumen"]
+[ext_resource type="Texture2D" uid="uid://yj4l8d07c6sa" path="res://Imagenes/fondo/1.jpeg" id="5_fondo_1"]
+[ext_resource type="Texture2D" uid="uid://cf0a05u7lnhh6" path="res://Imagenes/fondo/2.jpeg" id="6_fondo_2"]
+[ext_resource type="Texture2D" uid="uid://dew0rnlfviya0" path="res://Imagenes/fondo/3.jpeg" id="7_fondo_3"]
 
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
 bg_color = Color(0.075, 0.082, 0.12, 0.97)
-border_color = Color(0.66, 0.55, 0.36, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+border_color = Color(0.66, 0.55, 0.36, 1)
 corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 shadow_color = Color(0, 0, 0, 0.55)
 shadow_size = 16
-content_margin_left = 24.0
-content_margin_top = 22.0
-content_margin_right = 24.0
-content_margin_bottom = 22.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_relleno_volumen"]
 shader = ExtResource("4_shader_volumen")
+shader_parameter/fill_amount = 1.0
 
 [node name="menu_principal" type="Control" unique_id=1325911669]
 custom_minimum_size = Vector2(150, 0)
@@ -41,9 +41,9 @@ offset_right = 1151.0
 offset_bottom = 650.0
 script = ExtResource("1_script")
 
-[node name="FondoBotonesBase" type="TextureRect" parent="."]
+[node name="FondoBotonesBase" type="TextureRect" parent="." unique_id=1830382993]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -53,23 +53,23 @@ texture = ExtResource("7_fondo_3")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="FondoBotonesGlitch" type="TextureRect" parent="."]
+[node name="FondoBotonesGlitch" type="TextureRect" parent="." unique_id=210390547]
 visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-modulate = Color(1, 1, 1, 0)
 texture = ExtResource("5_fondo_1")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="FondoSinBotonesBase" type="TextureRect" parent="."]
+[node name="FondoSinBotonesBase" type="TextureRect" parent="." unique_id=1712207623]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,21 +80,22 @@ texture = ExtResource("5_fondo_1")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="FondoSinBotonesGlitch" type="TextureRect" parent="."]
+[node name="FondoSinBotonesGlitch" type="TextureRect" parent="." unique_id=1878880261]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-modulate = Color(1, 1, 1, 0)
 texture = ExtResource("6_fondo_2")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=340491058]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,15 +104,14 @@ offset_right = -584.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-visible = false
 color = Color(0.2556589, 0.25565878, 0.25565878, 1)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1366499672]
+visible = false
 layout_mode = 0
 offset_right = 1150.0
 offset_bottom = 644.0
 mouse_default_cursor_shape = 2
-visible = false
 
 [node name="contenedorMenu" type="VBoxContainer" parent="." unique_id=1091975248]
 layout_mode = 1
@@ -149,6 +149,7 @@ theme_override_font_sizes/font_size = 35
 text = "Salir"
 
 [node name="submenuOpciones" type="PanelContainer" parent="." unique_id=1400177163]
+visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 1
 anchors_preset = 4
@@ -193,15 +194,15 @@ theme_override_font_sizes/font_size = 17
 text = "Volumen General"
 
 [node name="slidervolumen" type="HSlider" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen" unique_id=12814396]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 30)
 theme = ExtResource("2_tema_volumen")
-min_value = 0.0
 max_value = 1.0
 step = 0.01
 
-[node name="relleno_textura" type="TextureRect" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen"]
+[node name="relleno_textura" type="TextureRect" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen" unique_id=1601123534]
+material = SubResource("ShaderMaterial_relleno_volumen")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +212,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_textura_volumen")
 stretch_mode = 6
-material = SubResource("ShaderMaterial_relleno_volumen")
 
 [node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=531900460]
 layout_mode = 2

@@ -18,6 +18,7 @@ var boton_continuar: Button
 var dialogo_nueva_partida: ConfirmationDialog
 
 @onready var fondo_botones_base: TextureRect = $FondoBotonesBase
+@onready var fondo_botones_glitch: TextureRect = $FondoBotonesGlitch
 @onready var fondo_sin_botones_base: TextureRect = $FondoSinBotonesBase
 @onready var fondo_sin_botones_glitch: TextureRect = $FondoSinBotonesGlitch
 
@@ -45,9 +46,11 @@ func _iniciar_ciclo_glitch() -> void:
 
 
 func _reproducir_glitch() -> void:
-	# Solo la mitad sin botones participa en el glitch; la mitad de botones permanece fija.
+	# Las dos mitades intercambian de imagen a la vez para que el corte visual coincida.
 	var duracion: float = randf_range(0.16, 0.72)
 	var entrada := create_tween().set_parallel(true)
+	entrada.tween_property(fondo_botones_base, "modulate:a", 0.0, duracion * 0.45)
+	entrada.tween_property(fondo_botones_glitch, "modulate:a", 1.0, duracion * 0.45)
 	entrada.tween_property(fondo_sin_botones_base, "modulate:a", 0.0, duracion * 0.45)
 	entrada.tween_property(fondo_sin_botones_glitch, "modulate:a", 1.0, duracion * 0.45)
 	await entrada.finished
@@ -55,6 +58,8 @@ func _reproducir_glitch() -> void:
 	# Breve pausa irregular antes de volver a la imagen principal.
 	await get_tree().create_timer(randf_range(0.04, 0.16)).timeout
 	var salida := create_tween().set_parallel(true)
+	salida.tween_property(fondo_botones_base, "modulate:a", 1.0, duracion * 0.55)
+	salida.tween_property(fondo_botones_glitch, "modulate:a", 0.0, duracion * 0.55)
 	salida.tween_property(fondo_sin_botones_base, "modulate:a", 1.0, duracion * 0.55)
 	salida.tween_property(fondo_sin_botones_glitch, "modulate:a", 0.0, duracion * 0.55)
 	await salida.finished
