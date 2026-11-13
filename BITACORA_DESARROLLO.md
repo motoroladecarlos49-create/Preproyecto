@@ -420,3 +420,17 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se quitaron variables de bus de audio que ya no eran necesarias en los scripts de menú.
 - Motivo: evitar que los menús principal y de pausa puedan divergir en las resoluciones ofrecidas o en el rango del control de volumen.
 - Prueba/estado: archivos actualizados en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar ambos menús, cambiar cada opción desde uno y comprobar que el otro refleje el mismo valor al abrirse, además de reiniciar el juego para verificar la persistencia.
+
+
+### 2026-11-13 — Aplicar resoluciones y pantalla completa directamente a la ventana
+- Archivo modificado:
+  - `Scripts/GameManager.gd`
+- Cambios:
+  - Se centralizó la aplicación del modo de pantalla en `_aplicar_configuracion_ventana()`, utilizada tanto al iniciar el juego como al cambiar las opciones.
+  - Antes de cambiar el tamaño, se fuerza el modo ventana y se aplica el tamaño elegido mediante `DisplayServer.window_set_size()`; después se centra la ventana.
+  - Si pantalla completa está activada, se cambia el modo de esa misma ventana a pantalla completa después de restaurar/aplicar el tamaño de ventana guardado.
+  - Al desactivar pantalla completa se vuelve a aplicar la última resolución de ventana seleccionada.
+  - Se valida que la resolución guardada siga perteneciendo a las opciones disponibles; si el archivo contiene un valor inválido, se conserva la resolución predeterminada.
+  - Se rechazan resoluciones que no estén en la lista compartida, evitando guardar opciones que los selectores no ofrecen.
+- Motivo: asegurar que las resoluciones y el modo de pantalla se apliquen a la ventana principal del juego, y no solamente se actualicen los valores internos o los selectores.
+- Prueba/estado: cambios subidos a GitHub y verificados en el contenido remoto. No se ejecutó Godot desde este entorno; queda pendiente probar cada resolución, activar/desactivar pantalla completa y comprobar que al salir de pantalla completa se restaure el tamaño seleccionado.
