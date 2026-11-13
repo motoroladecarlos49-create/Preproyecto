@@ -14,10 +14,8 @@ const FUENTE_MENU: Font = preload("res://fuente/immortal/IMMORTAL.ttf")
 @onready var option_button: OptionButton = $submenuOpciones/MarginContainer/VBoxOpciones/HBoxContainer/optionbutton
 @onready var boton_volver: Button = $submenuOpciones/MarginContainer/VBoxOpciones/botoncerrar
 
-var bus_index: int = AudioServer.get_bus_index("Master")
 var boton_continuar: Button
 var dialogo_nueva_partida: ConfirmationDialog
-var resoluciones: Array[Vector2i] = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
 
 func _ready() -> void:
 	submenu_opciones.hide()
@@ -85,12 +83,16 @@ func _volver_al_menu() -> void:
 	contenedor_menu.show()
 
 func _configurar_opciones() -> void:
+	slider_volumen.min_value = 0.0
+	slider_volumen.max_value = 1.0
+	slider_volumen.step = 0.01
 	var volumen_actual: float = GameManager.obtener_volumen_general()
 	slider_volumen.set_value_no_signal(volumen_actual)
 	_actualizar_relleno_volumen(volumen_actual)
 
 	check_pantalla.set_pressed_no_signal(GameManager.obtener_pantalla_completa())
 	option_button.clear()
+	var resoluciones: Array[Vector2i] = GameManager.obtener_resoluciones_disponibles()
 	var tamano_actual: Vector2i = GameManager.obtener_resolucion_ventana()
 	for i in range(resoluciones.size()):
 		option_button.add_item("%d x %d" % [resoluciones[i].x, resoluciones[i].y])
@@ -105,6 +107,7 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	GameManager.establecer_pantalla_completa(toggled_on)
 
 func _on_option_button_item_selected(index: int) -> void:
+	var resoluciones: Array[Vector2i] = GameManager.obtener_resoluciones_disponibles()
 	if index < 0 or index >= resoluciones.size():
 		return
 	GameManager.establecer_resolucion_ventana(resoluciones[index])
