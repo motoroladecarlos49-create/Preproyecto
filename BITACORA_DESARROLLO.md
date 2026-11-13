@@ -574,3 +574,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - La colisión de Cajonera se trasladó fuera de `player/AreaRecogida` a un `StaticBody2D` fijo; se añadieron áreas de interacción independientes para Cajonera y Armario.
 - Motivo: permitir examinar los objetos y comunicar las zonas cerradas/no transitables sin alterar la recogida de ítems.
 - Prueba/estado: cambios guardados en GitHub y verificados mediante lectura posterior de archivos. No se ejecutó Godot; queda pendiente probar la proximidad, la tecla E y la duración de los mensajes en ambas habitaciones.
+
+
+### 2026-11-13 — Fondo dividido con transiciones aleatorias tipo glitch en el menú principal
+- Archivos modificados:
+  - `Menus/menu_principal.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Se utilizaron `Imagenes/fondo/1.jpeg` y `Imagenes/fondo/2.jpeg` en dos mitades que cubren el menú.
+  - La mitad derecha (sin botones) mantiene la imagen 1 como estado normal y muestra brevemente la imagen 2 durante el glitch.
+  - La mitad izquierda (zona de botones) usa la imagen 2 como base y cambia a la imagen 1 durante el mismo efecto, coordinando ambas mitades para que el cambio tenga continuidad visual.
+  - Se añadieron fundidos simultáneos de entrada y salida, con intervalos aleatorios de 2,0 a 5,5 segundos y una duración aleatoria de 0,16 a 0,72 segundos para el cambio visual. El breve intervalo de permanencia también es aleatorio.
+  - Se conservó la estructura y funcionalidad de los botones y del panel de opciones; se ocultaron los dos fondos anteriores que quedaban por encima de las nuevas capas.
+- Motivo: dar al menú un fondo dinámico y coherente entre ambas mitades, con apariciones breves y no periódicas de la segunda imagen.
+- Prueba/estado: archivos actualizados en GitHub y verificados mediante lectura posterior. No se ejecutó Godot; queda pendiente comprobar visualmente el recorte de ambas imágenes en las resoluciones disponibles y ajustar el efecto si el encuadre no coincide con el diseño esperado.
