@@ -100,6 +100,7 @@ func _on_guardar_pressed() -> void:
 	var jugador := get_parent() as Node2D
 	if GameManager.guardar_partida(jugador):
 		etiqueta_estado.text = "PARTIDA GUARDADA"
+		_actualizar_boton_cargar()
 	else:
 		etiqueta_estado.text = "NO SE PUDO GUARDAR"
 
