@@ -512,3 +512,22 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Scripts/SaveGame.gd`: `377c37fc95eca82cdedeed5be8015badf80c0c85`
   - `Scripts/GameManager.gd`: `4fd8268ace3a1da7613efc1a5f69f50b0207505c`
   - `Scripts/habitacion1.gd`: `dae558c53f73c6e30dba31b0432f6bc559aeb879`
+
+
+### 2026-11-13 — Mensajes para Puerta3 y Puerta4 sin destino
+- Archivos modificados:
+  - `Scripts/puerta.gd`
+  - `Scripts/player.gd`
+  - `Escenas/habitacion2.tscn`
+- Cambios:
+  - Se agregó la propiedad exportada `mensaje_bloqueo` a las puertas; queda vacía por defecto para no alterar las puertas existentes.
+  - Al interactuar con una puerta sin escena de destino, el jugador muestra el mensaje configurado, si existe.
+  - Puerta3 muestra «La puerta está cerrada.».
+  - Puerta4 muestra «Necesitas una llave para abrir esta puerta.».
+  - Ninguna de las dos cambia de escena.
+- Guardado/carga de booleanos: se revisó `GameManager.gd` y `SaveGame.gd`; las banderas booleanas están declaradas como propiedades exportadas, se copian al guardar y se restauran al cargar. No se identificó un error reproducible en el código revisado; queda pendiente el texto exacto del error para diagnosticarlo con precisión.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot.
+- Commits:
+  - `Scripts/puerta.gd`: `d141a7432203791a0f30368b91af9a28d04f5498`
+  - `Scripts/player.gd`: `33b1ca40c4499323068a578c44446653d9431a74`
+  - `Escenas/habitacion2.tscn`: `e3966b4b8fda5ececbc26b56e36ddedab77921b3`
