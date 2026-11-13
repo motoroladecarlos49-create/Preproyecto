@@ -94,3 +94,42 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Player: `2bfc8c62cae8139a3102f33cf2a765d602f6dbf4`
   - UI script: `3cfbd101e71f514882d54ed293f6df9cd669d0f5`
   - UI scene: `a116b5a5ce1a1df1e3c5a59e5a1dd28bf361fab7`
+
+
+### 2026-11-12 — Integración inicial de menús principal y pausa
+- Archivos creados:
+  - `Menus/menu_principal.tscn`
+  - `Menus/menu_pausa.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+- Archivos modificados:
+  - `project.godot`
+  - `Scripts/GameManager.gd`
+  - `Escenas/player.tscn`
+- Menú principal:
+  - Se configura como escena inicial del proyecto.
+  - El botón «Jugar» pasa a llamarse «Nueva partida».
+  - Se agrega dinámicamente «Continuar» solo si existe un guardado válido: el recurso debe poder cargarse, tener una escena registrada y esa escena debe existir.
+  - «Continuar» llama al sistema de carga manual existente, conservando escena, posición, inventario, selección y estado de linterna según los datos del guardado.
+  - Si ya existe un guardado válido, «Nueva partida» solicita confirmación y avisa que eliminará ese guardado. Solo después de confirmar se elimina el archivo anterior y se reinicia el estado global.
+  - Se conserva el menú de opciones (volumen, pantalla completa y resolución); se corrigió la ruta del nodo OptionButton para coincidir con el nombre real de la escena.
+- Menú de pausa:
+  - Se instancia dentro de la escena del jugador.
+  - Se abre/cierra con la acción `ui_cancel` (Escape por defecto) y pausa el árbol mientras está visible.
+  - «Reanudar» quita la pausa.
+  - «Menú principal» despausa antes de cambiar a `Menus/menu_principal.tscn`.
+  - Se corrigieron la ruta del panel de opciones y el método conectado al botón de volver al menú.
+- Organización:
+  - Los archivos integrados se colocan en una nueva carpeta `Menus/`.
+  - Se conserva intacta la carpeta original `menuprincipal/`, incluido su `project.godot` y archivos temporales `.tmp`, para no borrar material de referencia antes de probar la integración.
+  - No se modificaron ni movieron recursos de `Imagenes/assepts`; quedan disponibles para una etapa posterior de mejora visual.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot; quedan pendientes la importación y las pruebas de inicio, aparición dinámica de «Continuar», confirmación de nueva partida, carga, pausa, reanudación y regreso al menú.
+- Commits:
+  - Script del menú principal: `858099bd74ec29c6e932a8140aa1f3f8951cad1a`
+  - Script del menú de pausa: `e044acdc85a8abce8fc771efd991ec085315267c`
+  - GameManager: `484dcb345df599c605196fe32b50ba897eb0e5fc`
+  - Escena del menú principal: `5ef7738a0e757c839dfa7efc8bf6f2ad2b90d874`
+  - Escena del menú de pausa: `b27c0461183f3880432098d5c792741ed193aade`
+  - Integración del menú de pausa en player: `e40cf3d5a6ce722602a0dd5539a66160ae2342fa`
+  - Escena inicial del proyecto: `fe423c3abe8623d3350fadd1d56d40e24a8e9b31`
+  - Ajuste de texto del menú de pausa: `a13c7f0858a46c0cd4e95bdf992b632df819a68d`
