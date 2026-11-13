@@ -508,4 +508,7 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - La bandera permanece en memoria al cambiar de escena, se guarda y se recupera al cargar una partida, y solo se reinicia al iniciar una partida nueva.
 - Motivo: evitar que el tutorial vuelva a aparecer al regresar a `habitacion1`, sin impedir que se muestre al comenzar una partida nueva.
 - Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot; queda pendiente comprobar que el mensaje aparezca una vez, no reaparezca al salir y volver a la escena, se conserve tras guardar/cargar y vuelva a aparecer al iniciar una partida nueva.
-- Commits: se registran a continuación tras la actualización de los archivos.
+- Commits:
+  - `Scripts/SaveGame.gd`: `377c37fc95eca82cdedeed5be8015badf80c0c85`
+  - `Scripts/GameManager.gd`: `4fd8268ace3a1da7613efc1a5f69f50b0207505c`
+  - `Scripts/habitacion1.gd`: `dae558c53f73c6e30dba31b0432f6bc559aeb879`
