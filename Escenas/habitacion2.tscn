@@ -116,7 +116,7 @@ escena_destino = "res://Escenas/habitacion1.tscn"
 id_puerta_destino = "spawn_habitacion1"
 
 [node name="CollisionShape2D" parent="Puerta" index="0" unique_id=1857541741]
-position = Vector2(1271.077, 472.2308)
+position = Vector2(1259.5387, 510.69235)
 scale = Vector2(5, 5)
 
 [node name="spawn_habitacion2" type="Marker2D" parent="Puerta" unique_id=41924238]
@@ -125,5 +125,13 @@ position = Vector2(1294.1539, 622.2308)
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1951364210]
 position = Vector2(4300, 645.098)
 
+[node name="Puerta2" parent="." unique_id=849732651 instance=ExtResource("1_4jnyt")]
+escena_destino = "res://Escenas/level_3d.tscn"
+
+[node name="CollisionShape2D" parent="Puerta2" index="0" unique_id=1857541741]
+position = Vector2(3634.6155, 607.69244)
+scale = Vector2(5, 5)
+
 [editable path="player"]
 [editable path="Puerta"]
+[editable path="Puerta2"]
