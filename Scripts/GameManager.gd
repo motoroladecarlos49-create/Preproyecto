@@ -29,7 +29,8 @@ const RUTA_GUARDADO: String = "user://partida_guardada.tres"
 const RUTA_CONFIGURACION: String = "user://configuracion.cfg"
 
 var volumen_general: float = 1.0
-var resolucion_ventana: Vector2i = Vector2i(1280, 720)
+const RESOLUCION_PREDETERMINADA: Vector2i = Vector2i(1280, 720)
+var resolucion_ventana: Vector2i = RESOLUCION_PREDETERMINADA
 var pantalla_completa: bool = false
 
 const RESOLUCIONES_DISPONIBLES = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
@@ -41,7 +42,9 @@ func obtener_resoluciones_disponibles() -> Array[Vector2i]:
 
 func _ready() -> void:
 	var ventana: Window = get_tree().root
-	resolucion_ventana = ventana.size
+	# Mantener una resolución válida por defecto; el tamaño inicial de la ventana
+	# puede no coincidir con ninguna de las opciones disponibles.
+	resolucion_ventana = RESOLUCION_PREDETERMINADA
 
 	var indice_bus: int = AudioServer.get_bus_index("Master")
 	if indice_bus >= 0:
@@ -50,9 +53,11 @@ func _ready() -> void:
 	var configuracion := ConfigFile.new()
 	if configuracion.load(RUTA_CONFIGURACION) == OK:
 		volumen_general = clampf(float(configuracion.get_value("audio", "volumen_general", volumen_general)), 0.0, 1.0)
-		var resolucion_guardada: Variant = configuracion.get_value("video", "resolucion_ventana", resolucion_ventana)
+		var resolucion_guardada: Variant = configuracion.get_value("video", "resolucion_ventana", RESOLUCION_PREDETERMINADA)
 		if resolucion_guardada is Vector2i and RESOLUCIONES_DISPONIBLES.has(resolucion_guardada):
 			resolucion_ventana = resolucion_guardada
+		else:
+			resolucion_ventana = RESOLUCION_PREDETERMINADA
 		pantalla_completa = bool(configuracion.get_value("video", "pantalla_completa", false))
 
 	_aplicar_volumen_guardado()
@@ -96,13 +101,13 @@ func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
 
 func _aplicar_configuracion_ventana() -> void:
 	var ventana: Window = get_tree().root
-	# Primero se vuelve al modo ventana para que el tamaño elegido se aplique
-	# al área de ventana real y no quede solamente almacenado en la configuración.
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	DisplayServer.window_set_size(resolucion_ventana)
+	# Aplicar primero el tamaño en modo ventana. Se usa la propiedad del Window
+	# principal para conservar y restaurar la resolución de ventana seleccionada.
+	ventana.mode = Window.MODE_WINDOWED
+	ventana.size = resolucion_ventana
 	ventana.move_to_center()
 	if pantalla_completa:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		ventana.mode = Window.MODE_FULLSCREEN
 
 func _guardar_configuracion() -> void:
 	var configuracion := ConfigFile.new()
