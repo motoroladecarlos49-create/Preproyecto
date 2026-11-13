@@ -46,14 +46,13 @@ func _ready() -> void:
 	var configuracion := ConfigFile.new()
 	if configuracion.load(RUTA_CONFIGURACION) == OK:
 		volumen_general = clampf(float(configuracion.get_value("audio", "volumen_general", volumen_general)), 0.0, 1.0)
-		resolucion_ventana = configuracion.get_value("video", "resolucion_ventana", resolucion_ventana)
+		var resolucion_guardada: Variant = configuracion.get_value("video", "resolucion_ventana", resolucion_ventana)
+		if resolucion_guardada is Vector2i and RESOLUCIONES_DISPONIBLES.has(resolucion_guardada):
+			resolucion_ventana = resolucion_guardada
 		pantalla_completa = bool(configuracion.get_value("video", "pantalla_completa", false))
 
 	_aplicar_volumen_guardado()
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	ventana.size = resolucion_ventana
-	ventana.move_to_center()
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if pantalla_completa else DisplayServer.WINDOW_MODE_WINDOWED)
+	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
 
 func obtener_volumen_general() -> float:
@@ -79,23 +78,27 @@ func _aplicar_volumen_guardado() -> void:
 
 func establecer_pantalla_completa(activada: bool) -> void:
 	pantalla_completa = activada
-	if activada:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		var ventana: Window = get_tree().root
-		ventana.size = resolucion_ventana
-		ventana.move_to_center()
+	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
 
 func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
+	if not RESOLUCIONES_DISPONIBLES.has(resolucion):
+		push_warning("La resolución solicitada no está en la lista de opciones disponibles.")
+		return
 	resolucion_ventana = resolucion
 	pantalla_completa = false
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	var ventana: Window = get_tree().root
-	ventana.size = resolucion_ventana
-	ventana.move_to_center()
+	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
+
+func _aplicar_configuracion_ventana() -> void:
+	var ventana: Window = get_tree().root
+	# Primero se vuelve al modo ventana para que el tamaño elegido se aplique
+	# al área de ventana real y no quede solamente almacenado en la configuración.
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_size(resolucion_ventana)
+	ventana.move_to_center()
+	if pantalla_completa:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _guardar_configuracion() -> void:
 	var configuracion := ConfigFile.new()
