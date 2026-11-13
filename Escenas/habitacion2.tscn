@@ -136,8 +136,10 @@ position = Vector2(3657.6926, 700)
 [node name="Puerta3" parent="." unique_id=1909165495 instance=ExtResource("1_4jnyt")]
 position = Vector2(649.9999, 603.84607)
 scale = Vector2(5, 5)
+mensaje_bloqueo = "La puerta está cerrada."
 
 [node name="Puerta4" parent="." unique_id=697342636 instance=ExtResource("1_4jnyt")]
+mensaje_bloqueo = "Necesitas una llave para abrir esta puerta."
 
 [node name="CollisionShape2D" parent="Puerta4" index="0" unique_id=1857541741]
 position = Vector2(2730.7695, 584.6154)
