@@ -28,9 +28,9 @@ anchor_top = 0.374
 anchor_right = 0.5
 anchor_bottom = 0.374
 offset_left = -82.0
-offset_top = -38.352005
+offset_top = -190.0
 offset_right = 76.0
-offset_bottom = 26.647995
+offset_bottom = -125.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -42,9 +42,9 @@ text = "Reanudar"
 [node name="menu" type="Button" parent="." unique_id=887618465]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.637
+anchor_top = 0.76
 anchor_right = 0.5
-anchor_bottom = 0.637
+anchor_bottom = 0.76
 offset_left = -81.0
 offset_top = -35.776
 offset_right = 77.0
@@ -60,9 +60,9 @@ text = "Menú principal"
 [node name="opciones" type="Button" parent="." unique_id=816613110]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.42
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.42
 offset_left = -81.0
 offset_top = -39.0
 offset_right = 77.25
@@ -77,10 +77,10 @@ text = "Opciones"
 
 [node name="plane" type="PanelContainer" parent="opciones" unique_id=12656620]
 layout_mode = 0
-offset_left = -150.0
-offset_top = -154.0
-offset_right = 315.0
-offset_bottom = 221.0
+offset_left = -230.0
+offset_top = -245.0
+offset_right = 230.0
+offset_bottom = 245.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kso7j")
 
 [node name="MarginContainer" type="MarginContainer" parent="opciones/plane" unique_id=1364733054]
@@ -126,8 +126,93 @@ button_pressed = true
 text = "Volver"
 icon_alignment = 1
 
+
+[node name="contenedorvolumen" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="texto_volumen" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen"]
+layout_mode = 2
+text = "Volumen general"
+
+[node name="slidervolumen" type="HSlider" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="contenedorresolucion" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="texto_resolucion" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion"]
+layout_mode = 2
+text = "Resolución"
+
+[node name="optionbutton" type="OptionButton" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "1600 x 900"
+popup/item_0/id = 0
+popup/item_1/text = "1280 x 720"
+popup/item_1/id = 1
+popup/item_2/text = "720 x 480"
+popup/item_2/id = 2
+
+[node name="etiquetaestado" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.88
+anchor_right = 0.5
+anchor_bottom = 0.88
+offset_left = -260.0
+offset_top = -18.0
+offset_right = 260.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="botonguardar" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 0.5
+anchor_bottom = 0.55
+offset_left = -82.0
+offset_top = -34.0
+offset_right = 76.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+text = "Guardar"
+
+[node name="botoncargar" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.66
+anchor_right = 0.5
+anchor_bottom = 0.66
+offset_left = -82.0
+offset_top = -34.0
+offset_right = 76.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+text = "Cargar"
+
 [connection signal="pressed" from="reanudar" to="." method="_on_reanudar_pressed"]
 [connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="opciones" to="." method="_on_opciones_pressed"]
 [connection signal="toggled" from="opciones/plane/MarginContainer/VBoxContainer/contenedorp/pantallacompleta" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="opciones/plane/MarginContainer/VBoxContainer/botonvolver" to="." method="_on_botonvolver_pressed"]
+
+[connection signal="pressed" from="botonguardar" to="." method="_on_guardar_pressed"]
+[connection signal="pressed" from="botoncargar" to="." method="_on_cargar_pressed"]
+[connection signal="value_changed" from="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen/slidervolumen" to="." method="_on_slidervolumen_value_changed"]
+[connection signal="item_selected" from="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion/optionbutton" to="." method="_on_option_button_item_selected"]
