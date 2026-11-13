@@ -90,7 +90,7 @@ layout_mode = 2
 [node name="Panel8" parent="PanelContainer/GridContainer" unique_id=1307661475 instance=ExtResource("1_ker5q")]
 layout_mode = 2
 
-[node name="BtnDrop" type="Button" parent="." unique_id=2071719970]
+[node name="BtnDrop" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -106,3 +106,37 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_g52vg")
 theme_override_font_sizes/font_size = 28
 text = "Tirar"
+
+[node name="BtnSave" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = 150.0
+offset_right = -106.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_g52vg")
+theme_override_font_sizes/font_size = 28
+text = "Guardar"
+
+[node name="BtnLoad" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 106.0
+offset_top = 150.0
+offset_right = 250.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_g52vg")
+theme_override_font_sizes/font_size = 28
+text = "Cargar"
