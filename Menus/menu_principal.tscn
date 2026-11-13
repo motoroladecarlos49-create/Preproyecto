@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://Menus/scripts/menu_principal.gd" id="1_script"]
 [ext_resource type="Theme" path="res://Menus/tema_volumen.tres" id="2_tema_volumen"]
+[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="3_textura_volumen"]
+[ext_resource type="Shader" path="res://Menus/relleno_volumen.gdshader" id="4_shader_volumen"]
 
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
@@ -23,6 +25,9 @@ content_margin_left = 24.0
 content_margin_top = 22.0
 content_margin_right = 24.0
 content_margin_bottom = 22.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_relleno_volumen"]
+shader = ExtResource("4_shader_volumen")
 
 [node name="menu_principal" type="Control" unique_id=1325911669]
 custom_minimum_size = Vector2(150, 0)
