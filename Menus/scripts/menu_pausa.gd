@@ -86,7 +86,7 @@ func _configurar_opciones() -> void:
 		slider_volumen.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
 		check_pantalla.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 		selector_resolucion.clear()
-		for resolucion in resoluciones:
+		for resolucion: Vector2i in resoluciones:
 			selector_resolucion.add_item("%d x %d" % [resolucion.x, resolucion.y])
 		var tamano := get_window().size
 		for i in range(resoluciones.size()):
