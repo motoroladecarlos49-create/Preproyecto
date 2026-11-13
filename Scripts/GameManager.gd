@@ -4,6 +4,8 @@ var partida_actual: SaveGame = SaveGame.new()
 
 var puerta_destino_id: String = ""
 var direccion_salida: String = "down"
+var escena_retorno_2d: String = ""
+var punto_retorno_2d_id: String = ""
 var mochila_global: Mochila = null
 var linterna_encendida: bool = false
 var carga_pendiente: bool = false
@@ -133,12 +135,40 @@ func iniciar_partida_nueva() -> void:
 	carga_pendiente = false
 	puerta_destino_id = ""
 	direccion_salida = "down"
+	escena_retorno_2d = ""
+	punto_retorno_2d_id = ""
 	ya_aviso_inventario = false
 	ya_aviso_recoger = false
 	ya_aviso_puerta = false
 	tutorial_lampara_completado = false
 	item_recien_tirado = false
 	is_dialogue_active = false
+
+
+func preparar_regreso_2d(escena: String, punto_retorno_id: String) -> void:
+	escena_retorno_2d = escena
+	punto_retorno_2d_id = punto_retorno_id
+
+func volver_a_escena_2d() -> bool:
+	if escena_retorno_2d == "" or punto_retorno_2d_id == "":
+		push_warning("No hay una escena o un punto de regreso 2D configurado.")
+		return false
+	if not ResourceLoader.exists(escena_retorno_2d):
+		push_error("No existe la escena 2D de regreso: %s" % escena_retorno_2d)
+		return false
+
+	puerta_destino_id = punto_retorno_2d_id
+	direccion_salida = "down"
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var error: Error = get_tree().change_scene_to_file(escena_retorno_2d)
+	if error != OK:
+		puerta_destino_id = ""
+		push_error("No se pudo volver a la escena 2D. Código: %s" % error)
+		return false
+
+	escena_retorno_2d = ""
+	punto_retorno_2d_id = ""
+	return true
 
 
 func obtener_escala_item(escala_padre: float) -> float:
