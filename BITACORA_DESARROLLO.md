@@ -210,3 +210,7 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Commits:
   - Escena: `a8cea300d6e9aba30e8fcf72e3357c3fde3b7ef4`
   - Script (ajuste de tipado incluido): `11147e91a25edb3b123f53c73f7d778bf5528761`
+
+
+- Ajuste posterior: después de guardar correctamente, se vuelve a comprobar si existe una partida válida para habilitar inmediatamente el botón «CARGAR» sin tener que cerrar y reabrir la pausa.
+- Commit adicional del script: `f010e15da0c132c4f4fd4a2816320a22834dfe45`.
