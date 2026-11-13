@@ -40,9 +40,8 @@ func _agregar_boton_continuar() -> void:
 	boton_continuar = Button.new()
 	boton_continuar.name = "botoncontinuar"
 	boton_continuar.text = "CONTINUAR"
-	boton_continuar.custom_minimum_size = Vector2(330, 58)
 	boton_continuar.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	_estilizar_boton(boton_continuar, 25)
+	_estilizar_boton(boton_continuar, 35)
 	boton_continuar.pressed.connect(_on_botoncontinuar_pressed)
 	contenedor_menu.add_child(boton_continuar)
 	contenedor_menu.move_child(boton_continuar, 1)
@@ -118,25 +117,38 @@ func _on_option_button_item_selected(index: int) -> void:
 
 func _aplicar_estilo() -> void:
 	titulo.add_theme_font_override("font", FUENTE_MENU)
-	titulo.add_theme_font_size_override("font_size", 58)
+	titulo.add_theme_font_size_override("font_size", 50)
 	titulo.add_theme_color_override("font_color", Color("#ead7ad"))
 	titulo.add_theme_color_override("font_shadow_color", Color("#11131b"))
 	titulo.add_theme_constant_override("shadow_offset_x", 3)
 	titulo.add_theme_constant_override("shadow_offset_y", 4)
 	titulo_opciones.add_theme_font_override("font", FUENTE_MENU)
-	titulo_opciones.add_theme_font_size_override("font_size", 36)
+	titulo_opciones.add_theme_font_size_override("font_size", 30)
 	titulo_opciones.add_theme_color_override("font_color", Color("#ead7ad"))
 	var botones: Array[Button] = [boton_jugar, boton_opciones, boton_salir, boton_volver]
 	for i in range(botones.size()):
-		_estilizar_boton(botones[i], 27 if i < 3 else 22)
+		_estilizar_boton(botones[i], 35 if i < 3 else 30)
 	check_pantalla.add_theme_font_override("font", FUENTE_MENU)
 	option_button.add_theme_font_override("font", FUENTE_MENU)
-	option_button.add_theme_font_size_override("font_size", 20)
+
+	# El volumen se dibuja como un control deslizante real, no como un adorno.
+	var pista := StyleBoxFlat.new()
+	pista.bg_color = Color("#171923")
+	pista.set_corner_radius_all(5)
+	pista.content_margin_top = 3.0
+	pista.content_margin_bottom = 3.0
+	slider_volumen.add_theme_stylebox_override("slider", pista)
+	var tramo := StyleBoxFlat.new()
+	tramo.bg_color = Color("#c5a66d")
+	tramo.set_corner_radius_all(5)
+	tramo.content_margin_top = 3.0
+	tramo.content_margin_bottom = 3.0
+	slider_volumen.add_theme_stylebox_override("grabber_area", tramo)
+	slider_volumen.add_theme_stylebox_override("grabber_area_highlight", tramo.duplicate())
 
 func _estilizar_boton(boton: Button, tamano_fuente: int) -> void:
 	boton.add_theme_font_override("font", FUENTE_MENU)
 	boton.add_theme_font_size_override("font_size", tamano_fuente)
-	boton.custom_minimum_size = Vector2(330, 58)
 	boton.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = Color("#252735")
