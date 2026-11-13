@@ -22,6 +22,37 @@ var escala_item_escena2: float = 4.75
 
 const RUTA_GUARDADO: String = "user://partida_guardada.tres"
 
+func hay_partida_guardada() -> bool:
+	if not FileAccess.file_exists(RUTA_GUARDADO):
+		return false
+	var guardado = ResourceLoader.load(RUTA_GUARDADO) as SaveGame
+	return guardado != null and guardado.escena_actual != "" and ResourceLoader.exists(guardado.escena_actual)
+
+func eliminar_partida_guardada() -> bool:
+	if not FileAccess.file_exists(RUTA_GUARDADO):
+		return true
+	var ruta_absoluta = ProjectSettings.globalize_path(RUTA_GUARDADO)
+	var error = DirAccess.remove_absolute(ruta_absoluta)
+	if error != OK:
+		push_error("No se pudo eliminar el guardado anterior. Código: %s" % error)
+		return false
+	return true
+
+func iniciar_partida_nueva() -> void:
+	partida_actual = SaveGame.new()
+	mochila_global = Mochila.new()
+	linterna_encendida = false
+	carga_pendiente = false
+	puerta_destino_id = ""
+	direccion_salida = "down"
+	ya_aviso_inventario = false
+	ya_aviso_recoger = false
+	ya_aviso_puerta = false
+	tutorial_lampara_completado = false
+	item_recien_tirado = false
+	is_dialogue_active = false
+
+
 func obtener_escala_item(escala_padre: float) -> float:
 	if is_equal_approx(escala_padre, 0.01):
 		return escala_item_escena1
