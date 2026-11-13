@@ -108,10 +108,13 @@ func _on_cargar_pressed() -> void:
 		etiqueta_estado.text = "NO HAY UNA PARTIDA GUARDADA"
 		_actualizar_boton_cargar()
 		return
+	# Despausar antes de cambiar de escena: el menu puede liberarse al cargar.
+	get_tree().paused = false
 	if GameManager.cargar_partida():
-		get_tree().paused = false
-	else:
-		etiqueta_estado.text = "NO SE PUDO CARGAR LA PARTIDA"
+		return
+	# Si la carga falla, el menu sigue activo y se vuelve a pausar el juego.
+	get_tree().paused = true
+	etiqueta_estado.text = "NO SE PUDO CARGAR LA PARTIDA"
 
 func _configurar_opciones() -> void:
 	slider_volumen.min_value = 0.0
