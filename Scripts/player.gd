@@ -107,7 +107,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				item_cerca = null
 				if not GameManager.ya_aviso_inventario:
 					GameManager.ya_aviso_inventario = true
-					MessageManager.mostrar_mensaje("Presiona 'I' para abrir tu inventario", 3.0)
+					MessageManager.mostrar_mensaje("Presiona la tecla I para abrir el inventario", 3.0)
 			else:
 				print("Mochila llena.")
 		elif puerta_cerca != null:
@@ -134,7 +134,7 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 		if not GameManager.tutorial_lampara_completado:
 			GameManager.tutorial_lampara_completado = true
 			await get_tree().create_timer(0.2).timeout
-			MessageManager.mostrar_mensaje("Cierra el inventario con 'I' y presiona 'F' para usar la lámpara", 4.0)
+			MessageManager.mostrar_mensaje("Presiona la tecla I para cerrar el inventario y luego F para encender la linterna", 4.0)
 	else:
 		tiene_linterna_equipada = false
 		flash_light.enabled = false
