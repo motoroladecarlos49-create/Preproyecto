@@ -81,8 +81,31 @@ shape = SubResource("RectangleShape2D_r8g73")
 position = Vector2(1156.8462, 226.28206)
 shape = SubResource("CircleShape2D_vbfun")
 
-[node name="Armario" type="CollisionShape2D" parent="StaticBody2D" unique_id=1207664678]
+[node name="ColisionArmario" type="CollisionShape2D" parent="StaticBody2D" unique_id=1207664678]
 position = Vector2(536.97437, 230.76921)
+shape = SubResource("RectangleShape2D_nyvdy")
+
+[node name="CajoneraFija" type="StaticBody2D" parent="." unique_id=60633479]
+position = Vector2(1079, 959)
+scale = Vector2(3, 3)
+
+[node name="CajoneraColision" type="CollisionShape2D" parent="CajoneraFija"]
+shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="Cajonera" parent="." instance=ExtResource("1_4jnyt")]
+position = Vector2(1079, 959)
+scale = Vector2(3, 3)
+mensaje_bloqueo = "Está vacío."
+
+[node name="Armario" parent="." instance=ExtResource("1_4jnyt")]
+position = Vector2(2152, 967.3)
+scale = Vector2(3, 3)
+mensaje_bloqueo = "Está vacío."
+
+[node name="CollisionShape2D" parent="Cajonera" index="0"]
+shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="CollisionShape2D" parent="Armario" index="0"]
 shape = SubResource("RectangleShape2D_nyvdy")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
@@ -102,10 +125,6 @@ limit_bottom = 330
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="Cajonera" type="CollisionShape2D" parent="player/AreaRecogida" parent_id_path=PackedInt32Array(1418956237, 127996628) index="1" unique_id=60633479]
-position = Vector2(-46.328697, 37.170063)
-scale = Vector2(0.27272725, 0.27272725)
-shape = SubResource("RectangleShape2D_vbfun")
 
 [node name="UI_inventario" parent="player/CanvasLayer" parent_id_path=PackedInt32Array(1418956237, 480012948) index="0" unique_id=1844190648]
 offset_right = 10.0
@@ -151,3 +170,5 @@ scale = Vector2(5, 5)
 [editable path="Puerta2"]
 [editable path="Puerta3"]
 [editable path="Puerta4"]
+[editable path="Cajonera"]
+[editable path="Armario"]
