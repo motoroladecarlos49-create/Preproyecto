@@ -434,3 +434,22 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se rechazan resoluciones que no estén en la lista compartida, evitando guardar opciones que los selectores no ofrecen.
 - Motivo: asegurar que las resoluciones y el modo de pantalla se apliquen a la ventana principal del juego, y no solamente se actualicen los valores internos o los selectores.
 - Prueba/estado: cambios subidos a GitHub y verificados en el contenido remoto. No se ejecutó Godot desde este entorno; queda pendiente probar cada resolución, activar/desactivar pantalla completa y comprobar que al salir de pantalla completa se restaure el tamaño seleccionado.
+
+
+### 2026-11-13 — Conectar la puerta 2D con el escenario 3D y permitir el regreso
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `Scripts/player.gd`
+  - `Scripts/puerta.gd`
+  - `Scripts/player3D.gd`
+  - `Escenas/habitacion2.tscn`
+  - `Escenas/level_3d.tscn`
+- Cambios:
+  - La puerta `Puerta2` de `habitacion2.tscn` ahora indica el identificador del punto de aparición para el regreso.
+  - Al interactuar con esa puerta, el jugador 2D registra en `GameManager` la escena de origen y el marcador de retorno antes de cargar `level_3d.tscn`.
+  - Se renombró el marcador que ya existía en la habitación a `spawn_retorno_3d`, conservando su posición.
+  - Se añadió en `level_3d.tscn` una zona de salida 3D con un indicador visual luminoso.
+  - Al acercarse a la salida aparece el aviso para pulsar E; al interactuar, `GameManager` vuelve a la escena 2D registrada y `player.gd` coloca al jugador en el marcador.
+  - Se conserva el jugador 2D para las escenas 2D y el jugador 3D para el escenario 3D; no se mezclan sus tipos ni controles.
+- Motivo: permitir entrar desde la puerta 2D a un nivel 3D y regresar por la misma conexión al lugar preparado junto a la puerta.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar las señales de proximidad, la interacción E, la carga de ambas escenas y la posición exacta del marcador de regreso.
