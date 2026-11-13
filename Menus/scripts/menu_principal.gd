@@ -7,6 +7,7 @@ extends Control
 
 var boton_continuar: Button
 var dialogo_nueva_partida: ConfirmationDialog
+var resoluciones: Array[Vector2i] = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
 
 func _ready() -> void:
 	submenu_opciones.hide()
@@ -69,10 +70,9 @@ func _configurar_opciones() -> void:
 	slider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
 	var check: CheckButton = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla/pantallacompleta
 	check.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
-	var tamano := get_window().size
-	for i in range(3):
-		var resolucion := [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)][i]
-		if resolucion == tamano:
+	var tamano: Vector2i = get_window().size
+	for i in range(resoluciones.size()):
+		if resoluciones[i] == tamano:
 			option_button.select(i)
 			break
 
