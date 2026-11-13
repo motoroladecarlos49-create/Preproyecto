@@ -547,3 +547,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Prueba/estado: cambio subido y verificado por lectura de archivos en GitHub. No se ejecutó Godot.
 - Commit:
   - `Menus/scripts/menu_pausa.gd`: `3e6ae6e1ec004af0c4b7f1b11b22c2a71d0fc84e`
+
+
+### 2026-11-13 — Recuperar la aplicación de resoluciones y pantalla completa
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Se fijó 1280×720 como resolución predeterminada válida, en lugar de tomar el tamaño inicial de la ventana (que podía no coincidir con ninguna opción del selector).
+  - Al leer `user://configuracion.cfg`, se valida que la resolución guardada sea una de las tres opciones disponibles; si no lo es, se usa 1280×720.
+  - Se recuperó la aplicación del tamaño mediante la propiedad `Window.size` de la ventana principal, después de volver al modo ventana, y luego se activa pantalla completa si corresponde.
+  - Al desactivar pantalla completa se restaura la última resolución de ventana elegida; al elegir una resolución se mantiene el comportamiento de volver a modo ventana.
+  - Se mantienen intactos los métodos compartidos por el menú principal y el menú de pausa, así como el guardado de preferencias en `user://configuracion.cfg`.
+- Motivo: corregir la inicialización con tamaños no contemplados y restaurar el uso de la ventana principal para aplicar la resolución, evitando que el selector y el tamaño real de la ventana queden desincronizados.
+- Prueba/estado: cambios subidos a GitHub y revisados mediante lectura posterior de los archivos. No se ejecutó Godot en este entorno; queda pendiente probar las tres resoluciones, alternar pantalla completa/ventana desde ambos menús y reiniciar el juego para comprobar la persistencia.
+- Commit de código: `9861dde2cde38293666670a4d235210534ffd55f`.
