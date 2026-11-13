@@ -320,10 +320,16 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Commit del Theme: `d195e65c0a3a5aa093518c1297d892d24fe08c02`.
 
 
-### 2026-11-13 — Recuperar la barra decorativa del panel de opciones de pausa
-- Archivo modificado: `Menus/menu_pausa.tscn`.
-- Cambio: se recupera el nodo `separador_visual` debajo del título «OPCIONES», usando el recurso gráfico existente `Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png`. Se configura como textura horizontal, con altura mínima de 20 px, expansión horizontal y un matiz cálido/dorado para integrarlo con el panel.
-- Aclaración: esta barra es exclusivamente decorativa. No reemplaza ni modifica el `HSlider` funcional de volumen, que permanece debajo del separador.
-- Motivo: se había interpretado erróneamente que el usuario se refería a la pista del volumen; la solicitud correcta era restaurar y estilizar el divisor gráfico debajo del encabezado de opciones.
-- Prueba/estado: escena actualizada en GitHub y pendiente de inspección visual en Godot. No se ejecutó el motor desde este entorno.
-- Commit de la escena: ca0ce4727bc39f6e8636787da9e1dab7677fe743.
+### 2026-11-13 — Usar la textura Kenney como pista de los controles de volumen
+- Archivos modificados:
+  - `Menus/tema_volumen.tres`
+  - `Menus/menu_pausa.tscn`
+  - `BITACORA_DESARROLLO.md`
+- Corrección de interpretación: la textura `Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png` no debe aparecer como separador independiente debajo del título de opciones. Debe ser parte de la barra que representa el volumen.
+- Cambio:
+  - El tema compartido usa `divider-000.png` como textura de la pista del `HSlider`.
+  - Se conserva el tramo activo dorado y el estado resaltado; el `HSlider` continúa siendo el control interactivo y conserva su señal y lógica de volumen.
+  - Se elimina de la escena de pausa el nodo decorativo `separador_visual` y su referencia directa a la textura.
+  - Ambos menús continúan usando el mismo tema compartido, por lo que la apariencia de volumen queda unificada.
+- Motivo: aplicar la barra gráfica solicitada al control real de volumen de las opciones, no volver a colocarla en su ubicación decorativa original.
+- Prueba/estado: cambios preparados en GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar visualmente el aspecto de la textura estirada en ambas pistas y verificar el ajuste del volumen.
