@@ -376,3 +376,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Ambos menús actualizan el recorte al mover el slider y al sincronizar el volumen actual al abrir las opciones.
 - Motivo: representar el progreso con una sola imagen continua, sin duplicarla en mosaico ni estirarla dinámicamente al cambiar el valor.
 - Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar la importación del shader, el aspecto de la textura en ambos menús y la interacción del HSlider.
+
+
+### 2026-11-13 — Ocultar el icono circular de los controles de volumen
+- Archivo modificado: `Menus/tema_volumen.tres`.
+- Problema: el círculo visible no provenía de los StyleBox del indicador, sino de los iconos `HSlider/icons/grabber` y `grabber_highlight`, que todavía podían heredarse del tema predeterminado.
+- Solución: se asignó a ambos estados una textura de 1×1 completamente transparente. Se conserva el HSlider como control interactivo y no se altera el shader que recorta la textura de relleno.
+- Alcance: el tema es compartido por `Menus/menu_principal.tscn` y `Menus/menu_pausa.tscn`, por lo que el cambio se aplica a ambos menús sin modificar sus escenas ni scripts.
+- Prueba/estado: cambio subido a GitHub. No se ejecutó Godot desde este entorno; comprobar visualmente ambos controles y confirmar que se puedan arrastrar con normalidad.
+- Commit del tema: `e0628046087cfeb210c97ac0089292905dddecd8`.

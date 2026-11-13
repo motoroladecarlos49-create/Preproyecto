@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3]
+[gd_resource type="Theme" load_steps=5 format=3]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pista"]
 bg_color = Color(0.075, 0.082, 0.12, 1)
@@ -11,9 +11,19 @@ content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_indicador"]
 
+[sub_resource type="Gradient" id="Gradient_indicador_transparente"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_indicador_transparente"]
+gradient = SubResource("Gradient_indicador_transparente")
+width = 1
+height = 1
+
 [resource]
 HSlider/styles/slider = SubResource("StyleBoxFlat_pista")
 HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_indicador")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_indicador")
 HSlider/styles/grabber = SubResource("StyleBoxEmpty_indicador")
 HSlider/styles/grabber_highlight = SubResource("StyleBoxEmpty_indicador")
+HSlider/icons/grabber = SubResource("GradientTexture2D_indicador_transparente")
+HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_indicador_transparente")
