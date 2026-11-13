@@ -151,6 +151,22 @@ func _on_option_button_item_selected(index: int) -> void:
 	DisplayServer.window_set_size(resoluciones[index])
 	get_window().move_to_center()
 
+	# Mantener el volumen como un HSlider funcional y darle el mismo acabado
+	# oscuro/dorado que el control del menú principal.
+	var pista := StyleBoxFlat.new()
+	pista.bg_color = Color("#171923")
+	pista.set_corner_radius_all(5)
+	pista.content_margin_top = 3.0
+	pista.content_margin_bottom = 3.0
+	slider_volumen.add_theme_stylebox_override("slider", pista)
+	var tramo := StyleBoxFlat.new()
+	tramo.bg_color = Color("#c5a66d")
+	tramo.set_corner_radius_all(5)
+	tramo.content_margin_top = 3.0
+	tramo.content_margin_bottom = 3.0
+	slider_volumen.add_theme_stylebox_override("grabber_area", tramo)
+	slider_volumen.add_theme_stylebox_override("grabber_area_highlight", tramo.duplicate())
+
 func _aplicar_estilo() -> void:
 	titulo.add_theme_font_override("font", FUENTE_MENU)
 	titulo.add_theme_font_size_override("font_size", 54)
