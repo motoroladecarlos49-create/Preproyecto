@@ -24,13 +24,13 @@ color = Color(0, 0, 0, 0.4627451)
 [node name="reanudar" type="Button" parent="." unique_id=641955151]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.374
+anchor_top = 0.25
 anchor_right = 0.5
-anchor_bottom = 0.374
+anchor_bottom = 0.25
 offset_left = -82.0
-offset_top = -190.0
+offset_top = -34.0
 offset_right = 76.0
-offset_bottom = -125.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -42,9 +42,9 @@ text = "Reanudar"
 [node name="menu" type="Button" parent="." unique_id=887618465]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.76
+anchor_top = 0.75
 anchor_right = 0.5
-anchor_bottom = 0.76
+anchor_bottom = 0.75
 offset_left = -81.0
 offset_top = -35.776
 offset_right = 77.0
@@ -60,9 +60,9 @@ text = "Menú principal"
 [node name="opciones" type="Button" parent="." unique_id=816613110]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.42
+anchor_top = 0.38
 anchor_right = 0.5
-anchor_bottom = 0.42
+anchor_bottom = 0.38
 offset_left = -81.0
 offset_top = -39.0
 offset_right = 77.25
@@ -115,16 +115,6 @@ text = "Pantalla Completa
 "
 icon_alignment = 1
 
-[node name="botonvolver" type="Button" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=2117726864]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 25
-toggle_mode = true
-button_pressed = true
-text = "Volver"
-icon_alignment = 1
 
 
 [node name="contenedorvolumen" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer"]
@@ -159,6 +149,17 @@ popup/item_1/id = 1
 popup/item_2/text = "720 x 480"
 popup/item_2/id = 2
 
+[node name="botonvolver" type="Button" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=2117726864]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "Volver"
+icon_alignment = 1
+
 [node name="etiquetaestado" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -177,9 +178,9 @@ theme_override_font_sizes/font_size = 18
 [node name="botonguardar" type="Button" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.55
+anchor_top = 0.51
 anchor_right = 0.5
-anchor_bottom = 0.55
+anchor_bottom = 0.51
 offset_left = -82.0
 offset_top = -34.0
 offset_right = 76.0
@@ -193,9 +194,9 @@ text = "Guardar"
 [node name="botoncargar" type="Button" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.66
+anchor_top = 0.63
 anchor_right = 0.5
-anchor_bottom = 0.66
+anchor_bottom = 0.63
 offset_left = -82.0
 offset_top = -34.0
 offset_right = 76.0
