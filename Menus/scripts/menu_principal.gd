@@ -4,7 +4,6 @@ const FUENTE_MENU: Font = preload("res://fuente/immortal/IMMORTAL.ttf")
 
 @onready var contenedor_menu: VBoxContainer = $contenedorMenu
 @onready var submenu_opciones: PanelContainer = $submenuOpciones
-@onready var titulo: Label = $contenedorMenu/texto
 @onready var boton_jugar: Button = $contenedorMenu/botonjugar
 @onready var boton_opciones: Button = $contenedorMenu/botonopciones
 @onready var boton_salir: Button = $contenedorMenu/botonsalir
@@ -155,12 +154,6 @@ func _on_option_button_item_selected(index: int) -> void:
 	check_pantalla.set_pressed_no_signal(false)
 
 func _aplicar_estilo() -> void:
-	titulo.add_theme_font_override("font", FUENTE_MENU)
-	titulo.add_theme_font_size_override("font_size", 50)
-	titulo.add_theme_color_override("font_color", Color("#ead7ad"))
-	titulo.add_theme_color_override("font_shadow_color", Color("#11131b"))
-	titulo.add_theme_constant_override("shadow_offset_x", 3)
-	titulo.add_theme_constant_override("shadow_offset_y", 4)
 	titulo_opciones.add_theme_font_override("font", FUENTE_MENU)
 	titulo_opciones.add_theme_font_size_override("font_size", 30)
 	titulo_opciones.add_theme_color_override("font_color", Color("#ead7ad"))
