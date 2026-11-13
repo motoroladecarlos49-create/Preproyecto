@@ -241,3 +241,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Script del menú principal: `f08dc7142ebd98bf1e10f968b0e20e0ab7e8ac3a`
   - Escena del menú principal: `cff1ec7ed6893b5969fa9f713f6a9780d6a7cb3d`
   - Mensajes tutoriales: `cc281ff4b8d91998157f5fe618e127778078c96a`
+
+
+### 2026-11-13 — Corregir ruta del botón Volver en opciones del menú principal
+- Archivo modificado: `Menus/scripts/menu_principal.gd`.
+- Error informado en Godot: no encontraba `submenuOpciones/MarginContainer/VBoxOpciones/botonvolver`; luego `_estilizar_boton()` intentaba aplicar la fuente sobre una referencia nula.
+- Causa: en `Menus/menu_principal.tscn` el nodo está nombrado `botoncerrar`, pero el `@onready` del script buscaba `botonvolver`.
+- Solución: se corrigió la ruta del `@onready var boton_volver` para apuntar al nombre real `botoncerrar`. No se modificó la escena ni el comportamiento del botón.
+- Prueba/estado: verificada la coincidencia entre la ruta corregida y el nombre del nodo en la escena remota. No se ejecutó Godot desde este entorno; comprobar que desaparezcan ambos errores al iniciar el menú.
+- Commit del script: `f559bf6a2574ed1bb255044e9ada8a0087bee05d`.
