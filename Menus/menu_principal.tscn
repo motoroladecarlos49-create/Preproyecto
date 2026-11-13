@@ -7,6 +7,7 @@
 
 [ext_resource type="Texture2D" path="res://Imagenes/fondo/1.jpeg" id="5_fondo_1"]
 [ext_resource type="Texture2D" path="res://Imagenes/fondo/2.jpeg" id="6_fondo_2"]
+[ext_resource type="Texture2D" path="res://Imagenes/fondo/3.jpeg" id="7_fondo_3"]
 
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
@@ -48,11 +49,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_fondo_2")
+texture = ExtResource("7_fondo_3")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="FondoBotonesGlitch" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 0.5
