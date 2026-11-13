@@ -7,5 +7,5 @@ class_name Item
 @export var cantidad: int = 1
 @export var max_cantidad: int = 16
 
-# Variable para recordar de qué posición original viene el ítem
-var id_escena: String = "" 
+# Se exporta para conservar el identificador al serializar el recurso.
+@export var id_escena: String = ""
