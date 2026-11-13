@@ -28,6 +28,13 @@ var volumen_general: float = 1.0
 var resolucion_ventana: Vector2i = Vector2i(1280, 720)
 var pantalla_completa: bool = false
 
+const RESOLUCIONES_DISPONIBLES = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
+
+func obtener_resoluciones_disponibles() -> Array[Vector2i]:
+	var resoluciones: Array[Vector2i] = []
+	resoluciones.assign(RESOLUCIONES_DISPONIBLES)
+	return resoluciones
+
 func _ready() -> void:
 	var ventana: Window = get_tree().root
 	resolucion_ventana = ventana.size
