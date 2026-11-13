@@ -318,3 +318,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Menus/menu_principal.tscn`: `baa18fb4b633eb976a30670b572e57b436b13b71`
   - `Menus/menu_pausa.tscn`: `1c844047016318cc0cbb6ea6258e9abfe8dc2f6c`
 - Commit del Theme: `d195e65c0a3a5aa093518c1297d892d24fe08c02`.
+
+
+### 2026-11-13 — Recuperar la barra decorativa del panel de opciones de pausa
+- Archivo modificado: `Menus/menu_pausa.tscn`.
+- Cambio: se recupera el nodo `separador_visual` debajo del título «OPCIONES», usando el recurso gráfico existente `Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png`. Se configura como textura horizontal, con altura mínima de 20 px, expansión horizontal y un matiz cálido/dorado para integrarlo con el panel.
+- Aclaración: esta barra es exclusivamente decorativa. No reemplaza ni modifica el `HSlider` funcional de volumen, que permanece debajo del separador.
+- Motivo: se había interpretado erróneamente que el usuario se refería a la pista del volumen; la solicitud correcta era restaurar y estilizar el divisor gráfico debajo del encabezado de opciones.
+- Prueba/estado: escena actualizada en GitHub y pendiente de inspección visual en Godot. No se ejecutó el motor desde este entorno.
+- Commit de la escena: ca0ce4727bc39f6e8636787da9e1dab7677fe743.
