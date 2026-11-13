@@ -119,13 +119,13 @@ func _configurar_opciones() -> void:
 		slider_volumen.min_value = 0.0
 		slider_volumen.max_value = 1.0
 		slider_volumen.step = 0.01
-		var volumen_actual: float = 0.0 if AudioServer.is_bus_mute(bus_index) else db_to_linear(AudioServer.get_bus_volume_db(bus_index))
-		slider_volumen.set_value_no_signal(volumen_actual)
-		_actualizar_relleno_volumen(volumen_actual)
+	var volumen_actual: float = GameManager.obtener_volumen_general()
+	slider_volumen.set_value_no_signal(volumen_actual)
+	_actualizar_relleno_volumen(volumen_actual)
 
-	check_pantalla.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+	check_pantalla.set_pressed_no_signal(GameManager.obtener_pantalla_completa())
 	selector_resolucion.clear()
-	var tamano_actual: Vector2i = get_window().size
+	var tamano_actual: Vector2i = GameManager.obtener_resolucion_ventana()
 	for i in range(resoluciones.size()):
 		selector_resolucion.add_item("%d x %d" % [resoluciones[i].x, resoluciones[i].y])
 		if resoluciones[i] == tamano_actual:
@@ -137,21 +137,16 @@ func _actualizar_boton_cargar() -> void:
 
 func _on_slidervolumen_value_changed(value: float) -> void:
 	_actualizar_relleno_volumen(value)
-	if bus_index < 0:
-		return
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(value, 0.001)))
-	AudioServer.set_bus_mute(bus_index, value <= 0.0)
+	GameManager.establecer_volumen_general(value)
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	var mode: DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED
-	DisplayServer.window_set_mode(mode)
+	GameManager.establecer_pantalla_completa(toggled_on)
 
 func _on_option_button_item_selected(index: int) -> void:
 	if index < 0 or index >= resoluciones.size():
 		return
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	DisplayServer.window_set_size(resoluciones[index])
-	get_window().move_to_center()
+	GameManager.establecer_resolucion_ventana(resoluciones[index])
+	check_pantalla.set_pressed_no_signal(false)
 
 
 func _aplicar_estilo() -> void:
