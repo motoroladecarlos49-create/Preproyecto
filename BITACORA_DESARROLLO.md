@@ -469,3 +469,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Prueba/estado: rutas contrastadas con el árbol actual del repositorio y corregidas en GitHub. No se ejecutó Godot; queda pendiente abrir el proyecto y probar la transición a la escena 3D.
 - Commit de código: `8211999c38b4cfaab3fe52b2f205c6c911e2aa4f`.
 
+### 2026-11-13 — Aclarar los mensajes de la tecla del inventario
+- Archivo modificado: `Scripts/player.gd`.
+- Cambios:
+  - Se reformuló el aviso de apertura para indicar claramente «Presiona la tecla I para abrir el inventario».
+  - Se reformuló el aviso de la linterna para indicar que primero se cierra el inventario con I y luego se enciende la linterna con F.
+- Alcance: solo se corrigió la redacción de esos dos mensajes. No se modificaron las asignaciones de teclas, las acciones de entrada ni la lógica/frecuencia de los tutoriales.
+- Prueba/estado: textos actualizados en GitHub y verificados en el archivo. No se ejecutó Godot desde este entorno.
+- Commit de código: 52165dc8abcd751c9707ffcc01bd0302d8b278be.
+
