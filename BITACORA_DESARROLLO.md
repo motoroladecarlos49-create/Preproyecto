@@ -495,3 +495,17 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Scripts/SaveGame.gd`: f79ee95722dedfa68d3be4cad2069bcc4822ea40
   - `Scripts/GameManager.gd`: 96730331e66c4421502328cc666ce72f267df1a5
   - `Scripts/player3D.gd`: ac9912f4b2983b4bd009ff39bff08da0a6ce07c0
+
+
+### 2026-11-13 — Evitar que se repita el tutorial de movimiento al volver a una escena
+- Archivos modificados:
+  - `Scripts/SaveGame.gd`
+  - `Scripts/GameManager.gd`
+  - `Scripts/habitacion1.gd`
+- Cambios:
+  - Se agregó `tutorial_movimiento_completado` como bandera del tutorial de movimiento.
+  - El mensaje «Muévete con W, A, S, D» ahora se muestra solamente si la bandera todavía está desactivada; se marca como completada al mostrarlo.
+  - La bandera permanece en memoria al cambiar de escena, se guarda y se recupera al cargar una partida, y solo se reinicia al iniciar una partida nueva.
+- Motivo: evitar que el tutorial vuelva a aparecer al regresar a `habitacion1`, sin impedir que se muestre al comenzar una partida nueva.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot; queda pendiente comprobar que el mensaje aparezca una vez, no reaparezca al salir y volver a la escena, se conserve tras guardar/cargar y vuelva a aparecer al iniciar una partida nueva.
+- Commits: se registran a continuación tras la actualización de los archivos.
