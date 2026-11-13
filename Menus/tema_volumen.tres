@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3]
+[gd_resource type="Theme" load_steps=5 format=3]
 
 [ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="1_divider"]
 
