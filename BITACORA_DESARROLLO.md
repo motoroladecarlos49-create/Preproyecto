@@ -163,7 +163,7 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se trasladan los botones Guardar y Cargar desde el inventario al menú de pausa. Guardar usa el jugador actual como referencia; Cargar se deshabilita cuando no existe un guardado válido.
   - Se muestra un mensaje de resultado dentro del menú de pausa.
   - Las opciones de pausa ahora incluyen volumen general, pantalla completa y resolución (1600x900, 1280x720 y 720x480), igual que el menú principal.
-  - Se sincronizan los controles con los ajustes actuales al abrir opciones.
+  - Se sincronizan los controles con los ajustes actuales al abrir opciones. Se ordenaron los controles del submenú para mostrar volumen, pantalla completa, resolución y Volver.
   - Se corrige el rango del volumen a 0..1 en ambos menús para que la conversión lineal/decibelios sea correcta.
   - Se retiran Guardar y Cargar del inventario; el botón Tirar y la gestión de objetos permanecen.
 - Motivo: concentrar las acciones de partida y configuración en la pausa, manteniendo el inventario enfocado en los objetos.
