@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var mochila : Mochila 
+var mochila : Mochila
 var escena_item_mundo: PackedScene
 var ui_inventario: Control = null
 
@@ -10,40 +10,37 @@ var ui_inventario: Control = null
 @onready var camera: Camera2D = $Camera2D
 
 @export var speed: float = 160
-@export var flashlight_distance: float = 5.0 
+@export var flashlight_distance: float = 5.0
 
 var last_direction: String = "down"
-var item_cerca: Node = null 
-var puerta_cerca: Node = null 
-
+var item_cerca: Node = null
+var puerta_cerca: Node = null
 var escena_destino: String = ""
-var id_puerta: String = "" 
+var id_puerta: String = ""
 var direccion_salida: String = "down"
 var tiene_linterna_equipada: bool = false
 
 func _ready() -> void:
 	flash_light.enabled = false
-	sprite_lampara.visible = false 
+	sprite_lampara.visible = false
 	update_flashlight_direction()
-	z_index = 2 
-	
-	escena_item_mundo = load("res://Escenas/linterna_mundo.tscn") 
-	
+	z_index = 2
+	escena_item_mundo = load("res://Escenas/linterna_mundo.tscn")
+
 	if GameManager.mochila_global == null:
 		mochila = Mochila.new()
 		GameManager.mochila_global = mochila
 	else:
 		mochila = GameManager.mochila_global
-		
+
 	ui_inventario = find_child("UI_inventario", true, false) as Control
 	if ui_inventario != null:
 		ui_inventario.mochila = mochila
 		ui_inventario.conectar_mochila()
-	
+
 	if not mochila.item_seleccionado_cambiado.is_connected(_on_mochila_item_seleccionado_cambiado):
 		mochila.item_seleccionado_cambiado.connect(_on_mochila_item_seleccionado_cambiado)
 
-	# Recupera los objetos que se habían soltado en esta habitación.
 	GameManager.restaurar_items_tirados(get_parent())
 
 	if GameManager.puerta_destino_id != "":
@@ -54,19 +51,26 @@ func _ready() -> void:
 			update_animation("idle")
 		GameManager.puerta_destino_id = ""
 
-	# La mochila persiste entre escenas, pero el jugador se crea de nuevo.
-	# Aplicamos la selección guardada para recuperar el sprite y su animación.
-	_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
+	# La carga manual tiene prioridad sobre el punto de aparición de una puerta.
+	if GameManager.carga_pendiente:
+		global_position = GameManager.partida_actual.posicion_jugador
+		var clave_guardada = GameManager.partida_actual.clave_item_seleccionado
+		if clave_guardada != "" and mochila.objetos.has(clave_guardada):
+			mochila.seleccionar_item(clave_guardada)
+		else:
+			mochila.seleccionar_item("")
+		GameManager.carga_pendiente = false
+	else:
+		_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
 
 func _process(_delta):
 	if camera:
 		camera.global_position.x = global_position.x
-		camera.global_position.y = 0 
+		camera.global_position.y = 0
 
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
-	
 	if item_cerca != null:
 		if not GameManager.ya_aviso_recoger:
 			MessageManager.mostrar_mensaje("Presiona 'E' para recoger el ítem", 2.0)
@@ -88,8 +92,8 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interactuar"):
 		if item_cerca != null:
-			if item_cerca.data == null: return
-				
+			if item_cerca.data == null:
+				return
 			var exito = mochila.agregar_item(item_cerca.data)
 			if exito:
 				var id_recogido = item_cerca.id_unico
@@ -98,15 +102,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				if id_recogido != "" and not GameManager.partida_actual.items_recogidos.has(id_recogido):
 					GameManager.partida_actual.items_recogidos.append(id_recogido)
 				GameManager.quitar_item_tirado(id_recogido)
-				item_cerca.queue_free() 
+				item_cerca.queue_free()
 				item_cerca = null
-				
 				if not GameManager.ya_aviso_inventario:
 					GameManager.ya_aviso_inventario = true
 					MessageManager.mostrar_mensaje("Presiona 'I' para abrir tu inventario", 3.0)
 			else:
 				print("Mochila llena.")
-				
 		elif puerta_cerca != null:
 			if escena_destino != "":
 				GameManager.puerta_destino_id = id_puerta
@@ -114,14 +116,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				get_tree().change_scene_to_file(escena_destino)
 
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
-	if item_actual != null and item_actual.nombre == "Linterna": 
+	if item_actual != null and item_actual.nombre == "Linterna":
 		tiene_linterna_equipada = true
 		sprite_normal.visible = false
 		sprite_lampara.visible = true
-		# Recupera el estado de encendido que tenía antes del cambio de escena.
 		flash_light.enabled = GameManager.linterna_encendida
 		if not GameManager.tutorial_lampara_completado:
-			GameManager.tutorial_lampara_completado = true 
+			GameManager.tutorial_lampara_completado = true
 			await get_tree().create_timer(0.2).timeout
 			MessageManager.mostrar_mensaje("Cierra el inventario con 'I' y presiona 'F' para usar la lámpara", 4.0)
 	else:
@@ -135,46 +136,26 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	if escena_item_mundo == null or item_a_tirar == null:
 		return
-
-	# Conserva marcado el ID anterior: así la linterna original del mapa
-	# no vuelve a aparecer cuando regreses a esa habitación.
 	var id_anterior = item_a_tirar.id_escena
 	if id_anterior != "" and not GameManager.partida_actual.items_recogidos.has(id_anterior):
 		GameManager.partida_actual.items_recogidos.append(id_anterior)
-
-	# Cada objeto soltado recibe un ID propio, distinto al de su ubicación original.
 	var nuevo_id = item_a_tirar.nombre + "_soltado_" + str(Time.get_ticks_usec())
 	item_a_tirar.id_escena = nuevo_id
-
 	var item_suelto = escena_item_mundo.instantiate()
 	item_suelto.data = item_a_tirar
 	item_suelto.id_unico = nuevo_id
-
-	# Se agrega primero para que Godot aplique la escala final del objeto.
 	get_parent().add_child(item_suelto)
-	# Alinea el centro de la colisión del objeto con el centro de la
-	# colisión del jugador, en vez de usar un desplazamiento fijo.
 	var colision_jugador: CollisionShape2D = $CollisionShape2D
 	var colision_item: CollisionShape2D = item_suelto.get_node("CollisionShape2D")
 	var desplazamiento_colision = colision_item.global_position - item_suelto.global_position
 	var posicion_alineada = colision_jugador.global_position - desplazamiento_colision
-	# Usa el punto medio entre la alineación de colisiones y el desplazamiento anterior.
 	var posicion_anterior = global_position + Vector2(50, 50)
 	item_suelto.global_position = posicion_alineada.lerp(posicion_anterior, 0.5)
 	item_suelto.z_index = 1
-
-	GameManager.registrar_item_tirado(
-		nuevo_id,
-		item_a_tirar,
-		item_suelto.global_position,
-		get_tree().current_scene.scene_file_path
-	)
-
+	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
 	mochila.remover_item_por_clave(clave)
 
 func get_input() -> void:
-	# Frenar también la velocidad ya acumulada al abrir el inventario.
-	# No alcanza con ignorar nuevas teclas: move_and_slide() seguiría usando velocity.
 	if GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
 		velocity = Vector2.ZERO
 		update_animation("idle")
