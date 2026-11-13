@@ -529,5 +529,5 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot.
 - Commits:
   - `Scripts/puerta.gd`: `d141a7432203791a0f30368b91af9a28d04f5498`
-  - `Scripts/player.gd`: `33b1ca40c4499323068a578c44446653d9431a74`
+  - `Scripts/player.gd`: `d0e82115800ac09b7f51734f21f609e6c0797d91` (corrección final del bloque de interacción)
   - `Escenas/habitacion2.tscn`: `e3966b4b8fda5ececbc26b56e36ddedab77921b3`
