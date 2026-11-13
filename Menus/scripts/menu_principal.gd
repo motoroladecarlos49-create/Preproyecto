@@ -10,6 +10,7 @@ var dialogo_nueva_partida: ConfirmationDialog
 
 func _ready() -> void:
 	submenu_opciones.hide()
+	_configurar_opciones()
 	if GameManager.hay_partida_guardada():
 		_agregar_boton_continuar()
 
@@ -49,6 +50,7 @@ func _on_botoncontinuar_pressed() -> void:
 func _on_botonopciones_pressed() -> void:
 	contenedor_menu.hide()
 	submenu_opciones.show()
+	_configurar_opciones()
 
 func _on_botonsalir_pressed() -> void:
 	get_tree().quit()
@@ -57,10 +59,28 @@ func _on_botoncerrar_pressed() -> void:
 	submenu_opciones.hide()
 	contenedor_menu.show()
 
+func _configurar_opciones() -> void:
+	if bus_index < 0:
+		return
+	var slider: HSlider = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen
+	slider.min_value = 0.0
+	slider.max_value = 1.0
+	slider.step = 0.01
+	slider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
+	var check: CheckButton = $submenuOpciones/MarginContainer/VBoxOpciones/contenedorpantalla/pantallacompleta
+	check.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+	var tamano := get_window().size
+	for i in range(3):
+		var resolucion := [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)][i]
+		if resolucion == tamano:
+			option_button.select(i)
+			break
+
 func _on_slidervolumen_value_changed(value: float) -> void:
-	var db_value = linear_to_db(value)
-	AudioServer.set_bus_volume_db(bus_index, db_value)
-	AudioServer.set_bus_mute(bus_index, value == 0.0)
+	if bus_index < 0:
+		return
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(value, 0.001)))
+	AudioServer.set_bus_mute(bus_index, value <= 0.0)
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	var mode = DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED
