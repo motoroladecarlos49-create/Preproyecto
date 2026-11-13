@@ -295,3 +295,11 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Commits:
   - Escena de pausa: d49b4793413d9e6ba882fe06d40f751a9b2e09d5
   - Script de pausa: 02caff44214afc68f7c97ec164f0c051d986cd71
+
+### 2026-11-13 — Aplicar correctamente el estilo de barra al volumen en pausa
+- Archivo modificado: `Menus/scripts/menu_pausa.gd`.
+- Problema: el estilo visual del HSlider de volumen estaba dentro de `_on_option_button_item_selected()`, por lo que solo se aplicaba después de cambiar la resolución y no al abrir el panel de opciones.
+- Solución: mover la configuración de la pista oscura y el tramo activo dorado a `_aplicar_estilo()`, que se ejecuta al iniciar el menú de pausa. Se conserva el HSlider funcional y el mismo acabado que en las opciones del menú principal.
+- Alcance: no se modifica la lógica de volumen, resolución, pantalla completa ni la distribución de los controles.
+- Prueba/estado: cambio subido a GitHub. No se ejecutó Godot; queda pendiente comprobar visualmente ambos controles de volumen dentro del proyecto.
+- Commit del script: `992a29bc17ee187cb7481b4eeadebe9c9a93870b`.
