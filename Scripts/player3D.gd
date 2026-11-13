@@ -94,7 +94,8 @@ func _physics_process(delta: float) -> void:
 
 	if salida_3d != null:
 		var esta_dentro := salida_3d.get_overlapping_bodies().has(self)
-		if esta_dentro and not salida_cerca:
+		if esta_dentro and not salida_cerca and not GameManager.ya_aviso_salida_3d:
+			GameManager.ya_aviso_salida_3d = true
 			MessageManager.mostrar_mensaje("Presiona 'E' para volver por la puerta", 3.0)
 		salida_cerca = esta_dentro
 
