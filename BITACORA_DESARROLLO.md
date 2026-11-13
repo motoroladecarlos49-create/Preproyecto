@@ -133,3 +133,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Integración del menú de pausa en player: `e40cf3d5a6ce722602a0dd5539a66160ae2342fa`
   - Escena inicial del proyecto: `fe423c3abe8623d3350fadd1d56d40e24a8e9b31`
   - Ajuste de texto del menú de pausa: `a13c7f0858a46c0cd4e95bdf992b632df819a68d`
+
+
+### 2026-11-12 — Corrección de apertura del menú de pausa con Escape
+- Archivos modificados:
+  - `Menus/scripts/menu_pausa.gd`
+  - `Menus/menu_pausa.tscn`
+- Cambio:
+  - Se detecta Escape directamente como tecla, además de mantener compatibilidad con la acción `ui_cancel`.
+  - Se ignoran repeticiones de tecla y se marca el evento como atendido para evitar que otros controles reaccionen al mismo Escape.
+  - Al abrir la pausa se muestra el fondo y se cierra el submenú de opciones; al cerrar se reanuda el árbol.
+  - Se mantiene el procesamiento del menú durante la pausa y se eleva su CanvasLayer a la capa 10 para dibujarlo por encima de la interfaz del juego.
+  - El fondo ahora se ajusta al tamaño completo de la ventana en lugar de usar dimensiones fijas.
+  - Se quitó el reinicio forzado de `get_tree().paused` en `_ready()`, para no alterar el estado global al instanciar el menú.
+- Motivo: hacer fiable la apertura/cierre con Esc y evitar que el menú quede parcialmente dibujado o detrás del inventario.
+- Prueba/estado: cambios subidos a GitHub; no se ejecutó Godot, por lo que queda pendiente probar Escape, Reanudar, Opciones y Menú principal en ejecución.
