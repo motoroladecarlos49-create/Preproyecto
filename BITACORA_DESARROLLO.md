@@ -460,3 +460,12 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Scripts/player3D.gd`: `6934f417eedacb8f19b336adc8e4c2100d773524`
   - `Escenas/level_3d.tscn`: `86efc6fe89b5c9a42583ffabab121fdd487b645c`
   - `Escenas/habitacion2.tscn`: `2ca3e96d34ed1026e4682fe81d8fdb02d82d9635`
+
+### 2026-11-13 — Corregir rutas de recursos de la escena 3D
+- Archivo modificado: `Escenas/level_3d.tscn`.
+- Cambio: se corrigieron las rutas de las tres texturas para que apunten a `res://Imagenes/texturas_ambiente/`: `2d_lights_and_shadows_neutral_point_light.webp`, `S.webp` y `crosshair-000.png`.
+- Motivo: las rutas anteriores apuntaban directamente a `Imagenes/`, aunque los archivos están dentro de `Imagenes/texturas_ambiente/`. Esto impedía cargar la escena 3D y generaba errores al intentar cambiar de escena desde `player.gd`.
+- Revisión adicional: se inspeccionaron las referencias de recursos en las escenas, recursos y scripts principales fuera de `addons/`. En esa revisión, las únicas rutas `res://` no resueltas encontradas fueron estas tres.
+- Prueba/estado: rutas contrastadas con el árbol actual del repositorio y corregidas en GitHub. No se ejecutó Godot; queda pendiente abrir el proyecto y probar la transición a la escena 3D.
+- Commit de código: `8211999c38b4cfaab3fe52b2f205c6c911e2aa4f`.
+
