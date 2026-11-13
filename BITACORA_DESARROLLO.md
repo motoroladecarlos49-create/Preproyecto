@@ -609,3 +609,13 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Cambio: se eliminó únicamente el nodo Label `texto` que mostraba «RABBIT HOLE» dentro de `contenedorMenu`.
 - Alcance: se conservaron los botones, el contenedor, los fondos y el resto de las opciones del menú.
 - Prueba/estado: cambio subido y verificado mediante lectura posterior del archivo en GitHub. No se ejecutó Godot; queda pendiente comprobar visualmente la distribución del menú sin el título.
+
+
+### 2026-11-13 — Corregir referencia al título eliminado del menú
+- Archivos modificados: `Menus/scripts/menu_principal.gd` y `BITACORA_DESARROLLO.md`.
+- Cambios:
+  - Se quitó la referencia `@onready var titulo` que buscaba el nodo `contenedorMenu/texto`, eliminado previamente de la escena.
+  - Se retiraron de `_aplicar_estilo()` únicamente las llamadas de estilo correspondientes al título eliminado.
+  - Se conservaron los estilos de botones, opciones y demás controles.
+- Motivo: corregir el error de nodo inexistente y la llamada a `add_theme_font_override` sobre una referencia nula.
+- Prueba/estado: script actualizado y verificado mediante lectura posterior en GitHub. No se ejecutó Godot; queda pendiente iniciar el menú para confirmar que no aparezcan más errores.
