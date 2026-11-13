@@ -372,6 +372,7 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se incorpora una única `TextureRect` superpuesta al HSlider, con un shader que recorta la imagen horizontalmente según el valor del volumen.
   - La imagen conserva una escala fija respecto al ancho completo del control; al cambiar el volumen se revela u oculta una parte, sin repetir la textura ni cambiar su escala para cada valor.
   - El indicador circular permanece oculto y la textura superpuesta ignora el mouse para que el HSlider siga recibiendo la interacción.
+  - Se normalizó también el rango del slider del menú principal a 0..1, con paso 0.01, para que coincida con el valor lineal del volumen y con el parámetro de recorte del shader.
   - Ambos menús actualizan el recorte al mover el slider y al sincronizar el volumen actual al abrir las opciones.
 - Motivo: representar el progreso con una sola imagen continua, sin duplicarla en mosaico ni estirarla dinámicamente al cambiar el valor.
 - Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar la importación del shader, el aspecto de la textura en ambos menús y la interacción del HSlider.
