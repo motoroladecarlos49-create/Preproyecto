@@ -250,3 +250,23 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Solución: se corrigió la ruta del `@onready var boton_volver` para apuntar al nombre real `botoncerrar`. No se modificó la escena ni el comportamiento del botón.
 - Prueba/estado: verificada la coincidencia entre la ruta corregida y el nombre del nodo en la escena remota. No se ejecutó Godot desde este entorno; comprobar que desaparezcan ambos errores al iniciar el menú.
 - Commit del script: `f559bf6a2574ed1bb255044e9ada8a0087bee05d`.
+
+
+### 2026-11-13 — Recuperar la distribución original del menú principal y corregir el uso de las barras
+- Archivos modificados:
+  - `Menus/menu_principal.tscn`
+  - `Menus/scripts/menu_principal.gd`
+- Menú principal:
+  - Se recuperaron la jerarquía, el orden y las propiedades de posición/tamaño del menú original ubicado en `menuprincipal/menu_principal.tscn`.
+  - Se quitaron los elementos decorativos añadidos como separadores, que alteraban el espaciado y la distribución.
+  - Se mantuvieron la tipografía Immortal y el estilo oscuro/dorado del contenedor de opciones y los botones, sin imponer tamaños mínimos nuevos ni centrar/reubicar el menú.
+- Barras y controles:
+  - Se eliminó el uso de la textura gráfica de divisor como adorno entre el título y los botones y en el panel de opciones.
+  - Se recuperó el nodo `HSeparator` original para separar visualmente el encabezado de opciones de sus controles.
+  - El volumen sigue siendo un `HSlider` funcional y ahora su pista y tramo recorrido tienen estilos propios; no se usa una barra decorativa para simular un control.
+  - Se conservaron los controles reales de pantalla completa y resolución.
+- Motivo: respetar la composición que tenía el menú principal y reservar los elementos tipo barra para controles que representan valores, como el volumen.
+- Prueba/estado: archivos actualizados en GitHub. No se ejecutó Godot desde este entorno; comprobar la posición y el orden visual, el slider de volumen, pantalla completa y las resoluciones.
+- Commits:
+  - Escena: 577c124fd5c39c3235a8d56b44455c28a1400611
+  - Script: accc1ee1048af41fbeae186b1e51c88c3ebb26c1
