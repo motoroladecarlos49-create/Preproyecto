@@ -453,3 +453,10 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se conserva el jugador 2D para las escenas 2D y el jugador 3D para el escenario 3D; no se mezclan sus tipos ni controles.
 - Motivo: permitir entrar desde la puerta 2D a un nivel 3D y regresar por la misma conexión al lugar preparado junto a la puerta.
 - Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar las señales de proximidad, la interacción E, la carga de ambas escenas y la posición exacta del marcador de regreso.
+- Commits:
+  - `Scripts/GameManager.gd`: `ca3dd7b3ba1f8ab2859f351b667bdb02f36303fb`
+  - `Scripts/puerta.gd`: `578042e8b15002b813229e8042136414f269d56b`
+  - `Scripts/player.gd`: `ba7a5cf59e5f5b52de492e889319bdcc41d93ab0`
+  - `Scripts/player3D.gd`: `6934f417eedacb8f19b336adc8e4c2100d773524`
+  - `Escenas/level_3d.tscn`: `86efc6fe89b5c9a42583ffabab121fdd487b645c`
+  - `Escenas/habitacion2.tscn`: `2ca3e96d34ed1026e4682fe81d8fdb02d82d9635`
