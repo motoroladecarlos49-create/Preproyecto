@@ -85,7 +85,6 @@ func _volver_al_menu() -> void:
 	contenedor_menu.show()
 
 func _configurar_opciones() -> void:
-	if bus_index >= 0:
 	var volumen_actual: float = GameManager.obtener_volumen_general()
 	slider_volumen.set_value_no_signal(volumen_actual)
 	_actualizar_relleno_volumen(volumen_actual)
