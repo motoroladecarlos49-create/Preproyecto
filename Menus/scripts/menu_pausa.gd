@@ -121,6 +121,7 @@ func _configurar_opciones() -> void:
 		slider_volumen.step = 0.01
 		var volumen_actual: float = 0.0 if AudioServer.is_bus_mute(bus_index) else db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 		slider_volumen.set_value_no_signal(volumen_actual)
+		_actualizar_relleno_volumen(volumen_actual)
 
 	check_pantalla.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 	selector_resolucion.clear()
@@ -135,6 +136,7 @@ func _actualizar_boton_cargar() -> void:
 	boton_cargar.modulate = Color(1, 1, 1, 1) if not boton_cargar.disabled else Color(0.65, 0.65, 0.65, 0.75)
 
 func _on_slidervolumen_value_changed(value: float) -> void:
+	_actualizar_relleno_volumen(value)
 	if bus_index < 0:
 		return
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(value, 0.001)))
@@ -182,3 +184,9 @@ func _aplicar_estilo() -> void:
 	check_pantalla.add_theme_font_override("font", FUENTE_MENU)
 	selector_resolucion.add_theme_font_override("font", FUENTE_MENU)
 	boton_volver.add_theme_font_size_override("font_size", 22)
+
+
+func _actualizar_relleno_volumen(value: float) -> void:
+	var relleno: TextureRect = slider_volumen.get_node("relleno_textura")
+	var material_relleno: ShaderMaterial = relleno.material as ShaderMaterial
+	material_relleno.set_shader_parameter("fill_amount", clampf(value, 0.0, 1.0))
