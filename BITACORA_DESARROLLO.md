@@ -270,3 +270,11 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Commits:
   - Escena: 577c124fd5c39c3235a8d56b44455c28a1400611
   - Script: accc1ee1048af41fbeae186b1e51c88c3ebb26c1
+
+
+### 2026-11-13 — Ajustar la ruta del selector tras recuperar la escena original
+- Archivo modificado: `Menus/scripts/menu_principal.gd`.
+- Cambio: la referencia al `OptionButton` ahora apunta al nodo original `HBoxContainer/optionbutton`, en lugar del contenedor que existía solamente en el rediseño anterior.
+- Motivo: mantener el menú con su jerarquía original sin dejar referencias rotas en el script.
+- Prueba/estado: ruta contrastada con `Menus/menu_principal.tscn` en GitHub. No se ejecutó Godot; queda pendiente la prueba funcional de las opciones.
+- Commit: 75ab3999bdc1b6ef84dcd25c6941b42503e51690.
