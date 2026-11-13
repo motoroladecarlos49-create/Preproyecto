@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bbcmtuwdx3hmj"]
 
-[ext_resource type="Texture2D" path="res://Imagenes/2d_lights_and_shadows_neutral_point_light.webp" id="1_i8hrn"]
+[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/2d_lights_and_shadows_neutral_point_light.webp" id="1_i8hrn"]
 [ext_resource type="PackedScene" uid="uid://bccooec3fhrtm" path="res://Escenas/player3D.tscn" id="1_usqj6"]
-[ext_resource type="Texture2D" path="res://Imagenes/S.webp" id="2_drlo1"]
-[ext_resource type="Texture2D" path="res://Imagenes/crosshair-000.png" id="4_6joj8"]
+[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/S.webp" id="2_drlo1"]
+[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/crosshair-000.png" id="4_6joj8"]
 
 [sub_resource type="Environment" id="Environment_p77xk"]
 background_mode = 1
