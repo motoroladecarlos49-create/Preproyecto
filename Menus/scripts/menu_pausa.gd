@@ -179,20 +179,6 @@ func _aplicar_estilo() -> void:
 		var pressed := normal.duplicate() as StyleBoxFlat
 		pressed.bg_color = Color("#171923")
 		boton.add_theme_stylebox_override("pressed", pressed)
-	# Barra de volumen oscura con el tramo activo dorado, igual que en el menú principal.
-	var pista := StyleBoxFlat.new()
-	pista.bg_color = Color("#171923")
-	pista.set_corner_radius_all(5)
-	pista.content_margin_top = 3.0
-	pista.content_margin_bottom = 3.0
-	slider_volumen.add_theme_stylebox_override("slider", pista)
-	var tramo := StyleBoxFlat.new()
-	tramo.bg_color = Color("#c5a66d")
-	tramo.set_corner_radius_all(5)
-	tramo.content_margin_top = 3.0
-	tramo.content_margin_bottom = 3.0
-	slider_volumen.add_theme_stylebox_override("grabber_area", tramo)
-	slider_volumen.add_theme_stylebox_override("grabber_area_highlight", tramo.duplicate())
 	check_pantalla.add_theme_font_override("font", FUENTE_MENU)
 	selector_resolucion.add_theme_font_override("font", FUENTE_MENU)
 	boton_volver.add_theme_font_size_override("font_size", 22)
