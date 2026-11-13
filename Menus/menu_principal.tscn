@@ -138,6 +138,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 30)
 theme = ExtResource("2_tema_volumen")
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+
+[node name="relleno_textura" type="TextureRect" parent="submenuOpciones/MarginContainer/VBoxOpciones/contenedorvolumen/slidervolumen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_textura_volumen")
+stretch_mode = 0
+material = SubResource("ShaderMaterial_relleno_volumen")
 
 [node name="contenedorpantalla" type="HBoxContainer" parent="submenuOpciones/MarginContainer/VBoxOpciones" unique_id=531900460]
 layout_mode = 2
