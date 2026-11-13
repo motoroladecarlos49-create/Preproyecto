@@ -14,3 +14,4 @@ class_name SaveGame
 @export var ya_aviso_puerta: bool = false
 @export var tutorial_lampara_completado: bool = false
 @export var ya_aviso_salida_3d: bool = false
+@export var tutorial_movimiento_completado: bool = false
