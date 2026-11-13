@@ -478,3 +478,20 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Prueba/estado: textos actualizados en GitHub y verificados en el archivo. No se ejecutó Godot desde este entorno.
 - Commit de código: 52165dc8abcd751c9707ffcc01bd0302d8b278be.
 
+
+### 2026-11-13 — Persistir los avisos tutoriales por partida guardada
+- Archivos modificados:
+  - `Scripts/SaveGame.gd`
+  - `Scripts/GameManager.gd`
+  - `Scripts/player3D.gd`
+- Cambios:
+  - Se agregaron al recurso de guardado las banderas que registran si ya aparecieron los avisos de inventario, recogida, puertas y linterna.
+  - Al guardar, `GameManager` copia el estado de esas banderas al recurso; al cargar, las restaura desde la partida.
+  - Se agregó también una bandera para el aviso de regreso desde la salida 3D, que ahora se muestra una sola vez por partida guardada.
+  - Al iniciar una partida nueva se reinician todas las banderas. Al cambiar de escena se mantienen en memoria y al cargar se recuperan del guardado.
+- Motivo: evitar que los tutoriales vuelvan a aparecer por cambiar de escena o cargar una partida en la que ya se habían mostrado, sin impedir que aparezcan en una partida nueva.
+- Prueba/estado: cambios subidos y verificados en el contenido de GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar el primer aviso, cambiar de escena, guardar, cerrar/reabrir, cargar y comprobar que no se repita; también comprobar que una partida nueva vuelva a mostrar los tutoriales.
+- Commits:
+  - `Scripts/SaveGame.gd`: f79ee95722dedfa68d3be4cad2069bcc4822ea40
+  - `Scripts/GameManager.gd`: 96730331e66c4421502328cc666ce72f267df1a5
+  - `Scripts/player3D.gd`: ac9912f4b2983b4bd009ff39bff08da0a6ce07c0
