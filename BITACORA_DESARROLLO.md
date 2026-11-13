@@ -345,3 +345,14 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo: lograr que la propia textura se extienda o se acorte según la posición del indicador, en lugar de cubrir toda la pista de forma fija.
 - Prueba/estado: actualización subida a GitHub. No se ejecutó Godot desde este entorno; queda pendiente importar el recurso y comprobar visualmente que el tramo texturizado crezca/disminuya y que el control siga ajustando el volumen.
 - Commit del tema: `a2a35faeff737c3a47cbfad20ae5c23ecc7ac7d3`.
+
+
+### 2026-11-13 — Quitar el círculo del volumen y conservar la textura sin estirarla
+- Archivo modificado: `Menus/tema_volumen.tres`.
+- Cambios:
+  - Se asignó un estilo vacío a `HSlider/styles/grabber` y `grabber_highlight`, quitando el círculo/asa visible sin desactivar la interacción del control.
+  - Se cambió el modo de estiramiento horizontal de la textura del tramo activo a mosaico (`TILE`), para conservar el tamaño natural de la imagen mientras el relleno aumenta o disminuye.
+  - Se mantiene la pista oscura, el tono dorado y la variante resaltada.
+  - Como ambos menús usan el tema compartido, el ajuste afecta a los dos controles de volumen.
+- Prueba/estado: actualización subida a GitHub. No se ejecutó Godot; queda pendiente comprobar que el control se pueda arrastrar normalmente aunque el asa sea invisible y que el mosaico de la textura se vea natural en distintos niveles de volumen.
+- Commit del tema: `8b07719f8a60b9b7789a153c83bacf1ddf560ae8`.
