@@ -122,9 +122,6 @@ scale = Vector2(5, 5)
 [node name="spawn_habitacion2" type="Marker2D" parent="Puerta" unique_id=41924238]
 position = Vector2(1294.1539, 622.2308)
 
-[node name="spawn_retorno_3d" type="Marker2D" parent="." unique_id=1951364210]
-position = Vector2(4300, 645.098)
-
 [node name="Puerta2" parent="." unique_id=849732651 instance=ExtResource("1_4jnyt")]
 escena_destino = "res://Escenas/level_3d.tscn"
 id_punto_retorno_2d = "spawn_retorno_3d"
@@ -132,6 +129,9 @@ id_punto_retorno_2d = "spawn_retorno_3d"
 [node name="CollisionShape2D" parent="Puerta2" index="0" unique_id=1857541741]
 position = Vector2(3634.6155, 607.69244)
 scale = Vector2(5, 5)
+
+[node name="spawn_retorno_3d" type="Marker2D" parent="Puerta2" unique_id=1951364210]
+position = Vector2(3657.6926, 700)
 
 [editable path="player"]
 [editable path="Puerta"]
