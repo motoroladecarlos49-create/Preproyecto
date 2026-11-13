@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="3_textura_volumen"]
 [ext_resource type="Shader" path="res://Menus/relleno_volumen.gdshader" id="4_shader_volumen"]
 
+[ext_resource type="Texture2D" path="res://Imagenes/fondo/1.jpeg" id="5_fondo_1"]
+[ext_resource type="Texture2D" path="res://Imagenes/fondo/2.jpeg" id="6_fondo_2"]
+
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
 
@@ -37,6 +40,58 @@ offset_right = 1151.0
 offset_bottom = 650.0
 script = ExtResource("1_script")
 
+[node name="FondoBotonesBase" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_fondo_2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FondoBotonesGlitch" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("5_fondo_1")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FondoSinBotonesBase" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_fondo_1")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FondoSinBotonesGlitch" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("6_fondo_2")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=340491058]
 layout_mode = 1
 anchors_preset = 15
@@ -46,6 +101,7 @@ offset_right = -584.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+visible = false
 color = Color(0.2556589, 0.25565878, 0.25565878, 1)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1366499672]
@@ -53,6 +109,7 @@ layout_mode = 0
 offset_right = 1150.0
 offset_bottom = 644.0
 mouse_default_cursor_shape = 2
+visible = false
 
 [node name="contenedorMenu" type="VBoxContainer" parent="." unique_id=1091975248]
 layout_mode = 1
