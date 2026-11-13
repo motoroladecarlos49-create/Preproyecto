@@ -1,9 +1,27 @@
 [gd_scene format=3 uid="uid://gp00qdcbihco"]
 
 [ext_resource type="Script" path="res://Menus/scripts/menu_pausa.gd" id="1_jd2x8"]
+[ext_resource type="FontFile" path="res://fuente/immortal/IMMORTAL.ttf" id="2_fuente"]
+[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-000.png" id="3_marco"]
+[ext_resource type="Texture2D" path="res://Imagenes/assepts/kenney_fantasy-ui-borders/PNG/Default/Divider/divider-000.png" id="4_divisor"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kso7j"]
-bg_color = Color(0, 0, 0, 0.6784314)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.075, 0.082, 0.12, 0.97)
+border_color = Color(0.66, 0.55, 0.36, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.55)
+shadow_size = 16
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=977779306]
 process_mode = 3
@@ -11,120 +29,191 @@ layer = 10
 script = ExtResource("1_jd2x8")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=959168940]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.4627451)
+color = Color(0.012, 0.016, 0.03, 0.76)
+mouse_filter = 2
+
+[node name="titulo" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.17
+anchor_right = 0.5
+anchor_bottom = 0.17
+offset_left = -230.0
+offset_top = -42.0
+offset_right = 230.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="adorno_izquierdo" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.17
+anchor_right = 0.5
+anchor_bottom = 0.17
+offset_left = -270.0
+offset_top = -18.0
+offset_right = -234.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_marco")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
+
+[node name="adorno_derecho" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.17
+anchor_right = 0.5
+anchor_bottom = 0.17
+offset_left = 234.0
+offset_top = -18.0
+offset_right = 270.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_marco")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
 
 [node name="reanudar" type="Button" parent="." unique_id=641955151]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.25
+anchor_top = 0.32
 anchor_right = 0.5
-anchor_bottom = 0.25
-offset_left = -82.0
-offset_top = -34.0
-offset_right = 76.0
-offset_bottom = 31.0
+anchor_bottom = 0.32
+offset_left = -165.0
+offset_top = -29.0
+offset_right = 165.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 32
-text = "Reanudar"
-
-[node name="menu" type="Button" parent="." unique_id=887618465]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.75
-anchor_right = 0.5
-anchor_bottom = 0.75
-offset_left = -81.0
-offset_top = -35.776
-offset_right = 77.0
-offset_bottom = 28.223999
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-text = "Menú principal"
+text = "REANUDAR"
 
 [node name="opciones" type="Button" parent="." unique_id=816613110]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.38
+anchor_top = 0.43
 anchor_right = 0.5
-anchor_bottom = 0.38
-offset_left = -81.0
-offset_top = -39.0
-offset_right = 77.25
-offset_bottom = 30.0
+anchor_bottom = 0.43
+offset_left = -165.0
+offset_top = -29.0
+offset_right = 165.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-text = "Opciones"
+text = "OPCIONES"
 
-[node name="plane" type="PanelContainer" parent="opciones" unique_id=12656620]
-layout_mode = 0
-offset_left = -230.0
+[node name="botonguardar" type="Button" parent="." ]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.54
+anchor_right = 0.5
+anchor_bottom = 0.54
+offset_left = -165.0
+offset_top = -29.0
+offset_right = 165.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "GUARDAR"
+
+[node name="botoncargar" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+offset_left = -165.0
+offset_top = -29.0
+offset_right = 165.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "CARGAR"
+
+[node name="menu" type="Button" parent="." unique_id=887618465]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.76
+anchor_right = 0.5
+anchor_bottom = 0.76
+offset_left = -165.0
+offset_top = -29.0
+offset_right = 165.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "MENÚ PRINCIPAL"
+
+[node name="plane" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
 offset_top = -245.0
-offset_right = 230.0
+offset_right = 310.0
 offset_bottom = 245.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_kso7j")
+grow_horizontal = 2
+grow_vertical = 2
+custom_minimum_size = Vector2(620, 490)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="MarginContainer" type="MarginContainer" parent="opciones/plane" unique_id=1364733054]
+[node name="MarginContainer" type="MarginContainer" parent="plane"]
 layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="opciones/plane/MarginContainer" unique_id=1397220016]
+[node name="VBoxContainer" type="VBoxContainer" parent="plane/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
 
-[node name="Label" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=263758759]
+[node name="titulo_opciones" type="Label" parent="plane/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 31
-text = "Opciones"
+text = "OPCIONES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=863964905]
+[node name="separador_visual" type="TextureRect" parent="plane/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
-theme_override_constants/separation = 7
+texture = ExtResource("4_divisor")
+expand_mode = 1
+stretch_mode = 0
+mouse_filter = 2
 
-[node name="contenedorp" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=1835461232]
+[node name="contenedorvolumen" type="HBoxContainer" parent="plane/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
-size_flags_stretch_ratio = 0.5
-mouse_default_cursor_shape = 2
+theme_override_constants/separation = 18
 
-[node name="pantallacompleta" type="CheckButton" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorp" unique_id=1286092271]
-layout_mode = 2
-size_flags_horizontal = 6
-theme_override_font_sizes/font_size = 19
-button_pressed = true
-text = "Pantalla Completa
-"
-icon_alignment = 1
-
-
-
-[node name="contenedorvolumen" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="texto_volumen" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen"]
+[node name="texto_volumen" type="Label" parent="plane/MarginContainer/VBoxContainer/contenedorvolumen"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Volumen general"
+vertical_alignment = 1
 
-[node name="slidervolumen" type="HSlider" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen"]
+[node name="slidervolumen" type="HSlider" parent="plane/MarginContainer/VBoxContainer/contenedorvolumen"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 0.0
@@ -132,15 +221,28 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="contenedorresolucion" type="HBoxContainer" parent="opciones/plane/MarginContainer/VBoxContainer"]
+[node name="contenedorp" type="HBoxContainer" parent="plane/MarginContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="texto_resolucion" type="Label" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion"]
+[node name="pantallacompleta" type="CheckButton" parent="plane/MarginContainer/VBoxContainer/contenedorp"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Pantalla completa"
+
+[node name="contenedorresolucion" type="HBoxContainer" parent="plane/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="texto_resolucion" type="Label" parent="plane/MarginContainer/VBoxContainer/contenedorresolucion"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Resolución"
+vertical_alignment = 1
 
-[node name="optionbutton" type="OptionButton" parent="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion"]
+[node name="optionbutton" type="OptionButton" parent="plane/MarginContainer/VBoxContainer/contenedorresolucion"]
 layout_mode = 2
+size_flags_horizontal = 3
 item_count = 3
 popup/item_0/text = "1600 x 900"
 popup/item_0/id = 0
@@ -149,71 +251,34 @@ popup/item_1/id = 1
 popup/item_2/text = "720 x 480"
 popup/item_2/id = 2
 
-[node name="botonvolver" type="Button" parent="opciones/plane/MarginContainer/VBoxContainer" unique_id=2117726864]
+[node name="botonvolver" type="Button" parent="plane/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 25
-toggle_mode = true
-button_pressed = true
-text = "Volver"
-icon_alignment = 1
+text = "VOLVER A PAUSA"
 
 [node name="etiquetaestado" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.88
+anchor_top = 0.9
 anchor_right = 0.5
-anchor_bottom = 0.88
-offset_left = -260.0
+anchor_bottom = 0.9
+offset_left = -300.0
 offset_top = -18.0
-offset_right = 260.0
+offset_right = 300.0
 offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 18
-
-[node name="botonguardar" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.51
-anchor_right = 0.5
-anchor_bottom = 0.51
-offset_left = -82.0
-offset_top = -34.0
-offset_right = 76.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 28
-text = "Guardar"
-
-[node name="botoncargar" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.63
-anchor_right = 0.5
-anchor_bottom = 0.63
-offset_left = -82.0
-offset_top = -34.0
-offset_right = 76.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 28
-text = "Cargar"
+vertical_alignment = 1
 
 [connection signal="pressed" from="reanudar" to="." method="_on_reanudar_pressed"]
 [connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="opciones" to="." method="_on_opciones_pressed"]
-[connection signal="toggled" from="opciones/plane/MarginContainer/VBoxContainer/contenedorp/pantallacompleta" to="." method="_on_fullscreen_toggled"]
-[connection signal="pressed" from="opciones/plane/MarginContainer/VBoxContainer/botonvolver" to="." method="_on_botonvolver_pressed"]
-
 [connection signal="pressed" from="botonguardar" to="." method="_on_guardar_pressed"]
 [connection signal="pressed" from="botoncargar" to="." method="_on_cargar_pressed"]
-[connection signal="value_changed" from="opciones/plane/MarginContainer/VBoxContainer/contenedorvolumen/slidervolumen" to="." method="_on_slidervolumen_value_changed"]
-[connection signal="item_selected" from="opciones/plane/MarginContainer/VBoxContainer/contenedorresolucion/optionbutton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="plane/MarginContainer/VBoxContainer/contenedorp/pantallacompleta" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="plane/MarginContainer/VBoxContainer/botonvolver" to="." method="_on_botonvolver_pressed"]
+[connection signal="value_changed" from="plane/MarginContainer/VBoxContainer/contenedorvolumen/slidervolumen" to="." method="_on_slidervolumen_value_changed"]
+[connection signal="item_selected" from="plane/MarginContainer/VBoxContainer/contenedorresolucion/optionbutton" to="." method="_on_option_button_item_selected"]
