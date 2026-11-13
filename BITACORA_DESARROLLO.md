@@ -562,3 +562,15 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo: corregir la inicialización con tamaños no contemplados y restaurar el uso de la ventana principal para aplicar la resolución, evitando que el selector y el tamaño real de la ventana queden desincronizados.
 - Prueba/estado: cambios subidos a GitHub y revisados mediante lectura posterior de los archivos. No se ejecutó Godot en este entorno; queda pendiente probar las tres resoluciones, alternar pantalla completa/ventana desde ambos menús y reiniciar el juego para comprobar la persistencia.
 - Commit de código: `9861dde2cde38293666670a4d235210534ffd55f`.
+
+
+### 2026-11-13 — Mensajes de interacción en las habitaciones 1 y 2
+- Archivos modificados: `Scripts/puerta.gd`, `Scripts/player.gd`, `Escenas/habitacion1.tscn`, `Escenas/habitacion2.tscn`.
+- Cambios:
+  - `Puerta2` de la habitación 1 muestra «La puerta está cerrada.» al pulsar E.
+  - `Ir` muestra «No se puede ir por aquí.» al entrar en su área.
+  - En la habitación 2, Cajonera y Armario muestran «Está vacío.» al pulsar E.
+  - El mensaje de bloqueo de puertas dura 1,5 segundos y el aviso automático de `Ir` también.
+  - La colisión de Cajonera se trasladó fuera de `player/AreaRecogida` a un `StaticBody2D` fijo; se añadieron áreas de interacción independientes para Cajonera y Armario.
+- Motivo: permitir examinar los objetos y comunicar las zonas cerradas/no transitables sin alterar la recogida de ítems.
+- Prueba/estado: cambios guardados en GitHub y verificados mediante lectura posterior de archivos. No se ejecutó Godot; queda pendiente probar la proximidad, la tecla E y la duración de los mensajes en ambas habitaciones.
