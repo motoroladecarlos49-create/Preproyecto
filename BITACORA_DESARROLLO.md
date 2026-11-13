@@ -214,3 +214,30 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 
 - Ajuste posterior: después de guardar correctamente, se vuelve a comprobar si existe una partida válida para habilitar inmediatamente el botón «CARGAR» sin tener que cerrar y reabrir la pausa.
 - Commit adicional del script: `f010e15da0c132c4f4fd4a2816320a22834dfe45`.
+
+
+### 2026-11-12 — Unificar el diseño del menú principal y los mensajes tutoriales
+- Archivos modificados:
+  - `Menus/menu_principal.tscn`
+  - `Menus/scripts/menu_principal.gd`
+  - `Scripts/MessageManager.gd`
+- Menú principal:
+  - Se reorganizó la pantalla con el título y los botones centrados, usando una paleta oscura y dorada.
+  - Se reutiliza la fuente `fuente/immortal/IMMORTAL.ttf` y los recursos Kenney de borde y divisor ya presentes en el proyecto.
+  - El panel de opciones ahora es independiente del contenedor del menú, queda centrado y oculta el menú principal mientras está abierto.
+  - Se agregó el botón «VOLVER AL MENÚ» y Escape también permite volver desde opciones.
+  - Se mantuvieron Nueva partida, Continuar (cuando hay guardado), la confirmación de sobrescritura y Salir.
+- Funcionamiento de opciones:
+  - Se sincronizan volumen, silencio, pantalla completa y resolución al abrir el panel.
+  - Se separó la lectura del volumen de la configuración de pantalla para que la falta del bus Master no impida configurar pantalla.
+  - Al elegir una resolución se cambia primero a modo ventana, se aplica el tamaño seleccionado y se centra la ventana; el control de pantalla completa se actualiza para reflejar ese cambio.
+  - El interruptor de pantalla completa cambia entre los modos ventana y pantalla completa.
+- Mensajes tutoriales:
+  - `MessageManager.gd` ahora muestra los mensajes en un panel inferior oscuro con borde dorado, tipografía del proyecto, texto centrado y ajuste automático de línea.
+  - Se conserva la función `mostrar_mensaje(texto, duracion)`, el temporizador y la lógica para no reiniciar mensajes idénticos que todavía están visibles.
+- Motivo: dar continuidad visual entre menú principal, pausa, opciones y mensajes tutoriales, y corregir el cambio de resolución para que no intente redimensionar la ventana mientras sigue en pantalla completa.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar el menú en ventana y pantalla completa, las tres resoluciones, volumen/silencio, Continuar/Nueva partida y la aparición/desaparición de mensajes tutoriales.
+- Commits:
+  - Script del menú principal: `f08dc7142ebd98bf1e10f968b0e20e0ab7e8ac3a`
+  - Escena del menú principal: `cff1ec7ed6893b5969fa9f713f6a9780d6a7cb3d`
+  - Mensajes tutoriales: `cc281ff4b8d91998157f5fe618e127778078c96a`
