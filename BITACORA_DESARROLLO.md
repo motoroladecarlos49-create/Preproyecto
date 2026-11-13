@@ -70,3 +70,27 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo: dejar el objeto algo más arriba/cerca que con el desplazamiento anterior, sin mantenerlo exactamente centrado sobre la colisión del jugador.
 - Prueba/estado: cambio subido a GitHub; pendiente de probar dentro de Godot y ajustar si la altura visual no resulta adecuada.
 - Commit de código: 92eee59125f5526ec994847e28978002304fe067.
+
+
+### 2026-11-12 — Primera etapa del sistema de guardado manual
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `Scripts/SaveGame.gd`
+  - `Scripts/player.gd`
+  - `Inventario/ui_inventario.gd`
+  - `Escenas/ui_inventario.tscn`
+  - `items/item.gd`
+- Diseño: se incorpora guardado/carga manual desde dos botones visibles en la interfaz del inventario. El autoguardado queda fuera de esta primera etapa para implementarlo después sin duplicar la lógica de serialización.
+- Datos guardados: mochila, escena actual, posición global del jugador, clave del objeto seleccionado, estado encendido/apagado de la linterna, objetos recogidos y objetos soltados con sus posiciones/escenas.
+- Persistencia adicional: `Item.id_escena` pasa a ser exportado para que ResourceSaver conserve el identificador al serializar recursos.
+- Carga: se recupera el recurso SaveGame, se restaura la mochila y el estado de linterna, se abre la escena guardada y el jugador aplica posición y selección guardadas al inicializarse.
+- Interfaz: se agregan los botones `Guardar` y `Cargar` junto al botón existente `Tirar`; se muestran mensajes de resultado.
+- Ruta local de guardado: `user://partida_guardada.tres`.
+- Prueba/estado: cambios subidos a GitHub. No se ejecutó el proyecto en Godot; queda pendiente probar guardado, carga, selección, linterna y objetos soltados en ejecución. El autoguardado todavía no está implementado.
+- Commits:
+  - GameManager: `084694629d3ff768aa7e8af03e0bdba4bbd4a6b7`
+  - SaveGame: `0c5d4b469f25262b83a98ba2cb6e35aad709f198`
+  - Item: `547e46322eaac019465ca1f012b928803b8d3820`
+  - Player: `2bfc8c62cae8139a3102f33cf2a765d602f6dbf4`
+  - UI script: `3cfbd101e71f514882d54ed293f6df9cd669d0f5`
+  - UI scene: `a116b5a5ce1a1df1e3c5a59e5a1dd28bf361fab7`
