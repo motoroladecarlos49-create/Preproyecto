@@ -80,7 +80,6 @@ position = Vector2(89800, 40300.01)
 scale = Vector2(229.99997, 229.99997)
 
 [node name="player" parent="." unique_id=1794548708 instance=ExtResource("4_oqkj6")]
-visible = false
 position = Vector2(24699.996, 43000)
 scale = Vector2(500, 500)
 
@@ -92,12 +91,6 @@ limit_right = 1148
 limit_bottom = 640
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
-
-[node name="CanvasLayer" parent="player" index="7" unique_id=480012948]
-visible = false
-
-[node name="MenuPausa" parent="player" index="8"]
-visible = false
 
 [node name="Puerta" parent="." unique_id=1610243142 instance=ExtResource("5_4djtc")]
 position = Vector2(58600, 40400)
@@ -112,7 +105,6 @@ position = Vector2(-2, -18)
 position = Vector2(-1.5, -30.5)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
-visible = false
 color = Color(0.06607054, 0.066070534, 0.06607054, 1)
 
 [node name="Puerta2" parent="." unique_id=1139194701 instance=ExtResource("5_4djtc")]
