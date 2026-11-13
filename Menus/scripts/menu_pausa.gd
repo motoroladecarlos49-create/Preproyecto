@@ -155,7 +155,9 @@ func _aplicar_estilo() -> void:
 	titulo.add_theme_font_size_override("font_size", 54)
 	titulo_opciones.add_theme_font_override("font", FUENTE_MENU)
 	titulo_opciones.add_theme_font_size_override("font_size", 34)
-	for boton: Button in [boton_reanudar, boton_opciones, boton_guardar, boton_cargar, boton_menu, boton_volver]:
+	var botones: Array[Button] = [boton_reanudar, boton_opciones, boton_guardar, boton_cargar, boton_menu, boton_volver]
+	for i in range(botones.size()):
+		var boton: Button = botones[i]
 		boton.add_theme_font_override("font", FUENTE_MENU)
 		boton.add_theme_font_size_override("font_size", 25)
 		var normal := StyleBoxFlat.new()
