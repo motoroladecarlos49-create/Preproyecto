@@ -21,6 +21,8 @@ var esta_agachado: bool = false
 var altura_camara_original: float = 0.0
 var altura_camara_objetivo: float = 0.0
 var altura_collider_objetivo: float = 0.0
+var salida_cerca: bool = false
+@onready var salida_3d: Area3D = get_tree().current_scene.get_node_or_null("Salida3D") as Area3D
 
 
 func _ready() -> void:
@@ -39,6 +41,11 @@ func _input(event):
 	
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interactuar") and salida_cerca:
+		GameManager.volver_a_escena_2d()
 
 
 func _physics_process(delta: float) -> void:
@@ -84,6 +91,12 @@ func _physics_process(delta: float) -> void:
 		collider.shape.size.y = lerp(collider.shape.size.y, altura_collider_objetivo, delta * velocidad_transicion)
 
 	move_and_slide()
+
+	if salida_3d != null:
+		var esta_dentro := salida_3d.get_overlapping_bodies().has(self)
+		if esta_dentro and not salida_cerca:
+			MessageManager.mostrar_mensaje("Presiona 'E' para volver por la puerta", 3.0)
+		salida_cerca = esta_dentro
 
 
 func _puede_levantarse() -> bool:
