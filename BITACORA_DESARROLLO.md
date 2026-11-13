@@ -333,3 +333,15 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Ambos menús continúan usando el mismo tema compartido, por lo que la apariencia de volumen queda unificada.
 - Motivo: aplicar la barra gráfica solicitada al control real de volumen de las opciones, no volver a colocarla en su ubicación decorativa original.
 - Prueba/estado: cambios preparados en GitHub. No se ejecutó Godot desde este entorno; queda pendiente comprobar visualmente el aspecto de la textura estirada en ambas pistas y verificar el ajuste del volumen.
+
+
+### 2026-11-13 — Convertir la textura Kenney en el relleno dinámico del volumen
+- Archivo modificado: `Menus/tema_volumen.tres`.
+- Cambio:
+  - Se reemplazó la textura usada como fondo completo de la pista por una pista oscura sencilla.
+  - La textura `divider-000.png` ahora se asigna al estilo `grabber_area` del HSlider, que representa el tramo recorrido desde el mínimo hasta el indicador.
+  - Se conserva una variante más clara para el estado resaltado.
+  - Los dos menús ya referencian este tema compartido, así que el relleno acompaña el valor del volumen en ambos sin cambiar las señales ni la lógica de audio.
+- Motivo: lograr que la propia textura se extienda o se acorte según la posición del indicador, en lugar de cubrir toda la pista de forma fija.
+- Prueba/estado: actualización subida a GitHub. No se ejecutó Godot desde este entorno; queda pendiente importar el recurso y comprobar visualmente que el tramo texturizado crezca/disminuya y que el control siga ajustando el volumen.
+- Commit del tema: `a2a35faeff737c3a47cbfad20ae5c23ecc7ac7d3`.
