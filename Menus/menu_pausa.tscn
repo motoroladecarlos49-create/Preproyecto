@@ -7,11 +7,18 @@ bg_color = Color(0, 0, 0, 0.6784314)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=977779306]
 process_mode = 3
+layer = 10
 script = ExtResource("1_jd2x8")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=959168940]
-offset_right = 1255.0
-offset_bottom = 694.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.4627451)
 
 [node name="reanudar" type="Button" parent="." unique_id=641955151]
