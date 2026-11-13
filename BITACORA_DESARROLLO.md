@@ -405,3 +405,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - `Scripts/GameManager.gd`: `6503ae994f103ac0618da20443cd3b496a5e141d`
   - `Menus/scripts/menu_principal.gd`: `7451cc3bcec01fbfa9d3a8d09ddf577b46858525` y corrección de indentación `11d1126eea16321f57fdc619a1f890c9879d6cfc`
   - `Menus/scripts/menu_pausa.gd`: `3b5a266e50f78bc840332ea5fa694c8e672c1acb`
+
+
+### 2026-11-13 — Unificar las opciones compartidas entre menú principal y pausa
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+- Cambios:
+  - Se centralizó en `GameManager` la lista de resoluciones disponibles y se agregó un método para que ambos menús obtengan una copia tipada de esa misma lista.
+  - Se eliminaron las listas duplicadas de los scripts de menú. Los dos selectores ahora se construyen y validan con la misma fuente.
+  - Se configuró explícitamente en ambos sliders el mismo rango de volumen (0 a 1) y el mismo paso (0.01), sin depender de que el bus Master exista al abrir las opciones.
+  - Se mantiene la lectura y escritura de volumen, resolución y pantalla completa a través de `GameManager`; al abrir cada panel, sus controles vuelven a sincronizarse con la configuración central.
+  - Se quitaron variables de bus de audio que ya no eran necesarias en los scripts de menú.
+- Motivo: evitar que los menús principal y de pausa puedan divergir en las resoluciones ofrecidas o en el rango del control de volumen.
+- Prueba/estado: archivos actualizados en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar ambos menús, cambiar cada opción desde uno y comprobar que el otro refleje el mismo valor al abrirse, además de reiniciar el juego para verificar la persistencia.
