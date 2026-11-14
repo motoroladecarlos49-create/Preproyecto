@@ -660,3 +660,21 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se mantuvo el volumen y el resto de la interfaz sin cambios.
 - Motivo: separar la persistencia de preferencias de la aplicación real de la ventana, tal como solicitó el usuario, y ejecutar la aplicación desde los scripts de menú.
 - Prueba/estado: archivos actualizados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar las tres resoluciones y el modo de pantalla desde el menú principal y el de pausa, y comprobar que las preferencias se conserven al reiniciar.
+
+### 2026-11-14 — Simplificar resolución y pantalla completa en los menús
+- Archivos modificados:
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+  - `Scripts/GameManager.gd`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Los dos menús consultan el modo real con `DisplayServer.window_get_mode()` y el tamaño real con `get_window().size`.
+  - La resolución y pantalla completa se aplican directamente desde cada menú mediante `DisplayServer.window_set_size()`, `Window.size`, `DisplayServer.window_set_mode()` y `move_to_center()`, sin depender de los métodos de video de `GameManager`.
+  - Se conservaron las tres resoluciones: 1600×900, 1280×720 y 720×480.
+  - `GameManager` ya no mantiene ni guarda preferencias de video; conserva la carga, aplicación y persistencia del volumen general.
+  - Se mantiene el resto de la lógica de los menús, guardado/carga de partidas, inventario y juego.
+- Revisión general:
+  - Se inspeccionaron los scripts principales del proyecto fuera de `addons/` y se comprobaron las referencias a los métodos de video eliminados.
+  - Se detectaron siete archivos temporales `.tmp` y una carpeta antigua `menuprincipal/` que contiene una copia separada de escenas/scripts. No se eliminaron porque no forman parte del cambio de video y conviene confirmar primero si se quieren conservar como respaldo.
+  - No se identificó código de otros sistemas que sea seguro borrar sin un análisis adicional de escenas, señales y dependencias.
+- Prueba/estado: archivos actualizados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot; queda pendiente probar resolución y pantalla completa desde ambos menús.
