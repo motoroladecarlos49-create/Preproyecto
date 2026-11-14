@@ -4,13 +4,13 @@ extends Control
 @onready var btn_drop: Button = $BtnDrop
 
 var mochila: Mochila
-var player: CharacterBody2D
+var player: Node
 var modo_drop: bool = false
 
 func _ready() -> void:
-	var nodo_actual = get_parent()
+	var nodo_actual: Node = get_parent()
 	while nodo_actual != null:
-		if nodo_actual is CharacterBody2D:
+		if nodo_actual.has_method("tirar_item"):
 			player = nodo_actual
 			break
 		nodo_actual = nodo_actual.get_parent()
@@ -49,8 +49,8 @@ func _on_btn_drop_pressed():
 func _on_slot_gui_input(event: InputEvent, slot: Panel):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if slot.item_data != null:
-			if modo_drop and player != null:
-				player.tirar_item(slot.clave_item, slot.item_data)
+			if modo_drop and player != null and player.has_method("tirar_item"):
+				player.call("tirar_item", slot.clave_item, slot.item_data)
 				redibujar_inventario()
 				modo_drop = false
 				btn_drop.modulate = Color(1, 1, 1)
