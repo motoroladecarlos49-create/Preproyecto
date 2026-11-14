@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bbcmtuwdx3hmj"]
 
-[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/2d_lights_and_shadows_neutral_point_light.webp" id="1_i8hrn"]
+[ext_resource type="Texture2D" uid="uid://oa3wrq5g84ll" path="res://Imagenes/texturas_ambiente/2d_lights_and_shadows_neutral_point_light.webp" id="1_i8hrn"]
 [ext_resource type="PackedScene" uid="uid://bccooec3fhrtm" path="res://Escenas/player3D.tscn" id="1_usqj6"]
-[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/S.webp" id="2_drlo1"]
-[ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/crosshair-000.png" id="4_6joj8"]
-[ext_resource type="PackedScene" path="res://Escenas/llave_3d.tscn" id="5_llave"]
+[ext_resource type="Texture2D" uid="uid://fp01kt5m0usa" path="res://Imagenes/texturas_ambiente/S.webp" id="2_drlo1"]
+[ext_resource type="Texture2D" uid="uid://bv540urgiewr6" path="res://Imagenes/texturas_ambiente/crosshair-000.png" id="4_6joj8"]
+[ext_resource type="PackedScene" uid="uid://twu2rgugmnyd" path="res://Escenas/llave_3d.tscn" id="5_llave"]
 
 [sub_resource type="Environment" id="Environment_p77xk"]
 background_mode = 1
@@ -42,7 +42,7 @@ emission_energy_multiplier = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_usqj6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_salida"]
-size = Vector3(2.5, 3.0, 1.5)
+size = Vector3(2.5, 3, 1.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_salida"]
 size = Vector3(1.7, 2.4, 0.12)
@@ -88,8 +88,8 @@ shape = SubResource("ConcavePolygonShape3D_drlo1")
 [node name="Player" parent="." unique_id=1410393463 instance=ExtResource("1_usqj6")]
 transform = Transform3D(-0.18279798, 0, -0.23787577, 0, 0.29999998, 0, 0.23787577, 0, -0.18279798, 0, 1.3825023, 0)
 
-[node name="Llave3D" parent="." instance=ExtResource("5_llave")]
-position = Vector3(-1.05, 0.12, 1.1)
+[node name="Llave3D" parent="." unique_id=166791944 instance=ExtResource("5_llave")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.05, 0.12, 1.1)
 
 [node name="Cubo2" type="RigidBody3D" parent="." unique_id=893215564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10963702, 0.8469744, 2.58918)
@@ -122,16 +122,14 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("4_6joj8")
 
-[node name="Salida3D" type="Area3D" parent="."]
-position = Vector3(0, 1.3, -4)
+[node name="Salida3D" type="Area3D" parent="." unique_id=730347138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -4)
 collision_layer = 0
-collision_mask = 1
-monitoring = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Salida3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Salida3D" unique_id=341384605]
 shape = SubResource("BoxShape3D_salida")
 
-[node name="IndicadorPuerta" type="MeshInstance3D" parent="Salida3D"]
-position = Vector3(0, 0, -0.55)
+[node name="IndicadorPuerta" type="MeshInstance3D" parent="Salida3D" unique_id=593909781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
 mesh = SubResource("BoxMesh_salida")
 surface_material_override/0 = SubResource("StandardMaterial3D_salida")
