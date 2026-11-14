@@ -150,7 +150,11 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 func _on_option_button_item_selected(index: int) -> void:
 	if index < 0 or index >= RESOLUCIONES.size():
 		return
-	get_window().size = RESOLUCIONES[index]
+
+	# El tamaño de la ventana solo se puede cambiar en modo ventana.
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	check_pantalla.set_pressed_no_signal(false)
+	DisplayServer.window_set_size(RESOLUCIONES[index])
 	get_window().move_to_center()
 
 
