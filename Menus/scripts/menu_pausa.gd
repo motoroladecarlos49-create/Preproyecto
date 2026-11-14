@@ -133,6 +133,15 @@ func _configurar_opciones() -> void:
 		if resoluciones[i] == tamano_actual:
 			selector_resolucion.select(i)
 
+func _aplicar_configuracion_ventana() -> void:
+	var resolucion: Vector2i = GameManager.obtener_resolucion_ventana()
+	var pantalla_completa: bool = GameManager.obtener_pantalla_completa()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_size(resolucion)
+	get_window().move_to_center()
+	if pantalla_completa:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 func _actualizar_boton_cargar() -> void:
 	boton_cargar.disabled = not GameManager.hay_partida_guardada()
 	boton_cargar.modulate = Color(1, 1, 1, 1) if not boton_cargar.disabled else Color(0.65, 0.65, 0.65, 0.75)
@@ -143,6 +152,7 @@ func _on_slidervolumen_value_changed(value: float) -> void:
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	GameManager.establecer_pantalla_completa(toggled_on)
+	_aplicar_configuracion_ventana()
 
 func _on_option_button_item_selected(index: int) -> void:
 	var resoluciones: Array[Vector2i] = GameManager.obtener_resoluciones_disponibles()
@@ -150,6 +160,7 @@ func _on_option_button_item_selected(index: int) -> void:
 		return
 	GameManager.establecer_resolucion_ventana(resoluciones[index])
 	check_pantalla.set_pressed_no_signal(false)
+	_aplicar_configuracion_ventana()
 
 
 func _aplicar_estilo() -> void:
