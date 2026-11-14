@@ -87,7 +87,7 @@ radius = 0.22
 height = 0.82
 
 [sub_resource type="SphereShape3D" id="AreaRecogidaShape"]
-radius = 0.42
+radius = 0.62
 
 [node name="Linterna3D" type="RigidBody3D"]
 mass = 0.2
