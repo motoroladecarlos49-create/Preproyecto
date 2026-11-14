@@ -160,6 +160,7 @@ mensaje_bloqueo = "La puerta está cerrada."
 
 [node name="Puerta4" parent="." unique_id=697342636 instance=ExtResource("1_4jnyt")]
 mensaje_bloqueo = "Necesitas una llave para abrir esta puerta."
+finalizar_juego = true
 
 [node name="CollisionShape2D" parent="Puerta4" index="0" unique_id=1857541741]
 position = Vector2(2730.7695, 584.6154)
