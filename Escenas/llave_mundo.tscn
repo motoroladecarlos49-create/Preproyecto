@@ -1,20 +1,22 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ddoeaumrbyoys"]
 
-[ext_resource type="Script" path="res://items/llave_mundo.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dyelvd7ck0bx6" path="res://items/llave_mundo.gd" id="1_script"]
 [ext_resource type="Resource" path="res://items/llave.tres" id="2_data"]
+[ext_resource type="Texture2D" uid="uid://ds7y07kna7vnc" path="res://Imagenes/texturas_items/llave_icono.png" id="3_ssjir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llave"]
 size = Vector2(14, 14)
 
-[node name="LlaveMundo" type="Area2D"]
+[node name="LlaveMundo" type="Area2D" unique_id=1723322948]
 script = ExtResource("1_script")
 data = ExtResource("2_data")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2117973512]
 shape = SubResource("RectangleShape2D_llave")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.03, 0.03)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=21386230]
+scale = Vector2(0.012871093, 0.012871093)
+texture = ExtResource("3_ssjir")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

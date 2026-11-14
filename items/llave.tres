@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Item" format=3]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dxj2x1h4y54on"]
 
-[ext_resource type="Script" path="res://items/item.gd" id="1_item"]
-[ext_resource type="Texture2D" path="res://Imagenes/texturas_items/llave_icono.svg" id="2_icono"]
+[ext_resource type="Script" uid="uid://c6hjsj82w85qq" path="res://items/item.gd" id="1_item"]
+[ext_resource type="Texture2D" uid="uid://ds7y07kna7vnc" path="res://Imagenes/texturas_items/llave_icono.png" id="1_s70j3"]
 
 [resource]
 script = ExtResource("1_item")
 nombre = "Llave"
-icono = ExtResource("2_icono")
+icono = ExtResource("1_s70j3")
 apilable = false
 max_cantidad = 1
