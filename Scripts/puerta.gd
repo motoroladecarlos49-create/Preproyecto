@@ -7,6 +7,7 @@ extends Area2D
 @export var mensaje_bloqueo: String = ""
 @export var mensaje_al_entrar: String = ""
 @export var requiere_llave: bool = false
+@export var finalizar_juego: bool = false
 @export var nombre_item_requerido: String = "Llave"
 
 func _on_area_entered(area: Area2D) -> void:
