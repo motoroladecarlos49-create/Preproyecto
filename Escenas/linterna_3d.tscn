@@ -64,10 +64,10 @@ rings = 10
 ring_segments = 32
 
 [sub_resource type="TorusMesh" id="AsaMesh"]
-inner_radius = 0.105
-outer_radius = 0.12
-rings = 10
-ring_segments = 32
+inner_radius = 0.255
+outer_radius = 0.28
+rings = 12
+ring_segments = 40
 
 [sub_resource type="CylinderMesh" id="VarillaMesh"]
 top_radius = 0.018
@@ -229,19 +229,18 @@ mesh = SubResource("Remache")
 surface_material_override/0 = SubResource("MaterialDorado")
 
 [node name="Asa" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.37, 0)
-rotation = Vector3(1.5708, 0, 0)
+position = Vector3(0, 0.62, 0)
 mesh = SubResource("AsaMesh")
 surface_material_override/0 = SubResource("MaterialMorado")
 
 [node name="AsaPataIzquierda" type="MeshInstance3D" parent="."]
-position = Vector3(-0.22, 0.25, 0)
+position = Vector3(-0.22, 0.48, 0)
 rotation = Vector3(0, 0, 0.12)
 mesh = SubResource("VarillaFina")
 surface_material_override/0 = SubResource("MaterialMorado")
 
 [node name="AsaPataDerecha" type="MeshInstance3D" parent="."]
-position = Vector3(0.22, 0.25, 0)
+position = Vector3(0.22, 0.48, 0)
 rotation = Vector3(0, 0, -0.12)
 mesh = SubResource("VarillaFina")
 surface_material_override/0 = SubResource("MaterialMorado")
