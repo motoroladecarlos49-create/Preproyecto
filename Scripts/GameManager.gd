@@ -9,6 +9,7 @@ var punto_retorno_2d_id: String = ""
 var mochila_global: Mochila = null
 var linterna_encendida: bool = false
 var carga_pendiente: bool = false
+var menu_desde_creditos: bool = false
 
 # Banderas de tutoriales
 var ya_aviso_inventario: bool = false
