@@ -142,8 +142,10 @@ func _on_slidervolumen_value_changed(value: float) -> void:
 	GameManager.establecer_volumen_general(value)
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	var modo = DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED
-	DisplayServer.window_set_mode(modo)
+	if toggled_on == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_option_button_item_selected(index: int) -> void:
 	if index < 0 or index >= RESOLUCIONES.size():
