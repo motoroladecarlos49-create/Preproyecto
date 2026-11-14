@@ -71,13 +71,14 @@ func _ready() -> void:
 		GameManager.carga_pendiente = false
 	else:
 		_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
+	ultima_posicion_pasos = global_position
 
 func _process(_delta):
 	if camera:
 		camera.global_position.x = global_position.x
 		camera.global_position.y = 0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
 	var desplazamiento := global_position - ultima_posicion_pasos
@@ -228,6 +229,7 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 		item_suelto.global_position.y += borde_inferior_jugador - borde_inferior_item
 	item_suelto.z_index = 1
 	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
+	_reproducir_tono(260.0, 0.12, 0.16)
 	mochila.remover_item_por_clave(clave)
 
 func _iniciar_secuencia_final() -> void:
