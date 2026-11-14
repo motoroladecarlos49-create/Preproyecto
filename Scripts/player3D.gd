@@ -65,7 +65,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if ui_inventario != null and ui_inventario.visible:
 			return
 		if item_cerca_3d != null:
-			_recoger_item_3d()
+			if _esta_mirando_item_3d(item_cerca_3d):
+				_recoger_item_3d()
 		elif salida_cerca:
 			GameManager.volver_a_escena_2d()
 
@@ -127,6 +128,22 @@ func establecer_item_cerca_3d(item: Node3D) -> void:
 
 func inventario_cambiado(abierto: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if abierto else Input.MOUSE_MODE_CAPTURED
+
+
+func _esta_mirando_item_3d(item: Node3D) -> bool:
+	if not is_instance_valid(item):
+		return false
+	var origen := camera_3d.global_position
+	var direccion := -camera_3d.global_transform.basis.z.normalized()
+	var consulta := PhysicsRayQueryParameters3D.create(origen, origen + direccion * 2.5)
+	consulta.exclude = [self]
+	consulta.collide_with_bodies = true
+	consulta.collide_with_areas = false
+	var impacto := get_world_3d().direct_space_state.intersect_ray(consulta)
+	if impacto.is_empty():
+		return false
+	var objetivo := impacto.get("collider") as Node
+	return objetivo == item or item.is_ancestor_of(objetivo)
 
 func _recoger_item_3d() -> void:
 	if not is_instance_valid(item_cerca_3d):
