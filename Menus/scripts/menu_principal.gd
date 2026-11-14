@@ -150,14 +150,21 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_option_button_item_selected(index: int) -> void:
+	var resolucion: Vector2i
 	match index:
 		0:
-			DisplayServer.window_set_size(Vector2i(1600, 900))
+			resolucion = Vector2i(1600, 900)
 		1:
-			DisplayServer.window_set_size(Vector2i(1280, 720))
+			resolucion = Vector2i(1280, 720)
 		2:
-			DisplayServer.window_set_size(Vector2i(720, 480))
-			
+			resolucion = Vector2i(720, 480)
+		_:
+			return
+
+	# El tamaño de la ventana solo se puede cambiar en modo ventana.
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	check_pantalla.set_pressed_no_signal(false)
+	DisplayServer.window_set_size(resolucion)
 	get_window().move_to_center()
 
 func _aplicar_estilo() -> void:
