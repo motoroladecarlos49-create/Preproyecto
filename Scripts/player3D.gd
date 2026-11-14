@@ -49,6 +49,9 @@ func _ready() -> void:
 	if GameManager.carga_pendiente:
 		if GameManager.partida_actual.jugador_en_3d:
 			global_position = GameManager.partida_actual.posicion_jugador_3d
+			global_rotation = GameManager.partida_actual.rotacion_jugador_3d
+			pitch = GameManager.partida_actual.pitch_jugador_3d
+			camera_3d.rotation.x = pitch
 		GameManager.carga_pendiente = false
 
 func _input(event: InputEvent) -> void:
@@ -125,6 +128,9 @@ func _physics_process(delta: float) -> void:
 		if item_cercano_data != null and item_cercano_data.nombre == "Llave" and _esta_mirando_item_3d(item_cerca_3d):
 			GameManager.ya_aviso_llave_3d = true
 			MessageManager.mostrar_mensaje("Presiona 'E' para recoger la llave", 1.8)
+
+func obtener_pitch_guardado() -> float:
+	return pitch
 
 func establecer_item_cerca_3d(item: Node3D) -> void:
 	item_cerca_3d = item
