@@ -239,7 +239,7 @@ func restaurar_items_tirados_3d(raiz_escena: Node) -> void:
 		objeto.set("data", registro.get("data") as Item)
 		objeto.set("id_unico", id)
 		objeto.set("esta_encendida", bool(registro.get("encendida", false)))
-		if objeto.data == null:
+		if objeto.get("data") == null:
 			objeto.free()
 			continue
 		_agregar_item_3d_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector3.ZERO))
