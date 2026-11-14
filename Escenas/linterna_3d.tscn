@@ -5,82 +5,144 @@
 
 [sub_resource type="CylinderMesh" id="BaseMesh"]
 top_radius = 0.23
-bottom_radius = 0.25
-height = 0.12
-radial_segments = 24
+bottom_radius = 0.28
+height = 0.13
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="BaseAnillo"]
+top_radius = 0.255
+bottom_radius = 0.255
+height = 0.045
+radial_segments = 32
 
 [sub_resource type="CylinderMesh" id="BaseSuperiorMesh"]
 top_radius = 0.17
 bottom_radius = 0.19
 height = 0.09
-radial_segments = 24
+radial_segments = 32
 
 [sub_resource type="CylinderMesh" id="CristalMesh"]
 top_radius = 0.145
-bottom_radius = 0.145
+bottom_radius = 0.155
 height = 0.38
-radial_segments = 24
-
-[sub_resource type="StandardMaterial3D" id="MaterialCristal"]
-albedo_color = Color(1, 0.69, 0.38, 0.28)
-transparency = 1
-roughness = 0.18
-emission_enabled = true
-emission = Color(0.32, 0.13, 0.035, 1)
-emission_energy_multiplier = 0.45
+radial_segments = 32
 
 [sub_resource type="CylinderMesh" id="TapaMesh"]
 top_radius = 0.205
-bottom_radius = 0.205
+bottom_radius = 0.22
 height = 0.105
-radial_segments = 24
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="TapaSuperior"]
+top_radius = 0.15
+bottom_radius = 0.18
+height = 0.055
+radial_segments = 32
 
 [sub_resource type="CylinderMesh" id="QuemadorMesh"]
 top_radius = 0.105
 bottom_radius = 0.12
 height = 0.07
-radial_segments = 20
+radial_segments = 24
 
 [sub_resource type="SphereMesh" id="LlamaMesh"]
-radius = 0.055
-height = 0.16
-radial_segments = 12
-rings = 8
+radius = 0.052
+height = 0.17
+radial_segments = 16
+rings = 10
 
 [sub_resource type="TorusMesh" id="AroMesh"]
 inner_radius = 0.145
 outer_radius = 0.17
-rings = 8
-ring_segments = 20
+rings = 10
+ring_segments = 32
+
+[sub_resource type="TorusMesh" id="AroFino"]
+inner_radius = 0.18
+outer_radius = 0.195
+rings = 10
+ring_segments = 32
 
 [sub_resource type="TorusMesh" id="AsaMesh"]
-inner_radius = 0.105
-outer_radius = 0.12
-rings = 8
-ring_segments = 20
+inner_radius = 0.255
+outer_radius = 0.28
+rings = 12
+ring_segments = 40
 
 [sub_resource type="CylinderMesh" id="VarillaMesh"]
 top_radius = 0.018
-bottom_radius = 0.018
+bottom_radius = 0.022
 height = 0.48
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="VarillaFina"]
+top_radius = 0.009
+bottom_radius = 0.009
+height = 0.52
 radial_segments = 10
 
+[sub_resource type="CylinderMesh" id="ArcoLateral"]
+top_radius = 0.024
+bottom_radius = 0.024
+height = 0.92
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Travesano"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.46
+radial_segments = 12
+
+[sub_resource type="TorusMesh" id="AsaAlta"]
+inner_radius = 0.29
+outer_radius = 0.315
+rings = 12
+ring_segments = 40
+
+[sub_resource type="SphereMesh" id="Remache"]
+radius = 0.025
+height = 0.025
+radial_segments = 12
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="MaterialCristal"]
+albedo_color = Color(1, 0.72, 0.43, 0.24)
+transparency = 1
+roughness = 0.14
+metallic = 0.05
+emission_enabled = true
+emission = Color(0.48, 0.21, 0.055, 1)
+emission_energy_multiplier = 1.65
+
 [sub_resource type="StandardMaterial3D" id="MaterialMorado"]
-albedo_color = Color(0.16, 0.12, 0.19, 1)
-metallic = 0.12
-roughness = 0.68
+albedo_color = Color(0.13, 0.095, 0.16, 1)
+metallic = 0.28
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="MaterialMoradoLuz"]
+albedo_color = Color(0.25, 0.18, 0.29, 1)
+metallic = 0.3
+roughness = 0.34
 
 [sub_resource type="StandardMaterial3D" id="MaterialDorado"]
-albedo_color = Color(0.78, 0.48, 0.20, 1)
-metallic = 0.28
-roughness = 0.5
+albedo_color = Color(0.83, 0.52, 0.22, 1)
+metallic = 0.5
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="MaterialDoradoBrillo"]
+albedo_color = Color(1, 0.72, 0.36, 1)
+emission_enabled = true
+emission = Color(1, 0.36, 0.06, 1)
+emission_energy_multiplier = 1.15
+metallic = 0.45
+roughness = 0.24
 
 [sub_resource type="StandardMaterial3D" id="MaterialLlama"]
-albedo_color = Color(1, 0.72, 0.18, 1)
+albedo_color = Color(1, 0.76, 0.24, 1)
 emission_enabled = true
-emission = Color(1, 0.42, 0.06, 1)
-emission_energy_multiplier = 2.0
-roughness = 0.4
+emission = Color(1, 0.52, 0.09, 1)
+emission_energy_multiplier = 4.0
+roughness = 0.25
 
 [sub_resource type="CapsuleShape3D" id="ColisionCuerpo"]
 radius = 0.22
@@ -105,29 +167,47 @@ position = Vector3(0, -0.31, 0)
 mesh = SubResource("BaseMesh")
 surface_material_override/0 = SubResource("MaterialMorado")
 
+[node name="BaseAnillo" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.235, 0)
+mesh = SubResource("BaseAnillo")
+surface_material_override/0 = SubResource("MaterialDorado")
+
 [node name="BaseSuperior" type="MeshInstance3D" parent="."]
 position = Vector3(0, -0.205, 0)
 mesh = SubResource("BaseSuperiorMesh")
-surface_material_override/0 = SubResource("MaterialMorado")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
 
 [node name="Cristal" type="MeshInstance3D" parent="."]
 position = Vector3(0, 0.015, 0)
 mesh = SubResource("CristalMesh")
 surface_material_override/0 = SubResource("MaterialCristal")
 
+[node name="AroCristalInferior" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.17, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("AroMesh")
+surface_material_override/0 = SubResource("MaterialDorado")
+
+[node name="AroCristalSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.205, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("AroMesh")
+surface_material_override/0 = SubResource("MaterialDorado")
+
 [node name="Tapa" type="MeshInstance3D" parent="."]
 position = Vector3(0, 0.255, 0)
 mesh = SubResource("TapaMesh")
 surface_material_override/0 = SubResource("MaterialMorado")
 
-[node name="BordeInferior" type="MeshInstance3D" parent="."]
-position = Vector3(0, -0.17, 0)
-mesh = SubResource("AroMesh")
-surface_material_override/0 = SubResource("MaterialDorado")
+[node name="TapaSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.325, 0)
+mesh = SubResource("TapaSuperior")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
 
-[node name="BordeSuperior" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.205, 0)
-mesh = SubResource("AroMesh")
+[node name="AroTapa" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.30, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("AroFino")
 surface_material_override/0 = SubResource("MaterialDorado")
 
 [node name="Quemador" type="MeshInstance3D" parent="."]
@@ -152,17 +232,78 @@ rotation = Vector3(0, 0, 0.08)
 mesh = SubResource("VarillaMesh")
 surface_material_override/0 = SubResource("MaterialMorado")
 
-[node name="Asa" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.37, 0)
+[node name="ProteccionFrontal1" type="MeshInstance3D" parent="."]
+position = Vector3(-0.10, 0.015, 0.145)
+rotation = Vector3(0.52, 0, -0.52)
+mesh = SubResource("VarillaFina")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
+
+[node name="ProteccionFrontal2" type="MeshInstance3D" parent="."]
+position = Vector3(0.10, 0.015, 0.145)
+rotation = Vector3(0.52, 0, 0.52)
+mesh = SubResource("VarillaFina")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
+
+[node name="RemacheIzquierdo" type="MeshInstance3D" parent="."]
+position = Vector3(-0.19, 0.22, 0)
+mesh = SubResource("Remache")
+surface_material_override/0 = SubResource("MaterialDorado")
+
+[node name="RemacheDerecho" type="MeshInstance3D" parent="."]
+position = Vector3(0.19, 0.22, 0)
+mesh = SubResource("Remache")
+surface_material_override/0 = SubResource("MaterialDorado")
+
+[node name="ArcoLateralIzquierdo" type="MeshInstance3D" parent="."]
+position = Vector3(-0.235, 0.045, 0)
+mesh = SubResource("ArcoLateral")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="ArcoLateralDerecho" type="MeshInstance3D" parent="."]
+position = Vector3(0.235, 0.045, 0)
+mesh = SubResource("ArcoLateral")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="TravesanoSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.49, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Travesano")
+surface_material_override/0 = SubResource("MaterialDorado")
+
+[node name="TravesanoInferior" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.40, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Travesano")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
+
+[node name="AsaAlta" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.66, 0)
 rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("AsaAlta")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="Asa" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.62, 0)
 mesh = SubResource("AsaMesh")
 surface_material_override/0 = SubResource("MaterialMorado")
 
+[node name="AsaPataIzquierda" type="MeshInstance3D" parent="."]
+position = Vector3(-0.22, 0.48, 0)
+rotation = Vector3(0, 0, 0.12)
+mesh = SubResource("VarillaFina")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="AsaPataDerecha" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 0.48, 0)
+rotation = Vector3(0, 0, -0.12)
+mesh = SubResource("VarillaFina")
+surface_material_override/0 = SubResource("MaterialMorado")
+
 [node name="Luz" type="OmniLight3D" parent="."]
-position = Vector3(0, 0.0, 0)
+position = Vector3(0, -0.015, 0)
 light_color = Color(1, 0.68, 0.35, 1)
-light_energy = 0.55
-omni_range = 2.6
+light_energy = 0.7
+omni_range = 2.9
 shadow_enabled = false
 
 [node name="AreaRecogida" type="Area3D" parent="."]

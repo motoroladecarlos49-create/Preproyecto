@@ -6,64 +6,95 @@
 [sub_resource type="TorusMesh" id="AroPetalo"]
 inner_radius = 0.105
 outer_radius = 0.15
+rings = 12
+ring_segments = 32
+
+[sub_resource type="TorusMesh" id="AroInterior"]
+inner_radius = 0.075
+outer_radius = 0.091
 rings = 10
-ring_segments = 24
+ring_segments = 28
 
 [sub_resource type="BoxMesh" id="GemaMarco"]
-size = Vector3(0.27, 0.075, 0.27)
+size = Vector3(0.29, 0.09, 0.29)
 
 [sub_resource type="BoxMesh" id="Gema"]
-size = Vector3(0.19, 0.09, 0.19)
+size = Vector3(0.19, 0.105, 0.19)
+
+[sub_resource type="BoxMesh" id="MarcoBisel"]
+size = Vector3(0.34, 0.035, 0.34)
 
 [sub_resource type="CylinderMesh" id="Vastago"]
-top_radius = 0.055
-bottom_radius = 0.07
-height = 0.62
-radial_segments = 16
+top_radius = 0.052
+bottom_radius = 0.068
+height = 0.68
+radial_segments = 24
 
-[sub_resource type="CylinderMesh" id="Diente"]
-top_radius = 0.045
-bottom_radius = 0.045
-height = 0.16
-radial_segments = 12
+[sub_resource type="CylinderMesh" id="Collar"]
+top_radius = 0.095
+bottom_radius = 0.095
+height = 0.11
+radial_segments = 24
+
+[sub_resource type="BoxMesh" id="Diente"]
+size = Vector3(0.17, 0.12, 0.14)
 
 [sub_resource type="TorusMesh" id="AnilloDecorativo"]
-inner_radius = 0.065
-outer_radius = 0.085
-rings = 8
-ring_segments = 20
+inner_radius = 0.066
+outer_radius = 0.087
+rings = 10
+ring_segments = 28
 
 [sub_resource type="StandardMaterial3D" id="MoradoOscuro"]
-albedo_color = Color(0.13, 0.085, 0.17, 1)
-metallic = 0.18
-roughness = 0.56
+albedo_color = Color(0.10, 0.065, 0.14, 1)
+metallic = 0.35
+roughness = 0.38
 
 [sub_resource type="StandardMaterial3D" id="MoradoMedio"]
-albedo_color = Color(0.29, 0.21, 0.34, 1)
-metallic = 0.14
-roughness = 0.5
+albedo_color = Color(0.29, 0.21, 0.36, 1)
+metallic = 0.22
+roughness = 0.34
 
-[sub_resource type="StandardMaterial3D" id="Dorado"]
-albedo_color = Color(0.88, 0.57, 0.24, 1)
-metallic = 0.3
-roughness = 0.42
-
-[sub_resource type="StandardMaterial3D" id="GemaLuminosa"]
-albedo_color = Color(1, 0.76, 0.22, 1)
-emission_enabled = true
-emission = Color(1, 0.48, 0.08, 1)
-emission_energy_multiplier = 1.8
+[sub_resource type="StandardMaterial3D" id="MoradoBorde"]
+albedo_color = Color(0.48, 0.36, 0.53, 1)
+metallic = 0.28
 roughness = 0.3
 
+[sub_resource type="StandardMaterial3D" id="Dorado"]
+albedo_color = Color(0.91, 0.61, 0.27, 1)
+metallic = 0.52
+roughness = 0.28
+
+[sub_resource type="StandardMaterial3D" id="GemaLuminosa"]
+albedo_color = Color(1, 0.84, 0.38, 1)
+emission_enabled = true
+emission = Color(1, 0.58, 0.12, 1)
+emission_energy_multiplier = 5.0
+metallic = 0.08
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="DoradoBrillante"]
+albedo_color = Color(1, 0.72, 0.32, 1)
+emission_enabled = true
+emission = Color(1, 0.42, 0.08, 1)
+emission_energy_multiplier = 1.4
+roughness = 0.24
+
+[sub_resource type="TorusMesh" id="AroGema"]
+inner_radius = 0.13
+outer_radius = 0.15
+rings = 12
+ring_segments = 32
+
 [sub_resource type="BoxShape3D" id="ColisionLlave"]
-size = Vector3(0.95, 0.16, 0.58)
+size = Vector3(0.78, 0.22, 0.42)
 
 [sub_resource type="SphereShape3D" id="AreaRecogida"]
-radius = 0.48
+radius = 0.36
 
 [node name="Llave3D" type="RigidBody3D"]
 mass = 0.08
-scale = Vector3(0.62, 0.62, 0.62)
+scale = Vector3(0.39, 0.39, 0.39)
 linear_damp = 3.0
 angular_damp = 4.0
 script = ExtResource("1_script")
@@ -92,19 +123,59 @@ position = Vector3(-0.19, 0.055, 0)
 mesh = SubResource("AroPetalo")
 surface_material_override/0 = SubResource("MoradoMedio")
 
+[node name="AroInteriorSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(-0.34, 0.205, 0.018)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="AroInteriorInferior" type="MeshInstance3D" parent="."]
+position = Vector3(-0.34, -0.095, 0.018)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="AroInteriorIzquierdo" type="MeshInstance3D" parent="."]
+position = Vector3(-0.49, 0.055, 0.018)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="AroInteriorDerecho" type="MeshInstance3D" parent="."]
+position = Vector3(-0.19, 0.055, 0.018)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="MarcoBisel" type="MeshInstance3D" parent="."]
+position = Vector3(-0.34, 0.105, 0.025)
+rotation = Vector3(0, 0, 0.7854)
+mesh = SubResource("MarcoBisel")
+surface_material_override/0 = SubResource("MoradoOscuro")
+
 [node name="GemaMarco" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.105, 0)
+position = Vector3(-0.34, 0.105, 0.055)
+rotation = Vector3(0, 0, 0.7854)
 mesh = SubResource("GemaMarco")
 surface_material_override/0 = SubResource("Dorado")
 
+[node name="AroGema" type="MeshInstance3D" parent="."]
+position = Vector3(-0.34, 0.105, 0.11)
+mesh = SubResource("AroGema")
+surface_material_override/0 = SubResource("DoradoBrillante")
+
 [node name="Gema" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.16, 0)
+position = Vector3(-0.34, 0.16, 0.085)
+rotation = Vector3(0, 0, 0.7854)
 mesh = SubResource("Gema")
 surface_material_override/0 = SubResource("GemaLuminosa")
 
 [node name="AnilloDecorativo" type="MeshInstance3D" parent="."]
 position = Vector3(-0.02, 0.055, 0)
+rotation = Vector3(0, 1.5708, 0)
 mesh = SubResource("AnilloDecorativo")
+surface_material_override/0 = SubResource("Dorado")
+
+[node name="CollarSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(0.08, 0.055, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Collar")
 surface_material_override/0 = SubResource("Dorado")
 
 [node name="Vastago" type="MeshInstance3D" parent="."]
@@ -113,32 +184,33 @@ rotation = Vector3(0, 0, 1.5708)
 mesh = SubResource("Vastago")
 surface_material_override/0 = SubResource("MoradoOscuro")
 
-[node name="Diente1" type="MeshInstance3D" parent="."]
-position = Vector3(0.52, 0.13, 0)
-rotation = Vector3(0, 0, 0)
-mesh = SubResource("Diente")
+[node name="CollarDientes" type="MeshInstance3D" parent="."]
+position = Vector3(0.53, 0.055, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Collar")
 surface_material_override/0 = SubResource("Dorado")
+
+[node name="Diente1" type="MeshInstance3D" parent="."]
+position = Vector3(0.54, 0.16, 0)
+mesh = SubResource("Diente")
+surface_material_override/0 = SubResource("MoradoMedio")
 
 [node name="Diente2" type="MeshInstance3D" parent="."]
-position = Vector3(0.52, -0.02, 0)
-rotation = Vector3(0, 0, 0)
+position = Vector3(0.54, -0.05, 0)
 mesh = SubResource("Diente")
-surface_material_override/0 = SubResource("Dorado")
+surface_material_override/0 = SubResource("MoradoMedio")
 
 [node name="LuzSuave" type="OmniLight3D" parent="."]
-position = Vector3(-0.34, 0.32, 0)
+position = Vector3(-0.34, 0.30, 0.10)
 light_color = Color(1, 0.73, 0.38, 1)
-light_energy = 0.18
-omni_range = 1.0
+light_energy = 0.32
+omni_range = 0.9
 shadow_enabled = false
 
 [node name="AreaRecogida" type="Area3D" parent="."]
-position = Vector3(0, 0.22, 0)
+position = Vector3(0, 0.18, 0)
 collision_layer = 0
 collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaRecogida"]
 shape = SubResource("AreaRecogida")
-
-[connection signal="body_entered" from="AreaRecogida" to="." method="_on_area_recogida_body_entered"]
-[connection signal="body_exited" from="AreaRecogida" to="." method="_on_area_recogida_body_exited"]
