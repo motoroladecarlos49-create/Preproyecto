@@ -125,6 +125,9 @@ func _physics_process(delta: float) -> void:
 func establecer_item_cerca_3d(item: Node3D) -> void:
 	item_cerca_3d = item
 
+func inventario_cambiado(abierto: bool) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if abierto else Input.MOUSE_MODE_CAPTURED
+
 func _recoger_item_3d() -> void:
 	if not is_instance_valid(item_cerca_3d):
 		item_cerca_3d = null
