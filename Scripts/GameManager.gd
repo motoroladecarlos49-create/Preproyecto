@@ -29,22 +29,8 @@ const RUTA_GUARDADO: String = "user://partida_guardada.tres"
 const RUTA_CONFIGURACION: String = "user://configuracion.cfg"
 
 var volumen_general: float = 1.0
-const RESOLUCION_PREDETERMINADA: Vector2i = Vector2i(1280, 720)
-var resolucion_ventana: Vector2i = RESOLUCION_PREDETERMINADA
-var pantalla_completa: bool = false
-
-const RESOLUCIONES_DISPONIBLES = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
-
-func obtener_resoluciones_disponibles() -> Array[Vector2i]:
-	var resoluciones: Array[Vector2i] = []
-	resoluciones.assign(RESOLUCIONES_DISPONIBLES)
-	return resoluciones
 
 func _ready() -> void:
-	# Mantener una resolución válida por defecto; el tamaño inicial de la ventana
-	# puede no coincidir con ninguna de las opciones disponibles.
-	resolucion_ventana = RESOLUCION_PREDETERMINADA
-
 	var indice_bus: int = AudioServer.get_bus_index("Master")
 	if indice_bus >= 0:
 		volumen_general = 0.0 if AudioServer.is_bus_mute(indice_bus) else db_to_linear(AudioServer.get_bus_volume_db(indice_bus))
@@ -52,24 +38,12 @@ func _ready() -> void:
 	var configuracion := ConfigFile.new()
 	if configuracion.load(RUTA_CONFIGURACION) == OK:
 		volumen_general = clampf(float(configuracion.get_value("audio", "volumen_general", volumen_general)), 0.0, 1.0)
-		var resolucion_guardada: Variant = configuracion.get_value("video", "resolucion_ventana", RESOLUCION_PREDETERMINADA)
-		if resolucion_guardada is Vector2i and RESOLUCIONES_DISPONIBLES.has(resolucion_guardada):
-			resolucion_ventana = resolucion_guardada
-		else:
-			resolucion_ventana = RESOLUCION_PREDETERMINADA
-		pantalla_completa = bool(configuracion.get_value("video", "pantalla_completa", false))
 
 	_aplicar_volumen_guardado()
 	_guardar_configuracion()
 
 func obtener_volumen_general() -> float:
 	return volumen_general
-
-func obtener_resolucion_ventana() -> Vector2i:
-	return resolucion_ventana
-
-func obtener_pantalla_completa() -> bool:
-	return pantalla_completa
 
 func establecer_volumen_general(valor: float) -> void:
 	volumen_general = clampf(valor, 0.0, 1.0)
@@ -83,23 +57,9 @@ func _aplicar_volumen_guardado() -> void:
 	AudioServer.set_bus_volume_db(indice_bus, linear_to_db(maxf(volumen_general, 0.001)))
 	AudioServer.set_bus_mute(indice_bus, volumen_general <= 0.0)
 
-func establecer_pantalla_completa(activada: bool) -> void:
-	pantalla_completa = activada
-	_guardar_configuracion()
-
-func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
-	if not RESOLUCIONES_DISPONIBLES.has(resolucion):
-		push_warning("La resolución solicitada no está en la lista de opciones disponibles.")
-		return
-	resolucion_ventana = resolucion
-	pantalla_completa = false
-	_guardar_configuracion()
-
 func _guardar_configuracion() -> void:
 	var configuracion := ConfigFile.new()
 	configuracion.set_value("audio", "volumen_general", volumen_general)
-	configuracion.set_value("video", "resolucion_ventana", resolucion_ventana)
-	configuracion.set_value("video", "pantalla_completa", pantalla_completa)
 	var error: Error = configuracion.save(RUTA_CONFIGURACION)
 	if error != OK:
 		push_error("No se pudo guardar la configuración. Código: %s" % error)
