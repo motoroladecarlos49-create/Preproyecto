@@ -23,8 +23,12 @@ func _ready() -> void:
 
 func _on_area_recogida_body_entered(body: Node3D) -> void:
 	if body.has_method("establecer_item_cerca_3d"):
+		if body is PhysicsBody3D:
+			(body as PhysicsBody3D).add_collision_exception_with(self)
 		body.establecer_item_cerca_3d(self)
 
 func _on_area_recogida_body_exited(body: Node3D) -> void:
 	if body.has_method("establecer_item_cerca_3d") and body.get("item_cerca_3d") == self:
+		if body is PhysicsBody3D:
+			(body as PhysicsBody3D).remove_collision_exception_with(self)
 		body.establecer_item_cerca_3d(null)
