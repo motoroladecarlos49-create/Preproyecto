@@ -191,8 +191,18 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	var colision_item: CollisionShape2D = item_suelto.get_node("CollisionShape2D")
 	var desplazamiento_colision = colision_item.global_position - item_suelto.global_position
 	var posicion_alineada = colision_jugador.global_position - desplazamiento_colision
-	# Deja el objeto junto a los pies, alineando su colision con la del jugador.
 	item_suelto.global_position = posicion_alineada + Vector2(0, 8)
+
+	# Para la linterna, alinea el borde inferior de su area de recogida
+	# con el borde inferior de la colision del jugador.
+	if item_a_tirar.nombre == "Linterna":
+		var forma_jugador: Shape2D = colision_jugador.shape
+		var forma_item: Shape2D = colision_item.shape
+		var mitad_alto_jugador := forma_jugador.get_rect().size.y * absf(colision_jugador.global_scale.y) * 0.5
+		var mitad_alto_item := forma_item.get_rect().size.y * absf(colision_item.global_scale.y) * 0.5
+		var borde_inferior_jugador := colision_jugador.global_position.y + mitad_alto_jugador
+		var borde_inferior_item := colision_item.global_position.y + mitad_alto_item
+		item_suelto.global_position.y += borde_inferior_jugador - borde_inferior_item
 	item_suelto.z_index = 1
 	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
 	mochila.remover_item_por_clave(clave)
