@@ -4,7 +4,7 @@
 [ext_resource type="Resource" path="res://items/llave.tres" id="2_data"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llave"]
-size = Vector2(38, 54)
+size = Vector2(14, 14)
 
 [node name="LlaveMundo" type="Area2D"]
 script = ExtResource("1_script")
