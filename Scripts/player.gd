@@ -191,8 +191,8 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	var colision_item: CollisionShape2D = item_suelto.get_node("CollisionShape2D")
 	var desplazamiento_colision = colision_item.global_position - item_suelto.global_position
 	var posicion_alineada = colision_jugador.global_position - desplazamiento_colision
-	var posicion_anterior = global_position + Vector2(50, 50)
-	item_suelto.global_position = posicion_alineada.lerp(posicion_anterior, 0.5)
+	# Deja el objeto junto a los pies, alineando su colision con la del jugador.
+	item_suelto.global_position = posicion_alineada + Vector2(0, 8)
 	item_suelto.z_index = 1
 	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
 	mochila.remover_item_por_clave(clave)
