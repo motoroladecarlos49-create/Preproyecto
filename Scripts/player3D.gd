@@ -154,10 +154,10 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 		return
 
 	var nuevo_id = item_a_tirar.nombre + "_3d_soltado_" + str(Time.get_ticks_usec())
-	var item_suelto = escena_item.instantiate()
-	item_suelto.data = item_a_tirar
-	item_suelto.id_unico = nuevo_id
-	item_suelto.esta_encendida = GameManager.linterna_encendida
+	var item_suelto := escena_item.instantiate() as RigidBody3D
+	item_suelto.set("data", item_a_tirar)
+	item_suelto.set("id_unico", nuevo_id)
+	item_suelto.set("esta_encendida", GameManager.linterna_encendida)
 
 	get_tree().current_scene.add_child(item_suelto)
 	var direccion = -global_transform.basis.z.normalized()
