@@ -1,3 +1,19 @@
+### 2026-11-14 — Corregir aplicación de resoluciones y adaptación de ventana
+- Archivos modificados:
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+  - `Menus/menu_principal.tscn`
+  - `project.godot`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Al seleccionar una resolución desde cualquiera de los dos menús, primero se cambia a modo ventana, luego se aplica el tamaño mediante `DisplayServer.window_set_size()` y se centra la ventana.
+  - El control de pantalla completa se desmarca sin emitir una señal al cambiar de resolución, para que la interfaz coincida con el modo aplicado.
+  - El nodo raíz del menú principal ahora usa anclajes Full Rect y ocupa todo el viewport; se conservan las posiciones y configuraciones de sus hijos.
+  - El proyecto principal define un viewport base de 1152×650 y un tamaño inicial de ventana de 1280×720. Se mantiene el modo de ventana predeterminado.
+  - No se modificó la copia antigua `menuprincipal/project.godot`, ni los sistemas de juego, volumen o guardado.
+- Motivo: evitar que el selector intente cambiar el tamaño mientras la ventana permanece en pantalla completa y permitir que el menú principal se adapte al área disponible.
+- Prueba/estado: cambios guardados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot en este entorno; queda pendiente probar las tres resoluciones desde ambos menús, alternar pantalla completa y comprobar el encuadre del menú en cada tamaño.
+
 # Bitácora de desarrollo — Preproyecto
 
 Repositorio: https://github.com/motoroladecarlos49-create/Preproyecto
