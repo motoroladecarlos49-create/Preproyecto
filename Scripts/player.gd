@@ -20,6 +20,7 @@ var id_puerta: String = ""
 var id_punto_retorno_2d: String = ""
 var direccion_salida: String = "down"
 var tiene_linterna_equipada: bool = false
+var _finalizando_juego: bool = false
 
 func _ready() -> void:
 	flash_light.enabled = false
@@ -120,6 +121,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					mensaje_bloqueo = "Necesitas seleccionar la llave en el inventario."
 				MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
 				return
+			if bool(puerta_cerca.get("finalizar_juego")):
+				await _iniciar_secuencia_final()
+				return
 			if escena_destino == "":
 				if mensaje_bloqueo != "":
 					MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
@@ -207,8 +211,31 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
 	mochila.remover_item_por_clave(clave)
 
+func _iniciar_secuencia_final() -> void:
+	if _finalizando_juego:
+		return
+	_finalizando_juego = true
+	velocity = Vector2.ZERO
+	var capa := CanvasLayer.new()
+	capa.layer = 100
+	get_tree().current_scene.add_child(capa)
+	var pantalla := ColorRect.new()
+	pantalla.color = Color(0, 0, 0, 0)
+	pantalla.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	pantalla.mouse_filter = Control.MOUSE_FILTER_STOP
+	capa.add_child(pantalla)
+	var fundido := create_tween()
+	fundido.tween_property(pantalla, "color:a", 1.0, 1.0)
+	await fundido.finished
+	GameManager.menu_desde_creditos = true
+	var error := get_tree().change_scene_to_file("res://Escenas/creditos.tscn")
+	if error != OK:
+		GameManager.menu_desde_creditos = false
+		_finalizando_juego = false
+		push_error("No se pudo abrir la pantalla de créditos. Código: %s" % error)
+
 func get_input() -> void:
-	if GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
+	if _finalizando_juego or GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
 		velocity = Vector2.ZERO
 		update_animation("idle")
 		return
