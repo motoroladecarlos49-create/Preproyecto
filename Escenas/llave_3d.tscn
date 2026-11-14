@@ -1,13 +1,10 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://twu2rgugmnyd"]
 
-[ext_resource type="Script" path="res://items/llave_3d.gd" id="1_script"]
-[ext_resource type="Resource" path="res://items/llave.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://kcmlougoywcl" path="res://items/llave_3d.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://dxj2x1h4y54on" path="res://items/llave.tres" id="2_data"]
 
-[sub_resource type="TorusMesh" id="AroPetalo"]
-inner_radius = 0.105
-outer_radius = 0.15
-rings = 12
-ring_segments = 32
+[sub_resource type="BoxShape3D" id="ColisionLlave"]
+size = Vector3(0.78, 0.22, 0.1399121)
 
 [sub_resource type="TorusMesh" id="AroInterior"]
 inner_radius = 0.075
@@ -15,29 +12,59 @@ outer_radius = 0.091
 rings = 10
 ring_segments = 28
 
+[sub_resource type="StandardMaterial3D" id="MoradoBorde"]
+albedo_color = Color(0.3314701, 0.24086675, 0.3705445, 1)
+metallic = 0.28
+roughness = 0.3
+
+[sub_resource type="TorusMesh" id="AroPetalo"]
+inner_radius = 0.105
+outer_radius = 0.15
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="MoradoMedio"]
+albedo_color = Color(0.29, 0.21, 0.36, 1)
+metallic = 0.22
+roughness = 0.34
+
+[sub_resource type="BoxMesh" id="MarcoBisel"]
+size = Vector3(0.3469629, 0.035, 0.39546388)
+
+[sub_resource type="StandardMaterial3D" id="MoradoOscuro"]
+albedo_color = Color(0.1, 0.065, 0.14, 1)
+metallic = 0.35
+roughness = 0.38
+
 [sub_resource type="BoxMesh" id="GemaMarco"]
 size = Vector3(0.29, 0.09, 0.29)
+
+[sub_resource type="StandardMaterial3D" id="Dorado"]
+albedo_color = Color(0.91, 0.61, 0.27, 1)
+metallic = 0.52
+roughness = 0.28
+
+[sub_resource type="TorusMesh" id="AroGema"]
+inner_radius = 0.13
+outer_radius = 0.15
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="DoradoBrillante"]
+albedo_color = Color(1, 0.72, 0.32, 1)
+roughness = 0.24
+emission_enabled = true
+emission = Color(1, 0.42, 0.08, 1)
+emission_energy_multiplier = 1.4
 
 [sub_resource type="BoxMesh" id="Gema"]
 size = Vector3(0.19, 0.105, 0.19)
 
-[sub_resource type="BoxMesh" id="MarcoBisel"]
-size = Vector3(0.34, 0.035, 0.34)
-
-[sub_resource type="CylinderMesh" id="Vastago"]
-top_radius = 0.052
-bottom_radius = 0.068
-height = 0.68
-radial_segments = 24
-
-[sub_resource type="CylinderMesh" id="Collar"]
-top_radius = 0.095
-bottom_radius = 0.095
-height = 0.11
-radial_segments = 24
-
-[sub_resource type="BoxMesh" id="Diente"]
-size = Vector3(0.17, 0.12, 0.14)
+[sub_resource type="StandardMaterial3D" id="GemaLuminosa"]
+albedo_color = Color(1, 0.84, 0.38, 1)
+metallic = 0.08
+roughness = 0.2
+emission_enabled = true
+emission = Color(1, 0.58, 0.12, 1)
+emission_energy_multiplier = 5.0
 
 [sub_resource type="TorusMesh" id="AnilloDecorativo"]
 inner_radius = 0.066
@@ -45,172 +72,141 @@ outer_radius = 0.087
 rings = 10
 ring_segments = 28
 
-[sub_resource type="StandardMaterial3D" id="MoradoOscuro"]
-albedo_color = Color(0.10, 0.065, 0.14, 1)
-metallic = 0.35
-roughness = 0.38
+[sub_resource type="CylinderMesh" id="Collar"]
+top_radius = 0.095
+bottom_radius = 0.095
+height = 0.11
+radial_segments = 24
 
-[sub_resource type="StandardMaterial3D" id="MoradoMedio"]
-albedo_color = Color(0.29, 0.21, 0.36, 1)
-metallic = 0.22
-roughness = 0.34
+[sub_resource type="CylinderMesh" id="Vastago"]
+top_radius = 0.03496875
+bottom_radius = 0.05096875
+height = 0.8463477
+radial_segments = 24
 
-[sub_resource type="StandardMaterial3D" id="MoradoBorde"]
-albedo_color = Color(0.48, 0.36, 0.53, 1)
-metallic = 0.28
-roughness = 0.3
-
-[sub_resource type="StandardMaterial3D" id="Dorado"]
-albedo_color = Color(0.91, 0.61, 0.27, 1)
-metallic = 0.52
-roughness = 0.28
-
-[sub_resource type="StandardMaterial3D" id="GemaLuminosa"]
-albedo_color = Color(1, 0.84, 0.38, 1)
-emission_enabled = true
-emission = Color(1, 0.58, 0.12, 1)
-emission_energy_multiplier = 5.0
-metallic = 0.08
-roughness = 0.2
-
-[sub_resource type="StandardMaterial3D" id="DoradoBrillante"]
-albedo_color = Color(1, 0.72, 0.32, 1)
-emission_enabled = true
-emission = Color(1, 0.42, 0.08, 1)
-emission_energy_multiplier = 1.4
-roughness = 0.24
-
-[sub_resource type="TorusMesh" id="AroGema"]
-inner_radius = 0.13
-outer_radius = 0.15
-rings = 12
-ring_segments = 32
-
-[sub_resource type="BoxShape3D" id="ColisionLlave"]
-size = Vector3(0.78, 0.22, 0.42)
+[sub_resource type="CylinderMesh" id="Diente"]
+top_radius = 0.021972656
+bottom_radius = 0.021972656
+height = 0.15996337
+radial_segments = 12
 
 [sub_resource type="SphereShape3D" id="AreaRecogida"]
 radius = 0.36
 
-[node name="Llave3D" type="RigidBody3D"]
+[node name="Llave3D" type="RigidBody3D" unique_id=299067355]
+transform = Transform3D(0.39, 0, 0, 0, 0.39, 0, 0, 0, 0.39, 0, 0, 0)
 mass = 0.08
-scale = Vector3(0.39, 0.39, 0.39)
 linear_damp = 3.0
 angular_damp = 4.0
 script = ExtResource("1_script")
 data = ExtResource("2_data")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1587630302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.019663095)
 shape = SubResource("ColisionLlave")
 
-[node name="PetaloSuperior" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.205, 0)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloInferior" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, -0.095, 0)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloIzquierdo" type="MeshInstance3D" parent="."]
-position = Vector3(-0.49, 0.055, 0)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloDerecho" type="MeshInstance3D" parent="."]
-position = Vector3(-0.19, 0.055, 0)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="AroInteriorSuperior" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.205, 0.018)
+[node name="AroInteriorInferior" type="MeshInstance3D" parent="." unique_id=892275500]
+transform = Transform3D(0.745025, 0, -0.6670364, 0, 1, 0, 0.6670364, 0, 0.745025, -0.41832173, 0.054999996, 0.16572617)
 mesh = SubResource("AroInterior")
 surface_material_override/0 = SubResource("MoradoBorde")
 
-[node name="AroInteriorInferior" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, -0.095, 0.018)
+[node name="AroInteriorSuperior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1329157917]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.02000001, 0, -0.37299997)
 mesh = SubResource("AroInterior")
 surface_material_override/0 = SubResource("MoradoBorde")
 
-[node name="AroInteriorIzquierdo" type="MeshInstance3D" parent="."]
-position = Vector3(-0.49, 0.055, 0.018)
+[node name="AroInteriorDerecho" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1109688091]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
 mesh = SubResource("AroInterior")
 surface_material_override/0 = SubResource("MoradoBorde")
 
-[node name="AroInteriorDerecho" type="MeshInstance3D" parent="."]
-position = Vector3(-0.19, 0.055, 0.018)
+[node name="PetaloIzquierdo" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1957172860]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.17659076, 0, -0.1799586)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloInferior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1520921003]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 1.4901161e-08, 0, -0.00011909008)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloSuperior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=116419753]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.023999989, 0, -0.37653828)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloDerecho" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1360928446]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="AroInteriorIzquierdo" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1701738844]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.16999997, 0, -0.17999996)
 mesh = SubResource("AroInterior")
 surface_material_override/0 = SubResource("MoradoBorde")
 
-[node name="MarcoBisel" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.105, 0.025)
-rotation = Vector3(0, 0, 0.7854)
+[node name="MarcoBisel" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=605259913]
+transform = Transform3D(0.49999982, 0, -0.00047643483, 0, 0.5, 0, 0.00047643483, 0, 0.49999982, -0.017149284, 0.017424885, -0.17527378)
 mesh = SubResource("MarcoBisel")
 surface_material_override/0 = SubResource("MoradoOscuro")
 
-[node name="GemaMarco" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.105, 0.055)
-rotation = Vector3(0, 0, 0.7854)
+[node name="GemaMarco" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1486277528]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("GemaMarco")
 surface_material_override/0 = SubResource("Dorado")
 
-[node name="AroGema" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.105, 0.11)
+[node name="AroGema" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1851975667]
 mesh = SubResource("AroGema")
 surface_material_override/0 = SubResource("DoradoBrillante")
 
-[node name="Gema" type="MeshInstance3D" parent="."]
-position = Vector3(-0.34, 0.16, 0.085)
-rotation = Vector3(0, 0, 0.7854)
+[node name="Gema" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1851074899]
 mesh = SubResource("Gema")
 surface_material_override/0 = SubResource("GemaLuminosa")
 
-[node name="AnilloDecorativo" type="MeshInstance3D" parent="."]
-position = Vector3(-0.02, 0.055, 0)
-rotation = Vector3(0, 1.5708, 0)
+[node name="AnilloDecorativo" type="MeshInstance3D" parent="." unique_id=1852875200]
+transform = Transform3D(-4.371139e-08, 0.99999994, -4.3711385e-08, 0, -4.3711385e-08, -0.99999994, -1, -4.3711385e-08, 1.9106853e-15, -0.02, 0.055, 0)
 mesh = SubResource("AnilloDecorativo")
 surface_material_override/0 = SubResource("Dorado")
 
-[node name="CollarSuperior" type="MeshInstance3D" parent="."]
-position = Vector3(0.08, 0.055, 0)
-rotation = Vector3(0, 0, 1.5708)
+[node name="CollarSuperior" type="MeshInstance3D" parent="." unique_id=110995229]
+transform = Transform3D(-2.895992e-06, -0.8000001, 0, 0.8000001, -2.895992e-06, 0, 0, 0, 0.8000001, 0.03483366, 0.055, 0)
 mesh = SubResource("Collar")
 surface_material_override/0 = SubResource("Dorado")
 
-[node name="Vastago" type="MeshInstance3D" parent="."]
-position = Vector3(0.31, 0.055, 0)
-rotation = Vector3(0, 0, 1.5708)
+[node name="Vastago" type="MeshInstance3D" parent="." unique_id=301663201]
+transform = Transform3D(-3.6199901e-06, -1, 0, 1, -3.6199901e-06, 0, 0, 0, 1, 0.22682618, 0.0549997, 0)
 mesh = SubResource("Vastago")
-surface_material_override/0 = SubResource("MoradoOscuro")
+surface_material_override/0 = SubResource("MoradoBorde")
 
-[node name="CollarDientes" type="MeshInstance3D" parent="."]
-position = Vector3(0.53, 0.055, 0)
-rotation = Vector3(0, 0, 1.5708)
+[node name="CollarDientes" type="MeshInstance3D" parent="." unique_id=1892807836]
+transform = Transform3D(-2.8959923e-06, -0.8, 2.2737344e-14, 0.0924579, -3.3469667e-07, 0.7946393, -0.7946393, 2.8765864e-06, 0.0924579, 0.4227445, 0.055, 0)
 mesh = SubResource("Collar")
 surface_material_override/0 = SubResource("Dorado")
 
-[node name="Diente1" type="MeshInstance3D" parent="."]
-position = Vector3(0.54, 0.16, 0)
+[node name="Diente1" type="MeshInstance3D" parent="." unique_id=1117219792]
+transform = Transform3D(-1.0000001, -3.5762791e-06, 2.5739114e-12, -4.1332106e-07, 0.11557258, -0.9932993, 3.5523037e-06, -0.99329907, -0.11557261, 0.56448305, 0.07471708, -0.07521513)
 mesh = SubResource("Diente")
 surface_material_override/0 = SubResource("MoradoMedio")
 
-[node name="Diente2" type="MeshInstance3D" parent="."]
-position = Vector3(0.54, -0.05, 0)
+[node name="Diente3" type="MeshInstance3D" parent="Diente1" unique_id=1984733343]
+transform = Transform3D(0.9999998, 1.8189894e-12, -2.5863756e-12, 3.5470293e-11, 0.9999964, 5.2154064e-08, 2.5011104e-12, -5.2154064e-08, 0.9999996, 0.058225393, 0.03641554, 0.0042370185)
 mesh = SubResource("Diente")
 surface_material_override/0 = SubResource("MoradoMedio")
 
-[node name="LuzSuave" type="OmniLight3D" parent="."]
-position = Vector3(-0.34, 0.30, 0.10)
+[node name="Diente2" type="MeshInstance3D" parent="Diente1" unique_id=154978166]
+transform = Transform3D(0.9999998, 1.5916157e-12, -6.3948846e-12, 5.4114935e-11, 0.9999981, 5.2154064e-08, 4.8601123e-12, -4.4703484e-08, 0.9999996, -0.057106555, -0.027177876, -0.0032891333)
+mesh = SubResource("Diente")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="LuzSuave" type="OmniLight3D" parent="." unique_id=2036828930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34, 0.3, 0.1)
 light_color = Color(1, 0.73, 0.38, 1)
 light_energy = 0.32
 omni_range = 0.9
-shadow_enabled = false
 
-[node name="AreaRecogida" type="Area3D" parent="."]
-position = Vector3(0, 0.18, 0)
+[node name="AreaRecogida" type="Area3D" parent="." unique_id=1630193796]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.18, 0)
 collision_layer = 0
-collision_mask = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaRecogida"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaRecogida" unique_id=845743219]
 shape = SubResource("AreaRecogida")
