@@ -47,6 +47,19 @@ size = Vector3(2.5, 3, 1.5)
 [sub_resource type="BoxMesh" id="BoxMesh_salida"]
 size = Vector3(1.7, 2.4, 0.12)
 
+
+[sub_resource type="BoxShape3D" id="MuroNorteShape"]
+size = Vector3(40, 5, 1)
+
+[sub_resource type="BoxShape3D" id="MuroSurShape"]
+size = Vector3(40, 5, 1)
+
+[sub_resource type="BoxShape3D" id="MuroEsteShape"]
+size = Vector3(1, 5, 40)
+
+[sub_resource type="BoxShape3D" id="MuroOesteShape"]
+size = Vector3(1, 5, 40)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_salida"]
 albedo_color = Color(0.12, 0.24, 0.3, 1)
 emission_enabled = true
@@ -84,6 +97,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nyvdy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plano/StaticBody3D" unique_id=223574540]
 shape = SubResource("ConcavePolygonShape3D_drlo1")
+
+
+[node name="LimitesMapa" type="StaticBody3D" parent="."]
+
+[node name="MuroNorte" type="CollisionShape3D" parent="LimitesMapa"]
+position = Vector3(0, 2.5, -19.5)
+shape = SubResource("MuroNorteShape")
+
+[node name="MuroSur" type="CollisionShape3D" parent="LimitesMapa"]
+position = Vector3(0, 2.5, 19.5)
+shape = SubResource("MuroSurShape")
+
+[node name="MuroEste" type="CollisionShape3D" parent="LimitesMapa"]
+position = Vector3(19.5, 2.5, 0)
+shape = SubResource("MuroEsteShape")
+
+[node name="MuroOeste" type="CollisionShape3D" parent="LimitesMapa"]
+position = Vector3(-19.5, 2.5, 0)
+shape = SubResource("MuroOesteShape")
 
 [node name="Player" parent="." unique_id=1410393463 instance=ExtResource("1_usqj6")]
 transform = Transform3D(-0.18279798, 0, -0.23787577, 0, 0.29999998, 0, 0.23787577, 0, -0.18279798, 0, 1.3825023, 0)
