@@ -111,22 +111,38 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				print("Mochila llena.")
 		elif puerta_cerca != null:
+			var mensaje_bloqueo := str(puerta_cerca.get("mensaje_bloqueo"))
+			var requiere_llave := bool(puerta_cerca.get("requiere_llave")) or mensaje_bloqueo.to_lower().contains("llave")
+			var nombre_requerido := str(puerta_cerca.get("nombre_item_requerido"))
+			if requiere_llave and not _mochila_tiene_item(nombre_requerido if nombre_requerido != "" else "Llave"):
+				if mensaje_bloqueo == "":
+					mensaje_bloqueo = "Necesitas una llave para abrir esta puerta."
+				MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
+				return
 			if escena_destino == "":
-				var mensaje: String = str(puerta_cerca.get("mensaje_bloqueo"))
-				if mensaje != "":
-					MessageManager.mostrar_mensaje(mensaje, 1.5)
+				if mensaje_bloqueo != "":
+					MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
 			elif escena_destino == "res://Escenas/level_3d.tscn":
 				if id_punto_retorno_2d == "":
 					push_warning("Esta puerta no tiene configurado su punto de regreso 2D.")
 					return
 				GameManager.preparar_regreso_2d(get_tree().current_scene.scene_file_path, id_punto_retorno_2d)
 				GameManager.puerta_destino_id = ""
+				var error_3d: Error = get_tree().change_scene_to_file(escena_destino)
+				if error_3d != OK:
+					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
 			else:
 				GameManager.puerta_destino_id = id_puerta
 				GameManager.direccion_salida = direccion_salida
-			var error: Error = get_tree().change_scene_to_file(escena_destino) if escena_destino != "" else OK
-			if error != OK:
-				push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
+				var error: Error = get_tree().change_scene_to_file(escena_destino) if escena_destino != "" else OK
+				if error != OK:
+					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
+
+func _mochila_tiene_item(nombre_item: String) -> bool:
+	for item in mochila.objetos.values():
+		if item is Item and item.nombre == nombre_item:
+			return true
+	return false
 
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 	if item_actual != null and item_actual.nombre == "Linterna":
@@ -147,14 +163,25 @@ func _on_mochila_item_seleccionado_cambiado(item_actual: Item):
 	update_animation("idle" if velocity == Vector2.ZERO else "run")
 
 func tirar_item(clave: String, item_a_tirar: Item) -> void:
-	if escena_item_mundo == null or item_a_tirar == null:
+	if item_a_tirar == null:
 		return
+	var ruta_escena := "res://Escenas/linterna_mundo.tscn"
+	if item_a_tirar.nombre == "Llave":
+		ruta_escena = "res://Escenas/llave_mundo.tscn"
+	elif item_a_tirar.nombre != "Linterna":
+		MessageManager.mostrar_mensaje("Este objeto todavía no tiene una representación en el mundo.", 2.0)
+		return
+	var escena := load(ruta_escena) as PackedScene
+	if escena == null:
+		push_error("No se pudo cargar la escena del objeto: " + ruta_escena)
+		return
+
 	var id_anterior = item_a_tirar.id_escena
 	if id_anterior != "" and not GameManager.partida_actual.items_recogidos.has(id_anterior):
 		GameManager.partida_actual.items_recogidos.append(id_anterior)
 	var nuevo_id = item_a_tirar.nombre + "_soltado_" + str(Time.get_ticks_usec())
 	item_a_tirar.id_escena = nuevo_id
-	var item_suelto = escena_item_mundo.instantiate()
+	var item_suelto = escena.instantiate()
 	item_suelto.data = item_a_tirar
 	item_suelto.id_unico = nuevo_id
 	get_parent().add_child(item_suelto)

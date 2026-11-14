@@ -288,29 +288,34 @@ func restaurar_items_tirados(raiz_escena: Node) -> void:
 		return
 
 	var escena_actual = get_tree().current_scene.scene_file_path
-	var escena_item: PackedScene = load("res://Escenas/linterna_mundo.tscn")
-	if escena_item == null:
-		return
-
 	for registro in partida_actual.items_tirados:
 		if str(registro.get("escena", "")) != escena_actual:
 			continue
 		var id = str(registro.get("id", ""))
 		if id == "" or partida_actual.items_recogidos.has(id):
 			continue
-		var existente = false
+		var item_data := registro.get("data") as Item
+		if item_data == null:
+			continue
+		var ruta_escena := "res://Escenas/linterna_mundo.tscn"
+		if item_data.nombre == "Llave":
+			ruta_escena = "res://Escenas/llave_mundo.tscn"
+		elif item_data.nombre != "Linterna":
+			continue
+		var existente := false
 		for hijo in raiz_escena.get_children():
-			if hijo is Area2D and hijo.get("id_unico") == id:
+			if hijo is Area2D and str(hijo.get("id_unico")) == id:
 				existente = true
 				break
 		if existente:
 			continue
-		var objeto = escena_item.instantiate()
-		objeto.data = registro.get("data") as Item
-		objeto.id_unico = id
-		if objeto.get("data") == null:
-			objeto.free()
+		var escena_item := load(ruta_escena) as PackedScene
+		if escena_item == null:
+			push_warning("No se pudo restaurar el objeto 2D '%s'." % id)
 			continue
+		var objeto := escena_item.instantiate() as Area2D
+		objeto.set("data", item_data)
+		objeto.set("id_unico", id)
 		_agregar_item_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector2.ZERO))
 
 func _agregar_item_restaurado(raiz_escena: Node, objeto: Node2D, posicion: Vector2) -> void:
