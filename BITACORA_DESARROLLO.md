@@ -645,3 +645,18 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Motivo: utilizar las llamadas de ventana que el usuario comprobó que funcionan en su script, manteniendo una única implementación para ambos menús.
 - Prueba/estado: contenido actualizado en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar las tres resoluciones y alternar pantalla completa desde ambos menús, además de comprobar la persistencia al reiniciar.
 - Commit de código: `228ee588253a97193d7be88411f8cbad7d2de9e9`.
+
+
+### 2026-11-14 — Aplicar video directamente desde los scripts de los menús
+- Archivos modificados:
+  - `Scripts/GameManager.gd`
+  - `Menus/scripts/menu_principal.gd`
+  - `Menus/scripts/menu_pausa.gd`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Se retiró de `GameManager` la aplicación directa del modo y tamaño de ventana. El gestor conserva la carga, validación y persistencia de las preferencias, pero sus setters de video ahora solo actualizan los valores y guardan la configuración.
+  - Se incorporó en cada script de menú una función local que aplica la resolución mediante `DisplayServer.window_set_size()`, centra la ventana y cambia el modo con `DisplayServer.window_set_mode()`.
+  - El menú principal aplica la configuración guardada al iniciarse y ambos menús aplican los cambios inmediatamente al seleccionar resolución o activar/desactivar pantalla completa.
+  - Se mantuvo el volumen y el resto de la interfaz sin cambios.
+- Motivo: separar la persistencia de preferencias de la aplicación real de la ventana, tal como solicitó el usuario, y ejecutar la aplicación desde los scripts de menú.
+- Prueba/estado: archivos actualizados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar las tres resoluciones y el modo de pantalla desde el menú principal y el de pausa, y comprobar que las preferencias se conserven al reiniciar.
