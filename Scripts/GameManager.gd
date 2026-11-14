@@ -291,7 +291,7 @@ func restaurar_items_tirados(raiz_escena: Node) -> void:
 		var objeto = escena_item.instantiate()
 		objeto.data = registro.get("data") as Item
 		objeto.id_unico = id
-		if objeto.data == null:
+		if objeto.get("data") == null:
 			objeto.free()
 			continue
 		_agregar_item_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector2.ZERO))
