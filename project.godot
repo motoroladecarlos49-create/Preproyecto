@@ -23,6 +23,7 @@ MessageManager="*uid://v0vh5g0cgkuu"
 
 [display]
 
+window/size/mode=3
 window/size/viewport_width=1152
 window/size/viewport_height=650
 window/size/window_width_override=1280
