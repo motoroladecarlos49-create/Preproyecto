@@ -46,15 +46,16 @@ func _ready() -> void:
 	_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
 
 	GameManager.restaurar_items_tirados_3d(get_tree().current_scene)
+	if GameManager.carga_pendiente:
+		if GameManager.partida_actual.jugador_en_3d:
+			global_position = GameManager.partida_actual.posicion_jugador_3d
+		GameManager.carga_pendiente = false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * sensivilidad_mouse)
 		pitch = clampf(pitch - event.relative.y * sensivilidad_mouse, deg_to_rad(-89), deg_to_rad(89))
 		camera_3d.rotation.x = pitch
-
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if event.is_action_pressed("toggle_linterna") and tiene_linterna_equipada:
 		GameManager.linterna_encendida = not GameManager.linterna_encendida
