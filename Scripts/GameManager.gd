@@ -157,6 +157,9 @@ func guardar_partida(jugador: Node = null) -> bool:
 		partida_actual.posicion_jugador = (jugador as Node2D).global_position
 	elif jugador is Node3D:
 		partida_actual.posicion_jugador_3d = (jugador as Node3D).global_position
+		partida_actual.rotacion_jugador_3d = (jugador as Node3D).global_rotation
+		if jugador.has_method("obtener_pitch_guardado"):
+			partida_actual.pitch_jugador_3d = jugador.obtener_pitch_guardado()
 
 	partida_actual.clave_item_seleccionado = ""
 	for clave in mochila_global.objetos:
