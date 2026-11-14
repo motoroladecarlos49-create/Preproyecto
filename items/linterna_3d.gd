@@ -10,6 +10,8 @@ func _ready() -> void:
 	if data == null:
 		return
 
+	add_to_group("items_tirados_3d")
+
 	if id_unico == "":
 		id_unico = data.id_escena
 	if id_unico == "":
