@@ -631,3 +631,17 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
 - Prueba/estado: escena actualizada en GitHub y pendiente de comprobar visualmente en Godot. No se ejecutó Godot desde este entorno.
 - Commit de escena: d187e154b1a27bb7ce6b99c04cec5bbbd00745f1.
 
+
+
+### 2026-11-14 — Aplicar resoluciones y pantalla completa con DisplayServer
+- Archivo modificado: `Scripts/GameManager.gd`.
+- Cambios:
+  - `_aplicar_configuracion_ventana()` ahora usa `DisplayServer.window_set_mode()` para establecer el modo ventana o pantalla completa.
+  - La resolución seleccionada se aplica mediante `DisplayServer.window_set_size()` y la ventana se centra con `get_window().move_to_center()`.
+  - La secuencia aplica primero el tamaño en modo ventana y activa pantalla completa al final si esa opción está guardada.
+  - Al desactivar pantalla completa o seleccionar una resolución, se conserva el comportamiento de volver a modo ventana y aplicar el tamaño elegido.
+  - No se duplicó la lógica en los menús: menú principal y menú de pausa siguen utilizando los métodos compartidos de `GameManager`.
+  - Se conservaron el guardado de preferencias, la validación de resoluciones y el control de volumen.
+- Motivo: utilizar las llamadas de ventana que el usuario comprobó que funcionan en su script, manteniendo una única implementación para ambos menús.
+- Prueba/estado: contenido actualizado en GitHub. No se ejecutó Godot desde este entorno; queda pendiente probar las tres resoluciones y alternar pantalla completa desde ambos menús, además de comprobar la persistencia al reiniciar.
+- Commit de código: `228ee588253a97193d7be88411f8cbad7d2de9e9`.
