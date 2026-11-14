@@ -151,6 +151,9 @@ func _recoger_item_3d() -> void:
 func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	if item_a_tirar == null:
 		return
+	if item_a_tirar.nombre != "Linterna":
+		MessageManager.mostrar_mensaje("Este objeto todavía no tiene una representación 3D para soltarlo.", 2.0)
+		return
 	var escena_item := load("res://Escenas/linterna_3d.tscn") as PackedScene
 	if escena_item == null:
 		push_error("No se pudo cargar la escena 3D de la linterna.")
