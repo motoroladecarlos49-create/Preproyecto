@@ -5,14 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://diq5ng61sq35x" path="res://Imagenes/texturas_items/lanterna_icono.png" id="2_vgdyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
-size = Vector2(38, 86)
+size = Vector2(61, 59)
 
 [node name="LinternaMundo" type="Area2D" unique_id=1475707383]
 script = ExtResource("1_2jadm")
 data = ExtResource("2_avbck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=779878007]
-position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_vbfun")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1785491067]
