@@ -3,30 +3,6 @@
 [ext_resource type="Script" uid="uid://kcmlougoywcl" path="res://items/llave_3d.gd" id="1_script"]
 [ext_resource type="Resource" uid="uid://dxj2x1h4y54on" path="res://items/llave.tres" id="2_data"]
 
-[sub_resource type="BoxShape3D" id="ColisionLlave"]
-size = Vector3(0.78, 0.22, 0.1399121)
-
-[sub_resource type="TorusMesh" id="AroInterior"]
-inner_radius = 0.075
-outer_radius = 0.091
-rings = 10
-ring_segments = 28
-
-[sub_resource type="StandardMaterial3D" id="MoradoBorde"]
-albedo_color = Color(0.3314701, 0.24086675, 0.3705445, 1)
-metallic = 0.28
-roughness = 0.3
-
-[sub_resource type="TorusMesh" id="AroPetalo"]
-inner_radius = 0.105
-outer_radius = 0.15
-rings = 12
-
-[sub_resource type="StandardMaterial3D" id="MoradoMedio"]
-albedo_color = Color(0.29, 0.21, 0.36, 1)
-metallic = 0.22
-roughness = 0.34
-
 [sub_resource type="BoxMesh" id="MarcoBisel"]
 size = Vector3(0.3469629, 0.035, 0.39546388)
 
@@ -66,6 +42,30 @@ emission_enabled = true
 emission = Color(1, 0.58, 0.12, 1)
 emission_energy_multiplier = 5.0
 
+[sub_resource type="TorusMesh" id="AroInterior"]
+inner_radius = 0.075
+outer_radius = 0.091
+rings = 10
+ring_segments = 28
+
+[sub_resource type="StandardMaterial3D" id="MoradoBorde"]
+albedo_color = Color(0.3314701, 0.24086675, 0.3705445, 1)
+metallic = 0.28
+roughness = 0.3
+
+[sub_resource type="TorusMesh" id="AroPetalo"]
+inner_radius = 0.105
+outer_radius = 0.15
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="MoradoMedio"]
+albedo_color = Color(0.29, 0.21, 0.36, 1)
+metallic = 0.22
+roughness = 0.34
+
+[sub_resource type="BoxShape3D" id="ColisionLlave"]
+size = Vector3(1.0203711, 0.06140869, 0.6363913)
+
 [sub_resource type="TorusMesh" id="AnilloDecorativo"]
 inner_radius = 0.066
 outer_radius = 0.087
@@ -101,67 +101,67 @@ angular_damp = 4.0
 script = ExtResource("1_script")
 data = ExtResource("2_data")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1587630302]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.019663095)
-shape = SubResource("ColisionLlave")
-
-[node name="AroInteriorInferior" type="MeshInstance3D" parent="." unique_id=892275500]
-transform = Transform3D(0.745025, 0, -0.6670364, 0, 1, 0, 0.6670364, 0, 0.745025, -0.41832173, 0.054999996, 0.16572617)
-mesh = SubResource("AroInterior")
-surface_material_override/0 = SubResource("MoradoBorde")
-
-[node name="AroInteriorSuperior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1329157917]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.02000001, 0, -0.37299997)
-mesh = SubResource("AroInterior")
-surface_material_override/0 = SubResource("MoradoBorde")
-
-[node name="AroInteriorDerecho" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1109688091]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
-mesh = SubResource("AroInterior")
-surface_material_override/0 = SubResource("MoradoBorde")
-
-[node name="PetaloIzquierdo" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1957172860]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.17659076, 0, -0.1799586)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloInferior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1520921003]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 1.4901161e-08, 0, -0.00011909008)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloSuperior" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=116419753]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.023999989, 0, -0.37653828)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="PetaloDerecho" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1360928446]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
-mesh = SubResource("AroPetalo")
-surface_material_override/0 = SubResource("MoradoMedio")
-
-[node name="AroInteriorIzquierdo" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=1701738844]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.16999997, 0, -0.17999996)
-mesh = SubResource("AroInterior")
-surface_material_override/0 = SubResource("MoradoBorde")
-
-[node name="MarcoBisel" type="MeshInstance3D" parent="AroInteriorInferior" unique_id=605259913]
-transform = Transform3D(0.49999982, 0, -0.00047643483, 0, 0.5, 0, 0.00047643483, 0, 0.49999982, -0.017149284, 0.017424885, -0.17527378)
+[node name="MarcoBisel" type="MeshInstance3D" parent="." unique_id=605259913]
+transform = Transform3D(0.28284273, 0, -0.28284273, 0, 0.4, 0, 0.28284273, 0, 0.28284273, -0.284, 0.055, 0)
 mesh = SubResource("MarcoBisel")
 surface_material_override/0 = SubResource("MoradoOscuro")
 
-[node name="GemaMarco" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1486277528]
+[node name="GemaMarco" type="MeshInstance3D" parent="MarcoBisel" unique_id=1486277528]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("GemaMarco")
 surface_material_override/0 = SubResource("Dorado")
 
-[node name="AroGema" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1851975667]
+[node name="AroGema" type="MeshInstance3D" parent="MarcoBisel" unique_id=1851975667]
 mesh = SubResource("AroGema")
 surface_material_override/0 = SubResource("DoradoBrillante")
 
-[node name="Gema" type="MeshInstance3D" parent="AroInteriorInferior/MarcoBisel" unique_id=1851074899]
+[node name="Gema" type="MeshInstance3D" parent="MarcoBisel" unique_id=1851074899]
 mesh = SubResource("Gema")
 surface_material_override/0 = SubResource("GemaLuminosa")
+
+[node name="AroInteriorInferior" type="MeshInstance3D" parent="MarcoBisel" unique_id=892275500]
+transform = Transform3D(1.9999989, 0, 0.001905739, 0, 2, 0, -0.001905739, 0, 1.9999989, 0.034632683, -0.034849778, 0.35051468)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="AroInteriorSuperior" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1329157917]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.02000001, 0, -0.37299997)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="AroInteriorDerecho" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1109688091]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="PetaloIzquierdo" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1957172860]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.17659076, 0, -0.1799586)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloInferior" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1520921003]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 1.4901161e-08, 0, -0.00011909008)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloSuperior" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=116419753]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.023999989, 0, -0.37653828)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="PetaloDerecho" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1360928446]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.15000004, 0, -0.20299996)
+mesh = SubResource("AroPetalo")
+surface_material_override/0 = SubResource("MoradoMedio")
+
+[node name="AroInteriorIzquierdo" type="MeshInstance3D" parent="MarcoBisel/AroInteriorInferior" unique_id=1701738844]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.16999997, 0, -0.17999996)
+mesh = SubResource("AroInterior")
+surface_material_override/0 = SubResource("MoradoBorde")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1587630302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.091, 0.054, 0)
+shape = SubResource("ColisionLlave")
 
 [node name="AnilloDecorativo" type="MeshInstance3D" parent="." unique_id=1852875200]
 transform = Transform3D(-4.371139e-08, 0.99999994, -4.3711385e-08, 0, -4.3711385e-08, -0.99999994, -1, -4.3711385e-08, 1.9106853e-15, -0.02, 0.055, 0)
@@ -205,7 +205,7 @@ light_energy = 0.32
 omni_range = 0.9
 
 [node name="AreaRecogida" type="Area3D" parent="." unique_id=1630193796]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.18, 0)
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0.18, 0)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaRecogida" unique_id=845743219]
