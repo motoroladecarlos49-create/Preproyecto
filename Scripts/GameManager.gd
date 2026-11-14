@@ -25,7 +25,6 @@ var escala_item_escena1: float = 230.0
 var escala_item_escena2: float = 4.75
 
 const RUTA_GUARDADO: String = "user://partida_guardada.tres"
-
 const RUTA_CONFIGURACION: String = "user://configuracion.cfg"
 
 var volumen_general: float = 1.0
@@ -64,7 +63,6 @@ func _guardar_configuracion() -> void:
 	if error != OK:
 		push_error("No se pudo guardar la configuración. Código: %s" % error)
 
-
 func hay_partida_guardada() -> bool:
 	if not FileAccess.file_exists(RUTA_GUARDADO):
 		return false
@@ -99,7 +97,6 @@ func iniciar_partida_nueva() -> void:
 	item_recien_tirado = false
 	is_dialogue_active = false
 
-
 func preparar_regreso_2d(escena: String, punto_retorno_id: String) -> void:
 	escena_retorno_2d = escena
 	punto_retorno_2d_id = punto_retorno_id
@@ -124,7 +121,6 @@ func volver_a_escena_2d() -> bool:
 	escena_retorno_2d = ""
 	punto_retorno_2d_id = ""
 	return true
-
 
 func obtener_escala_item(escala_padre: float) -> float:
 	if is_equal_approx(escala_padre, 0.01):
@@ -198,14 +194,27 @@ func cargar_partida() -> bool:
 		return false
 	return true
 
-func registrar_item_tirado_3d(id: String, item_data: Item, posicion: Vector3, escena: String, encendida: bool) -> void:
+func _obtener_escena_item_3d(item_data: Item) -> String:
+	if item_data == null:
+		return ""
+	match item_data.nombre:
+		"Linterna":
+			return "res://Escenas/linterna_3d.tscn"
+		"Llave":
+			return "res://Escenas/llave_3d.tscn"
+	return ""
+
+func registrar_item_tirado_3d(id: String, item_data: Item, posicion: Vector3, escena: String, encendida: bool, escena_item: String = "") -> void:
 	quitar_item_tirado_3d(id)
+	if escena_item == "":
+		escena_item = _obtener_escena_item_3d(item_data)
 	partida_actual.items_tirados_3d.append({
 		"id": id,
 		"data": item_data,
 		"posicion": posicion,
 		"escena": escena,
-		"encendida": encendida
+		"encendida": encendida,
+		"escena_item": escena_item
 	})
 
 func quitar_item_tirado_3d(id: String) -> void:
@@ -219,14 +228,18 @@ func restaurar_items_tirados_3d(raiz_escena: Node) -> void:
 	if raiz_escena == null:
 		return
 	var escena_actual = get_tree().current_scene.scene_file_path
-	var escena_item: PackedScene = load("res://Escenas/linterna_3d.tscn")
-	if escena_item == null:
-		return
 	for registro in partida_actual.items_tirados_3d:
 		if str(registro.get("escena", "")) != escena_actual:
 			continue
 		var id = str(registro.get("id", ""))
 		if id == "" or partida_actual.items_recogidos.has(id):
+			continue
+		var item_data := registro.get("data") as Item
+		var ruta_escena := str(registro.get("escena_item", ""))
+		if ruta_escena == "":
+			ruta_escena = _obtener_escena_item_3d(item_data)
+		if ruta_escena == "" or not ResourceLoader.exists(ruta_escena):
+			push_warning("No se pudo restaurar el objeto 3D '%s': no tiene una escena válida." % id)
 			continue
 		var existente := false
 		for hijo in raiz_escena.get_children():
@@ -235,10 +248,14 @@ func restaurar_items_tirados_3d(raiz_escena: Node) -> void:
 				break
 		if existente:
 			continue
-		var objeto := escena_item.instantiate() as RigidBody3D
-		objeto.set("data", registro.get("data") as Item)
+		var escena_item := load(ruta_escena) as PackedScene
+		if escena_item == null:
+			continue
+		var objeto := escena_item.instantiate() as Node3D
+		objeto.set("data", item_data)
 		objeto.set("id_unico", id)
-		objeto.set("esta_encendida", bool(registro.get("encendida", false)))
+		if objeto.has_method("configurar_estado"):
+			objeto.configurar_estado(bool(registro.get("encendida", false)))
 		if objeto.get("data") == null:
 			objeto.free()
 			continue
