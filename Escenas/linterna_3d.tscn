@@ -81,6 +81,24 @@ bottom_radius = 0.009
 height = 0.52
 radial_segments = 10
 
+[sub_resource type="CylinderMesh" id="ArcoLateral"]
+top_radius = 0.024
+bottom_radius = 0.024
+height = 0.92
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Travesano"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.46
+radial_segments = 12
+
+[sub_resource type="TorusMesh" id="AsaAlta"]
+inner_radius = 0.29
+outer_radius = 0.315
+rings = 12
+ring_segments = 40
+
 [sub_resource type="SphereMesh" id="Remache"]
 radius = 0.025
 height = 0.025
@@ -94,7 +112,7 @@ roughness = 0.14
 metallic = 0.05
 emission_enabled = true
 emission = Color(0.48, 0.21, 0.055, 1)
-emission_energy_multiplier = 0.75
+emission_energy_multiplier = 1.65
 
 [sub_resource type="StandardMaterial3D" id="MaterialMorado"]
 albedo_color = Color(0.13, 0.095, 0.16, 1)
@@ -111,11 +129,19 @@ albedo_color = Color(0.83, 0.52, 0.22, 1)
 metallic = 0.5
 roughness = 0.3
 
+[sub_resource type="StandardMaterial3D" id="MaterialDoradoBrillo"]
+albedo_color = Color(1, 0.72, 0.36, 1)
+emission_enabled = true
+emission = Color(1, 0.36, 0.06, 1)
+emission_energy_multiplier = 1.15
+metallic = 0.45
+roughness = 0.24
+
 [sub_resource type="StandardMaterial3D" id="MaterialLlama"]
 albedo_color = Color(1, 0.76, 0.24, 1)
 emission_enabled = true
 emission = Color(1, 0.52, 0.09, 1)
-emission_energy_multiplier = 2.8
+emission_energy_multiplier = 4.0
 roughness = 0.25
 
 [sub_resource type="CapsuleShape3D" id="ColisionCuerpo"]
@@ -228,6 +254,34 @@ position = Vector3(0.19, 0.22, 0)
 mesh = SubResource("Remache")
 surface_material_override/0 = SubResource("MaterialDorado")
 
+[node name="ArcoLateralIzquierdo" type="MeshInstance3D" parent="."]
+position = Vector3(-0.235, 0.045, 0)
+mesh = SubResource("ArcoLateral")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="ArcoLateralDerecho" type="MeshInstance3D" parent="."]
+position = Vector3(0.235, 0.045, 0)
+mesh = SubResource("ArcoLateral")
+surface_material_override/0 = SubResource("MaterialMorado")
+
+[node name="TravesanoSuperior" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.49, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Travesano")
+surface_material_override/0 = SubResource("MaterialDorado")
+
+[node name="TravesanoInferior" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.40, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Travesano")
+surface_material_override/0 = SubResource("MaterialMoradoLuz")
+
+[node name="AsaAlta" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.66, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("AsaAlta")
+surface_material_override/0 = SubResource("MaterialMorado")
+
 [node name="Asa" type="MeshInstance3D" parent="."]
 position = Vector3(0, 0.62, 0)
 mesh = SubResource("AsaMesh")
@@ -248,8 +302,8 @@ surface_material_override/0 = SubResource("MaterialMorado")
 [node name="Luz" type="OmniLight3D" parent="."]
 position = Vector3(0, -0.015, 0)
 light_color = Color(1, 0.68, 0.35, 1)
-light_energy = 0.55
-omni_range = 2.6
+light_energy = 0.7
+omni_range = 2.9
 shadow_enabled = false
 
 [node name="AreaRecogida" type="Area3D" parent="."]
