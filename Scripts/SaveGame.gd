@@ -3,6 +3,7 @@ class_name SaveGame
 
 @export var mochila: Mochila
 @export var items_tirados: Array[Dictionary] = []
+@export var items_tirados_3d: Array[Dictionary] = []
 @export var items_recogidos: Array[String] = []
 @export var escena_actual: String = ""
 @export var posicion_jugador: Vector2 = Vector2.ZERO
