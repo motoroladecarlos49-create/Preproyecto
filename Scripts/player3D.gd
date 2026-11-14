@@ -25,7 +25,8 @@ var item_cerca_3d: Node3D = null
 var mochila: Mochila
 var tiene_linterna_equipada: bool = false
 var reproductor_sonido: AudioStreamPlayer
-var tiempo_pasos: float = 0.0
+var distancia_pasos: float = 0.0
+var ultima_posicion_pasos: Vector3 = Vector3.ZERO
 
 @onready var salida_3d: Area3D = get_tree().current_scene.get_node_or_null("Salida3D") as Area3D
 
@@ -34,6 +35,7 @@ func _ready() -> void:
 	reproductor_sonido = AudioStreamPlayer.new()
 	reproductor_sonido.name = "SonidosJugador"
 	add_child(reproductor_sonido)
+	ultima_posicion_pasos = global_position
 	altura_camara_original = camera_3d.position.y
 	altura_camara_objetivo = altura_camara_original
 	altura_collider_objetivo = altura_normal
@@ -121,13 +123,17 @@ func _physics_process(delta: float) -> void:
 		collider.shape.size.y = lerp(collider.shape.size.y, altura_collider_objetivo, delta * velocidad_transicion)
 
 	move_and_slide()
-	if is_on_floor() and direccion.length() > 0.1:
-		tiempo_pasos += delta
-		if tiempo_pasos >= (0.58 if esta_agachado else 0.42):
-			tiempo_pasos = 0.0
-			_reproducir_sonido(105.0, 0.055, 0.10)
+	var desplazamiento_pasos := global_position - ultima_posicion_pasos
+	desplazamiento_pasos.y = 0.0
+	ultima_posicion_pasos = global_position
+	if is_on_floor() and desplazamiento_pasos.length() > 0.001:
+		distancia_pasos += desplazamiento_pasos.length()
+		var distancia_por_paso := 0.58 if esta_agachado else 0.68
+		if distancia_pasos >= distancia_por_paso:
+			distancia_pasos = fmod(distancia_pasos, distancia_por_paso)
+			_reproducir_pisada_3d()
 	else:
-		tiempo_pasos = 0.0
+		distancia_pasos = 0.0
 
 	if salida_3d != null:
 		var esta_dentro := salida_3d.get_overlapping_bodies().has(self)
@@ -261,6 +267,27 @@ func _reproducir_sonido(frecuencia: float, duracion: float, volumen: float = 0.1
 		var t := float(i) / frecuencia_muestreo
 		var envolvente := pow(1.0 - float(i) / cantidad, 2.0)
 		var muestra := int(sin(TAU * frecuencia * t) * envolvente * volumen * 32767.0)
+		datos.encode_s16(i * 2, muestra)
+	audio.data = datos
+	reproductor_sonido.stream = audio
+	reproductor_sonido.play()
+
+func _reproducir_pisada_3d() -> void:
+	if reproductor_sonido == null:
+		return
+	var frecuencia_muestreo := 22050
+	var duracion := 0.11
+	var cantidad := int(frecuencia_muestreo * duracion)
+	var audio := AudioStreamWAV.new()
+	audio.format = AudioStreamWAV.FORMAT_16_BITS
+	audio.mix_rate = frecuencia_muestreo
+	var datos := PackedByteArray()
+	datos.resize(cantidad * 2)
+	for i in range(cantidad):
+		var t := float(i) / frecuencia_muestreo
+		var envolvente := exp(-t * 30.0)
+		var golpe := sin(TAU * 78.0 * t) * 0.6 + (randf() * 2.0 - 1.0) * 0.4
+		var muestra := int(golpe * envolvente * 0.18 * 32767.0)
 		datos.encode_s16(i * 2, muestra)
 	audio.data = datos
 	reproductor_sonido.stream = audio
