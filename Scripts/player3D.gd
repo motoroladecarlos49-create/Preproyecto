@@ -166,7 +166,7 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	var direccion = -global_transform.basis.z.normalized()
 	item_suelto.global_position = global_position + direccion * 1.1 + Vector3.UP * 0.35
 	item_suelto.linear_velocity = direccion * 0.8 + Vector3.UP * 0.7
-	GameManager.registrar_item_tirado_3d(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path, item_suelto.esta_encendida)
+	GameManager.registrar_item_tirado_3d(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path, bool(item_suelto.get("esta_encendida")))
 	mochila.remover_item_por_clave(clave)
 
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item) -> void:
