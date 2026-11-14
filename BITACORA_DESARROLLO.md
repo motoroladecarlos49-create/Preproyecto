@@ -619,3 +619,15 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se conservaron los estilos de botones, opciones y demás controles.
 - Motivo: corregir el error de nodo inexistente y la llamada a `add_theme_font_override` sobre una referencia nula.
 - Prueba/estado: script actualizado y verificado mediante lectura posterior en GitHub. No se ejecutó Godot; queda pendiente iniciar el menú para confirmar que no aparezcan más errores.
+
+### 2026-11-14 — Restaurar el fondo gris en la zona de botones del menú principal
+- Archivo modificado: `Menus/menu_principal.tscn`.
+- Cambios:
+  - Se reemplazó la imagen fija `Imagenes/fondo/3.jpeg` por un `ColorRect` gris que cubre la mitad izquierda, donde están los botones.
+  - Se conservó el nodo `FondoBotonesBase` como `TextureRect` oculto para mantener compatibles las referencias del script y su ciclo de animación.
+  - Se retiró de esta escena la referencia a `3.jpeg`, que ya no se utiliza como fondo de esa mitad.
+  - Se mantuvieron sin cambios los botones, sus estilos y el efecto glitch de la mitad derecha.
+- Motivo: recuperar el aspecto gris original de la zona de botones.
+- Prueba/estado: escena actualizada en GitHub y pendiente de comprobar visualmente en Godot. No se ejecutó Godot desde este entorno.
+- Commit de escena: d187e154b1a27bb7ce6b99c04cec5bbbd00745f1.
+
