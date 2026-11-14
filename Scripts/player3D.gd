@@ -142,9 +142,8 @@ func _recoger_item_3d() -> void:
 	if id_recogido != "" and not GameManager.partida_actual.items_recogidos.has(id_recogido):
 		GameManager.partida_actual.items_recogidos.append(id_recogido)
 	GameManager.quitar_item_tirado_3d(id_recogido)
-	var estado_linterna = objeto.get("esta_encendida")
-	if estado_linterna != null:
-		GameManager.linterna_encendida = bool(estado_linterna)
+	if item_data.nombre == "Linterna":
+		GameManager.linterna_encendida = bool(objeto.get("esta_encendida"))
 	objeto.queue_free()
 	item_cerca_3d = null
 	GameManager.ya_aviso_recoger = false
