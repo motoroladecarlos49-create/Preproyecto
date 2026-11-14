@@ -27,7 +27,6 @@ func _ready() -> void:
 	submenu_opciones.hide()
 	_aplicar_estilo()
 	_configurar_opciones()
-	_aplicar_configuracion_ventana()
 	randomize()
 	_iniciar_ciclo_glitch()
 	if GameManager.hay_partida_guardada():
@@ -131,10 +130,10 @@ func _configurar_opciones() -> void:
 	slider_volumen.set_value_no_signal(volumen_actual)
 	_actualizar_relleno_volumen(volumen_actual)
 
-	check_pantalla.set_pressed_no_signal(GameManager.obtener_pantalla_completa())
+	check_pantalla.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+	var resoluciones: Array[Vector2i] = [Vector2i(1600, 900), Vector2i(1280, 720), Vector2i(720, 480)]
 	option_button.clear()
-	var resoluciones: Array[Vector2i] = GameManager.obtener_resoluciones_disponibles()
-	var tamano_actual: Vector2i = GameManager.obtener_resolucion_ventana()
+	var tamano_actual: Vector2i = get_window().size
 	for i in range(resoluciones.size()):
 		option_button.add_item("%d x %d" % [resoluciones[i].x, resoluciones[i].y])
 		if resoluciones[i] == tamano_actual:
@@ -145,25 +144,18 @@ func _on_slidervolumen_value_changed(value: float) -> void:
 	GameManager.establecer_volumen_general(value)
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	GameManager.establecer_pantalla_completa(toggled_on)
-	_aplicar_configuracion_ventana()
+	var modo = DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED
+	DisplayServer.window_set_mode(modo)
 
 func _on_option_button_item_selected(index: int) -> void:
-	var resoluciones: Array[Vector2i] = GameManager.obtener_resoluciones_disponibles()
-	if index < 0 or index >= resoluciones.size():
-		return
-	GameManager.establecer_resolucion_ventana(resoluciones[index])
-	check_pantalla.set_pressed_no_signal(false)
-	_aplicar_configuracion_ventana()
-
-func _aplicar_configuracion_ventana() -> void:
-	var resolucion: Vector2i = GameManager.obtener_resolucion_ventana()
-	var pantalla_completa: bool = GameManager.obtener_pantalla_completa()
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	DisplayServer.window_set_size(resolucion)
+	match index:
+		0:
+			DisplayServer.window_set_size(Vector2i(1600, 900))
+		1:
+			DisplayServer.window_set_size(Vector2i(1280, 720))
+		2:
+			DisplayServer.window_set_size(Vector2i(720, 480))
 	get_window().move_to_center()
-	if pantalla_completa:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _aplicar_estilo() -> void:
 	titulo_opciones.add_theme_font_override("font", FUENTE_MENU)
