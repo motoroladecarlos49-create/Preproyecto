@@ -34,6 +34,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mochila == null:
 			return
 		visible = not visible
+		if player != null and player.has_method("inventario_cambiado"):
+			player.call("inventario_cambiado", visible)
 		if visible:
 			redibujar_inventario()
 			if mochila.objetos.size() > 0 and not GameManager.tutorial_lampara_completado:
