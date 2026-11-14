@@ -230,15 +230,15 @@ func restaurar_items_tirados_3d(raiz_escena: Node) -> void:
 			continue
 		var existente := false
 		for hijo in raiz_escena.get_children():
-			if hijo.get("id_unico") == id:
+			if hijo.is_in_group("items_tirados_3d") and hijo.get("id_unico") == id:
 				existente = true
 				break
 		if existente:
 			continue
-		var objeto = escena_item.instantiate()
-		objeto.data = registro.get("data") as Item
-		objeto.id_unico = id
-		objeto.esta_encendida = bool(registro.get("encendida", false))
+		var objeto := escena_item.instantiate() as RigidBody3D
+		objeto.set("data", registro.get("data") as Item)
+		objeto.set("id_unico", id)
+		objeto.set("esta_encendida", bool(registro.get("encendida", false)))
 		if objeto.data == null:
 			objeto.free()
 			continue
