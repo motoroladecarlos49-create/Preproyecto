@@ -93,6 +93,8 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interactuar"):
 		if item_cerca != null:
+			if not _esta_mirando_item_2d(item_cerca):
+				return
 			if item_cerca.data == null:
 				return
 			var exito = mochila.agregar_item(item_cerca.data)
@@ -137,6 +139,26 @@ func _unhandled_input(event: InputEvent) -> void:
 				var error: Error = get_tree().change_scene_to_file(escena_destino) if escena_destino != "" else OK
 				if error != OK:
 					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
+
+
+func _esta_mirando_item_2d(item: Node2D) -> bool:
+	if not is_instance_valid(item):
+		return false
+	var hacia_item := item.global_position - global_position
+	if hacia_item.length_squared() < 0.001:
+		return true
+	hacia_item = hacia_item.normalized()
+	var direccion_mirada := Vector2.DOWN
+	match last_direction:
+		"up":
+			direccion_mirada = Vector2.UP
+		"down":
+			direccion_mirada = Vector2.DOWN
+		"left":
+			direccion_mirada = Vector2.LEFT
+		"right":
+			direccion_mirada = Vector2.RIGHT
+	return direccion_mirada.dot(hacia_item) >= 0.75
 
 func _mochila_tiene_item(nombre_item: String) -> bool:
 	for item in mochila.objetos.values():
