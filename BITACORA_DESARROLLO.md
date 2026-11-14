@@ -1,3 +1,14 @@
+### 2026-11-14 — Iniciar Preproyecto en pantalla completa
+- Archivos modificados:
+  - `project.godot`
+  - `BITACORA_DESARROLLO.md`
+- Cambios:
+  - Se establece `window/size/mode=3` en la configuración de pantalla para iniciar el juego en pantalla completa, igual que en el repositorio de referencia `Menu`.
+  - Se conservan el viewport base de 1152×650, el tamaño de ventana de 1280×720, el estiramiento `canvas_items` y `expand`, y las correcciones de los selectores de resolución en ambos menús.
+  - Al elegir una resolución desde pantalla completa, los scripts existentes cambian automáticamente a modo ventana, desmarcan el control de pantalla completa, aplican el tamaño seleccionado y centran la ventana.
+- Motivo: reproducir el comportamiento de inicio del proyecto de referencia sin perder las correcciones recientes para cambiar resoluciones.
+- Prueba/estado: cambios guardados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot en este entorno; queda pendiente comprobar el inicio en pantalla completa, las tres resoluciones desde ambos menús y la sincronización de los controles.
+
 ### 2026-11-14 — Corregir aplicación de resoluciones y adaptación de ventana
 - Archivos modificados:
   - `Menus/scripts/menu_principal.gd`
