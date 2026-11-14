@@ -6,7 +6,6 @@
 [ext_resource type="Shader" uid="uid://cirnysgwnck7p" path="res://Menus/relleno_volumen.gdshader" id="4_shader_volumen"]
 [ext_resource type="Texture2D" uid="uid://yj4l8d07c6sa" path="res://Imagenes/fondo/1.jpeg" id="5_fondo_1"]
 [ext_resource type="Texture2D" uid="uid://cf0a05u7lnhh6" path="res://Imagenes/fondo/2.jpeg" id="6_fondo_2"]
-[ext_resource type="Texture2D" uid="uid://dew0rnlfviya0" path="res://Imagenes/fondo/3.jpeg" id="7_fondo_3"]
 
 [sub_resource type="Theme" id="Theme_bj1uy"]
 default_font_size = 30
@@ -41,7 +40,7 @@ offset_right = 1151.0
 offset_bottom = 650.0
 script = ExtResource("1_script")
 
-[node name="FondoBotonesBase" type="TextureRect" parent="." unique_id=1830382993]
+[node name="FondoBotonesGris" type="ColorRect" parent="." unique_id=1830382993]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -49,7 +48,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("7_fondo_3")
+color = Color(0.2556589, 0.25565878, 0.25565878, 1)
+
+[node name="FondoBotonesBase" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
