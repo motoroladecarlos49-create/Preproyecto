@@ -47,6 +47,8 @@ func _input(event: InputEvent) -> void:
 
 func _abrir_pausa() -> void:
 	visible = true
+	if get_parent() is Node3D:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	panel_opciones.hide()
 	fondo.show()
 	etiqueta_estado.text = ""
@@ -57,6 +59,8 @@ func _abrir_pausa() -> void:
 func _cerrar_pausa() -> void:
 	visible = false
 	get_tree().paused = false
+	if get_parent() is Node3D:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _mostrar_menu_pausa() -> void:
 	titulo.show()
@@ -81,6 +85,7 @@ func _on_reanudar_pressed() -> void:
 
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://Menus/menu_principal.tscn")
 
 func _on_opciones_pressed() -> void:
@@ -97,7 +102,7 @@ func _on_botonvolver_pressed() -> void:
 	_volver_a_pausa()
 
 func _on_guardar_pressed() -> void:
-	var jugador := get_parent() as Node2D
+	var jugador := get_parent() as Node
 	if GameManager.guardar_partida(jugador):
 		etiqueta_estado.text = "PARTIDA GUARDADA"
 		_actualizar_boton_cargar()

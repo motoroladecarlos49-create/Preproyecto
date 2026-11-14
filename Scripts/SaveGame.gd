@@ -7,6 +7,10 @@ class_name SaveGame
 @export var items_recogidos: Array[String] = []
 @export var escena_actual: String = ""
 @export var posicion_jugador: Vector2 = Vector2.ZERO
+@export var posicion_jugador_3d: Vector3 = Vector3.ZERO
+@export var rotacion_jugador_3d: Vector3 = Vector3.ZERO
+@export var pitch_jugador_3d: float = 0.0
+@export var jugador_en_3d: bool = false
 @export var clave_item_seleccionado: String = ""
 @export var linterna_encendida: bool = false
 

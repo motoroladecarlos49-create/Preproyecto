@@ -132,13 +132,15 @@ func obtener_escala_item(escala_padre: float) -> float:
 		return escala_item_escena2
 	return 1.0
 
-func guardar_partida(jugador: Node2D = null) -> bool:
+func guardar_partida(jugador: Node = null) -> bool:
 	if mochila_global == null:
 		push_warning("No se pudo guardar: la mochila global no está inicializada.")
 		return false
 
 	if jugador == null and get_tree().current_scene != null:
-		jugador = get_tree().current_scene.find_child("player", true, false) as Node2D
+		jugador = get_tree().current_scene.find_child("player", true, false)
+		if jugador == null:
+			jugador = get_tree().current_scene.find_child("Player", true, false)
 
 	partida_actual.mochila = mochila_global
 	partida_actual.linterna_encendida = linterna_encendida
@@ -150,8 +152,14 @@ func guardar_partida(jugador: Node2D = null) -> bool:
 	partida_actual.tutorial_movimiento_completado = tutorial_movimiento_completado
 	partida_actual.escena_actual = get_tree().current_scene.scene_file_path if get_tree().current_scene != null else ""
 
-	if jugador != null:
-		partida_actual.posicion_jugador = jugador.global_position
+	partida_actual.jugador_en_3d = jugador is Node3D
+	if jugador is Node2D:
+		partida_actual.posicion_jugador = (jugador as Node2D).global_position
+	elif jugador is Node3D:
+		partida_actual.posicion_jugador_3d = (jugador as Node3D).global_position
+		partida_actual.rotacion_jugador_3d = (jugador as Node3D).global_rotation
+		if jugador.has_method("obtener_pitch_guardado"):
+			partida_actual.pitch_jugador_3d = jugador.obtener_pitch_guardado()
 
 	partida_actual.clave_item_seleccionado = ""
 	for clave in mochila_global.objetos:
