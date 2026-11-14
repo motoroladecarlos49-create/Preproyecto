@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bccooec3fhrtm" path="res://Escenas/player3D.tscn" id="1_usqj6"]
 [ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/S.webp" id="2_drlo1"]
 [ext_resource type="Texture2D" path="res://Imagenes/texturas_ambiente/crosshair-000.png" id="4_6joj8"]
+[ext_resource type="PackedScene" path="res://Escenas/llave_3d.tscn" id="5_llave"]
 
 [sub_resource type="Environment" id="Environment_p77xk"]
 background_mode = 1
@@ -86,6 +87,9 @@ shape = SubResource("ConcavePolygonShape3D_drlo1")
 
 [node name="Player" parent="." unique_id=1410393463 instance=ExtResource("1_usqj6")]
 transform = Transform3D(-0.18279798, 0, -0.23787577, 0, 0.29999998, 0, 0.23787577, 0, -0.18279798, 0, 1.3825023, 0)
+
+[node name="Llave3D" parent="." instance=ExtResource("5_llave")]
+position = Vector3(-1.2, 0.12, -2.0)
 
 [node name="Cubo2" type="RigidBody3D" parent="." unique_id=893215564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10963702, 0.8469744, 2.58918)
