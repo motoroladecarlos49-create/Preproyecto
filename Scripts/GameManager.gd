@@ -100,14 +100,13 @@ func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
 	_guardar_configuracion()
 
 func _aplicar_configuracion_ventana() -> void:
-	var ventana: Window = get_tree().root
-	# Aplicar primero el tamaño en modo ventana. Se usa la propiedad del Window
-	# principal para conservar y restaurar la resolución de ventana seleccionada.
-	ventana.mode = Window.MODE_WINDOWED
-	ventana.size = resolucion_ventana
-	ventana.move_to_center()
+	# Aplicar siempre primero la resolución en modo ventana para que el tamaño
+	# seleccionado quede guardado y pueda restaurarse al salir de pantalla completa.
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_size(resolucion_ventana)
+	get_window().move_to_center()
 	if pantalla_completa:
-		ventana.mode = Window.MODE_FULLSCREEN
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _guardar_configuracion() -> void:
 	var configuracion := ConfigFile.new()
