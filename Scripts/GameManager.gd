@@ -41,7 +41,6 @@ func obtener_resoluciones_disponibles() -> Array[Vector2i]:
 	return resoluciones
 
 func _ready() -> void:
-	var ventana: Window = get_tree().root
 	# Mantener una resolución válida por defecto; el tamaño inicial de la ventana
 	# puede no coincidir con ninguna de las opciones disponibles.
 	resolucion_ventana = RESOLUCION_PREDETERMINADA
@@ -61,7 +60,6 @@ func _ready() -> void:
 		pantalla_completa = bool(configuracion.get_value("video", "pantalla_completa", false))
 
 	_aplicar_volumen_guardado()
-	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
 
 func obtener_volumen_general() -> float:
@@ -87,7 +85,6 @@ func _aplicar_volumen_guardado() -> void:
 
 func establecer_pantalla_completa(activada: bool) -> void:
 	pantalla_completa = activada
-	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
 
 func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
@@ -96,17 +93,7 @@ func establecer_resolucion_ventana(resolucion: Vector2i) -> void:
 		return
 	resolucion_ventana = resolucion
 	pantalla_completa = false
-	_aplicar_configuracion_ventana()
 	_guardar_configuracion()
-
-func _aplicar_configuracion_ventana() -> void:
-	# Aplicar siempre primero la resolución en modo ventana para que el tamaño
-	# seleccionado quede guardado y pueda restaurarse al salir de pantalla completa.
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	DisplayServer.window_set_size(resolucion_ventana)
-	get_window().move_to_center()
-	if pantalla_completa:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _guardar_configuracion() -> void:
 	var configuracion := ConfigFile.new()
