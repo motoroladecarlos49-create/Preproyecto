@@ -142,8 +142,9 @@ func _recoger_item_3d() -> void:
 	if id_recogido != "" and not GameManager.partida_actual.items_recogidos.has(id_recogido):
 		GameManager.partida_actual.items_recogidos.append(id_recogido)
 	GameManager.quitar_item_tirado_3d(id_recogido)
-	if objeto.get("esta_encendida") != null:
-		GameManager.linterna_encendida = bool(objeto.get("esta_encendida"))
+	var estado_linterna = objeto.get("esta_encendida")
+	if estado_linterna != null:
+		GameManager.linterna_encendida = bool(estado_linterna)
 	objeto.queue_free()
 	item_cerca_3d = null
 	GameManager.ya_aviso_recoger = false
@@ -151,25 +152,49 @@ func _recoger_item_3d() -> void:
 func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	if item_a_tirar == null:
 		return
-	if item_a_tirar.nombre != "Linterna":
-		MessageManager.mostrar_mensaje("Este objeto todavía no tiene una representación 3D para soltarlo.", 2.0)
-		return
-	var escena_item := load("res://Escenas/linterna_3d.tscn") as PackedScene
+
+	var ruta_escena := ""
+	match item_a_tirar.nombre:
+		"Linterna":
+			ruta_escena = "res://Escenas/linterna_3d.tscn"
+		"Llave":
+			ruta_escena = "res://Escenas/llave_3d.tscn"
+		_:
+			MessageManager.mostrar_mensaje("Este objeto todavía no tiene una representación 3D para soltarlo.", 2.0)
+			return
+
+	var escena_item := load(ruta_escena) as PackedScene
 	if escena_item == null:
-		push_error("No se pudo cargar la escena 3D de la linterna.")
+		push_error("No se pudo cargar la escena 3D del objeto: " + ruta_escena)
 		return
 
-	var nuevo_id = item_a_tirar.nombre + "_3d_soltado_" + str(Time.get_ticks_usec())
+	var nuevo_id := item_a_tirar.nombre + "_3d_soltado_" + str(Time.get_ticks_usec())
 	var item_suelto := escena_item.instantiate() as RigidBody3D
+	if item_suelto == null:
+		push_error("La escena del objeto no tiene una raíz RigidBody3D: " + ruta_escena)
+		return
+
 	item_suelto.set("data", item_a_tirar)
 	item_suelto.set("id_unico", nuevo_id)
-	item_suelto.set("esta_encendida", GameManager.linterna_encendida)
+	var estado_encendida := item_a_tirar.nombre == "Linterna" and GameManager.linterna_encendida
+	if item_suelto.has_method("configurar_estado"):
+		item_suelto.configurar_estado(estado_encendida)
 
 	get_tree().current_scene.add_child(item_suelto)
-	var direccion = -global_transform.basis.z.normalized()
-	item_suelto.global_position = global_position + direccion * 1.1 + Vector3.UP * 0.35
-	item_suelto.linear_velocity = direccion * 0.8 + Vector3.UP * 0.7
-	GameManager.registrar_item_tirado_3d(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path, bool(item_suelto.get("esta_encendida")))
+	var direccion := -global_transform.basis.z.normalized()
+	item_suelto.global_position = global_position + direccion * 0.85 + Vector3.UP * 0.22
+	if item_a_tirar.nombre == "Linterna":
+		item_suelto.global_rotation = Vector3(0, rotation.y + PI / 2.0, 0)
+	item_suelto.linear_velocity = direccion * 0.55 + Vector3.UP * 0.35
+
+	GameManager.registrar_item_tirado_3d(
+		nuevo_id,
+		item_a_tirar,
+		item_suelto.global_position,
+		get_tree().current_scene.scene_file_path,
+		estado_encendida,
+		ruta_escena
+	)
 	mochila.remover_item_por_clave(clave)
 
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item) -> void:
