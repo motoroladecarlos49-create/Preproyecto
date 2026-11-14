@@ -35,9 +35,11 @@ shader_parameter/fill_amount = 1.0
 [node name="menu_principal" type="Control" unique_id=1325911669]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1151.0
-offset_bottom = 650.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 script = ExtResource("1_script")
 
 [node name="FondoBotonesGris" type="ColorRect" parent="." unique_id=1830382993]
