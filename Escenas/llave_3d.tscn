@@ -69,19 +69,32 @@ roughness = 0.28
 albedo_color = Color(1, 0.84, 0.38, 1)
 emission_enabled = true
 emission = Color(1, 0.58, 0.12, 1)
-emission_energy_multiplier = 3.2
+emission_energy_multiplier = 5.0
 metallic = 0.08
 roughness = 0.2
 
+[sub_resource type="StandardMaterial3D" id="DoradoBrillante"]
+albedo_color = Color(1, 0.72, 0.32, 1)
+emission_enabled = true
+emission = Color(1, 0.42, 0.08, 1)
+emission_energy_multiplier = 1.4
+roughness = 0.24
+
+[sub_resource type="TorusMesh" id="AroGema"]
+inner_radius = 0.13
+outer_radius = 0.15
+rings = 12
+ring_segments = 32
+
 [sub_resource type="BoxShape3D" id="ColisionLlave"]
-size = Vector3(0.88, 0.24, 0.48)
+size = Vector3(0.78, 0.22, 0.42)
 
 [sub_resource type="SphereShape3D" id="AreaRecogida"]
-radius = 0.42
+radius = 0.36
 
 [node name="Llave3D" type="RigidBody3D"]
 mass = 0.08
-scale = Vector3(0.48, 0.48, 0.48)
+scale = Vector3(0.39, 0.39, 0.39)
 linear_damp = 3.0
 angular_damp = 4.0
 script = ExtResource("1_script")
@@ -142,6 +155,11 @@ rotation = Vector3(0, 0, 0.7854)
 mesh = SubResource("GemaMarco")
 surface_material_override/0 = SubResource("Dorado")
 
+[node name="AroGema" type="MeshInstance3D" parent="."]
+position = Vector3(-0.34, 0.105, 0.11)
+mesh = SubResource("AroGema")
+surface_material_override/0 = SubResource("DoradoBrillante")
+
 [node name="Gema" type="MeshInstance3D" parent="."]
 position = Vector3(-0.34, 0.16, 0.085)
 rotation = Vector3(0, 0, 0.7854)
@@ -186,7 +204,7 @@ surface_material_override/0 = SubResource("MoradoMedio")
 position = Vector3(-0.34, 0.30, 0.10)
 light_color = Color(1, 0.73, 0.38, 1)
 light_energy = 0.32
-omni_range = 1.15
+omni_range = 0.9
 shadow_enabled = false
 
 [node name="AreaRecogida" type="Area3D" parent="."]
