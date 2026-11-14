@@ -13,6 +13,7 @@ var carga_pendiente: bool = false
 # Banderas de tutoriales
 var ya_aviso_inventario: bool = false
 var ya_aviso_recoger: bool = false
+var ya_aviso_llave_3d: bool = false
 var ya_aviso_puerta: bool = false
 var tutorial_lampara_completado: bool = false
 var ya_aviso_salida_3d: bool = false
@@ -90,6 +91,7 @@ func iniciar_partida_nueva() -> void:
 	punto_retorno_2d_id = ""
 	ya_aviso_inventario = false
 	ya_aviso_recoger = false
+	ya_aviso_llave_3d = false
 	ya_aviso_puerta = false
 	tutorial_lampara_completado = false
 	ya_aviso_salida_3d = false

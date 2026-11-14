@@ -119,9 +119,11 @@ func _physics_process(delta: float) -> void:
 			MessageManager.mostrar_mensaje("Presiona 'E' para volver por la puerta", 3.0)
 		salida_cerca = esta_dentro
 
-	if item_cerca_3d != null and not GameManager.ya_aviso_recoger:
-		GameManager.ya_aviso_recoger = true
-		MessageManager.mostrar_mensaje("Presiona 'E' para recoger el ítem", 2.0)
+	if item_cerca_3d != null and is_instance_valid(item_cerca_3d) and not GameManager.ya_aviso_llave_3d:
+		var item_cercano_data := item_cerca_3d.get("data") as Item
+		if item_cercano_data != null and item_cercano_data.nombre == "Llave" and _esta_mirando_item_3d(item_cerca_3d):
+			GameManager.ya_aviso_llave_3d = true
+			MessageManager.mostrar_mensaje("Presiona 'E' para recoger la llave", 1.8)
 
 func establecer_item_cerca_3d(item: Node3D) -> void:
 	item_cerca_3d = item
