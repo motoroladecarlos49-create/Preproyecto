@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crme88rv8fpio" path="res://Scripts/player3D.gd" id="1_p77xk"]
 [ext_resource type="PackedScene" path="res://Escenas/ui_inventario.tscn" id="2_ui"]
+[ext_resource type="PackedScene" path="res://Menus/menu_pausa.tscn" id="3_menu_pausa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbfun"]
 
@@ -24,6 +25,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5671865, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI_inventario" parent="CanvasLayer" instance=ExtResource("2_ui")]
+
+[node name="MenuPausa" parent="." instance=ExtResource("3_menu_pausa")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
