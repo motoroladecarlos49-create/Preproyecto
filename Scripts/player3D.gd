@@ -12,7 +12,7 @@ extends CharacterBody3D
 
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var collider: CollisionShape3D = $CollisionShape3D
-@onready var luz_linterna: SpotLight3D = $CollisionShape3D/SpotLight3D
+@onready var luz_linterna: OmniLight3D = $CollisionShape3D/SpotLight3D
 @onready var ui_inventario: Control = get_node_or_null("CanvasLayer/UI_inventario") as Control
 
 var pitch: float = 0.0
