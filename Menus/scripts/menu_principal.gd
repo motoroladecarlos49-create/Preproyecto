@@ -31,6 +31,24 @@ func _ready() -> void:
 	_iniciar_ciclo_glitch()
 	if GameManager.hay_partida_guardada():
 		_agregar_boton_continuar()
+	if GameManager.menu_desde_creditos:
+		GameManager.menu_desde_creditos = false
+		_entrada_desde_creditos()
+
+
+func _entrada_desde_creditos() -> void:
+	var capa := CanvasLayer.new()
+	capa.layer = 100
+	add_child(capa)
+	var pantalla := ColorRect.new()
+	pantalla.color = Color.BLACK
+	pantalla.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	pantalla.mouse_filter = Control.MOUSE_FILTER_STOP
+	capa.add_child(pantalla)
+	var fundido := create_tween()
+	fundido.tween_property(pantalla, "color:a", 0.0, 1.0)
+	await fundido.finished
+	capa.queue_free()
 
 
 func _iniciar_ciclo_glitch() -> void:
