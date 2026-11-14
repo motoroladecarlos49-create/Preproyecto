@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://items/linterna_mundo.gd" id="1_script"]
+[ext_resource type="Script" path="res://items/llave_mundo.gd" id="1_script"]
 [ext_resource type="Resource" path="res://items/llave.tres" id="2_data"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llave"]
@@ -15,3 +15,6 @@ shape = SubResource("RectangleShape2D_llave")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.03, 0.03)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
