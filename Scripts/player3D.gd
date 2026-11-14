@@ -168,7 +168,12 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 		push_error("No se pudo cargar la escena 3D del objeto: " + ruta_escena)
 		return
 
+	var id_anterior := item_a_tirar.id_escena
+	if id_anterior != "" and not GameManager.partida_actual.items_recogidos.has(id_anterior):
+		GameManager.partida_actual.items_recogidos.append(id_anterior)
+
 	var nuevo_id := item_a_tirar.nombre + "_3d_soltado_" + str(Time.get_ticks_usec())
+	item_a_tirar.id_escena = nuevo_id
 	var item_suelto := escena_item.instantiate() as RigidBody3D
 	if item_suelto == null:
 		push_error("La escena del objeto no tiene una raíz RigidBody3D: " + ruta_escena)
