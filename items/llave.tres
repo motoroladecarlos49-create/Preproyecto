@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://Imagenes/texturas_items/llave_icono.svg" id="2_icono"]
+
+[resource]
+script = ExtResource("1_item")
+nombre = "Llave"
+icono = ExtResource("2_icono")
+apilable = false
+max_cantidad = 1

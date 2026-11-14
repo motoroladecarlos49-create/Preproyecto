@@ -198,6 +198,58 @@ func cargar_partida() -> bool:
 		return false
 	return true
 
+func registrar_item_tirado_3d(id: String, item_data: Item, posicion: Vector3, escena: String, encendida: bool) -> void:
+	quitar_item_tirado_3d(id)
+	partida_actual.items_tirados_3d.append({
+		"id": id,
+		"data": item_data,
+		"posicion": posicion,
+		"escena": escena,
+		"encendida": encendida
+	})
+
+func quitar_item_tirado_3d(id: String) -> void:
+	if id == "":
+		return
+	for i in range(partida_actual.items_tirados_3d.size() - 1, -1, -1):
+		if str(partida_actual.items_tirados_3d[i].get("id", "")) == id:
+			partida_actual.items_tirados_3d.remove_at(i)
+
+func restaurar_items_tirados_3d(raiz_escena: Node) -> void:
+	if raiz_escena == null:
+		return
+	var escena_actual = get_tree().current_scene.scene_file_path
+	var escena_item: PackedScene = load("res://Escenas/linterna_3d.tscn")
+	if escena_item == null:
+		return
+	for registro in partida_actual.items_tirados_3d:
+		if str(registro.get("escena", "")) != escena_actual:
+			continue
+		var id = str(registro.get("id", ""))
+		if id == "" or partida_actual.items_recogidos.has(id):
+			continue
+		var existente := false
+		for hijo in raiz_escena.get_children():
+			if hijo.is_in_group("items_tirados_3d") and hijo.get("id_unico") == id:
+				existente = true
+				break
+		if existente:
+			continue
+		var objeto := escena_item.instantiate() as RigidBody3D
+		objeto.set("data", registro.get("data") as Item)
+		objeto.set("id_unico", id)
+		objeto.set("esta_encendida", bool(registro.get("encendida", false)))
+		if objeto.get("data") == null:
+			objeto.free()
+			continue
+		_agregar_item_3d_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector3.ZERO))
+
+func _agregar_item_3d_restaurado(raiz_escena: Node, objeto: Node3D, posicion: Vector3) -> void:
+	if not is_instance_valid(raiz_escena) or not is_instance_valid(objeto):
+		return
+	raiz_escena.add_child(objeto)
+	objeto.global_position = posicion
+
 func registrar_item_tirado(id: String, item_data: Item, posicion: Vector2, escena: String) -> void:
 	quitar_item_tirado(id)
 	partida_actual.items_tirados.append({
@@ -239,7 +291,7 @@ func restaurar_items_tirados(raiz_escena: Node) -> void:
 		var objeto = escena_item.instantiate()
 		objeto.data = registro.get("data") as Item
 		objeto.id_unico = id
-		if objeto.data == null:
+		if objeto.get("data") == null:
 			objeto.free()
 			continue
 		_agregar_item_restaurado.call_deferred(raiz_escena, objeto, registro.get("posicion", Vector2.ZERO))
