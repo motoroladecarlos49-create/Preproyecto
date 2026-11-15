@@ -705,3 +705,13 @@ Este archivo mantiene el contexto técnico para retomar el proyecto en futuras c
   - Se detectaron siete archivos temporales `.tmp` y una carpeta antigua `menuprincipal/` que contiene una copia separada de escenas/scripts. No se eliminaron porque no forman parte del cambio de video y conviene confirmar primero si se quieren conservar como respaldo.
   - No se identificó código de otros sistemas que sea seguro borrar sin un análisis adicional de escenas, señales y dependencias.
 - Prueba/estado: archivos actualizados y verificados mediante lectura posterior en GitHub. No se ejecutó Godot; queda pendiente probar resolución y pantalla completa desde ambos menús.
+
+### 2026-11-15 — Reproducir la animación de apertura de las puertas
+- Archivos modificados: `Scripts/player.gd`, `Escenas/puerta.tscn`, `Escenas/habitacion2.tscn` y `BITACORA_DESARROLLO.md`.
+- Cambios:
+  - Las puertas que conducen a otra escena reproducen `abrir` al interactuar.
+  - La animación de apertura ahora es de una sola reproducción y la transición de escena espera a que termine.
+  - El jugador queda inmovilizado durante la apertura para evitar repetir la interacción o moverse mientras se reproduce.
+  - La escena de puerta comienza en `idle` (cerrada), en lugar de iniciar mostrando `abrir`.
+  - Cajonera y Armario de habitación2 quedan sin animación visible y fijados en `idle`; conservan su mensaje de objeto vacío.
+- Prueba/estado: cambios subidos a GitHub y pendientes de probar dentro de Godot. No se ejecutó el proyecto desde este entorno.
