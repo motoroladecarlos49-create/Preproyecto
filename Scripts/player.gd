@@ -15,6 +15,7 @@ var ui_inventario: Control = null
 var last_direction: String = "down"
 var item_cerca: Node = null
 var puerta_cerca: Node = null
+var cajonera_cerca: bool = false
 var escena_destino: String = ""
 var id_puerta: String = ""
 var id_punto_retorno_2d: String = ""
@@ -111,6 +112,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					MessageManager.mostrar_mensaje("Presiona la tecla I para abrir el inventario", 3.0)
 			else:
 				print("Mochila llena.")
+		elif cajonera_cerca:
+			MessageManager.mostrar_mensaje("La cajonera está vacía.", 1.5)
 		elif puerta_cerca != null:
 			var mensaje_bloqueo := str(puerta_cerca.get("mensaje_bloqueo"))
 			var requiere_llave := bool(puerta_cerca.get("requiere_llave")) or mensaje_bloqueo.to_lower().contains("llave")
