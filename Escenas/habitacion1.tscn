@@ -82,6 +82,12 @@ rotation = -0.46600294
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_nyvdy")
 
+[node name="AreaCajonera" type="Area2D" parent="." unique_id=1738200111]
+position = Vector2(46150, 41586.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCajonera" unique_id=1738200112]
+shape = SubResource("RectangleShape2D_fcwek")
+
 [node name="LinternaMundo" parent="." unique_id=1475707383 instance=ExtResource("3_mdmms")]
 position = Vector2(51200, 28499.996)
 scale = Vector2(229.99997, 229.99997)
@@ -117,3 +123,6 @@ color = Color(0.06607054, 0.066070534, 0.06607054, 1)
 
 [editable path="player"]
 [editable path="Puerta"]
+
+[connection signal="area_entered" from="AreaCajonera" to="." method="_on_area_cajonera_area_entered"]
+[connection signal="area_exited" from="AreaCajonera" to="." method="_on_area_cajonera_area_exited"]
