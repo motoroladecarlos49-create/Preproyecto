@@ -22,6 +22,7 @@ var id_punto_retorno_2d: String = ""
 var direccion_salida: String = "down"
 var tiene_linterna_equipada: bool = false
 var _finalizando_juego: bool = false
+var _abriendo_puerta: bool = false
 
 func _ready() -> void:
 	flash_light.enabled = false
@@ -125,12 +126,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
 				return
 			if bool(puerta_cerca.get("finalizar_juego")):
+				_abriendo_puerta = true
+				velocity = Vector2.ZERO
+				await _reproducir_animacion_abrir(puerta_cerca)
 				await _iniciar_secuencia_final()
 				return
 			if escena_destino == "":
 				if mensaje_bloqueo != "":
 					MessageManager.mostrar_mensaje(mensaje_bloqueo, 1.5)
 			elif escena_destino == "res://Escenas/level_3d.tscn":
+				_abriendo_puerta = true
+				velocity = Vector2.ZERO
+				await _reproducir_animacion_abrir(puerta_cerca)
 				if id_punto_retorno_2d == "":
 					push_warning("Esta puerta no tiene configurado su punto de regreso 2D.")
 					return
@@ -140,12 +147,24 @@ func _unhandled_input(event: InputEvent) -> void:
 				if error_3d != OK:
 					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
 			else:
+				_abriendo_puerta = true
+				velocity = Vector2.ZERO
+				await _reproducir_animacion_abrir(puerta_cerca)
 				GameManager.puerta_destino_id = id_puerta
 				GameManager.direccion_salida = direccion_salida
 				var error: Error = get_tree().change_scene_to_file(escena_destino) if escena_destino != "" else OK
 				if error != OK:
 					push_error("No se pudo abrir la escena de destino: %s" % escena_destino)
 
+
+func _reproducir_animacion_abrir(puerta: Node) -> void:
+	var animacion := puerta.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animacion == null or not animacion.visible:
+		return
+	if not animacion.sprite_frames.has_animation("abrir"):
+		return
+	animacion.play("abrir")
+	await animacion.animation_finished
 
 func _mochila_tiene_item(nombre_item: String) -> bool:
 	for item in mochila.objetos.values():
@@ -238,7 +257,7 @@ func _iniciar_secuencia_final() -> void:
 		push_error("No se pudo abrir la pantalla de créditos. Código: %s" % error)
 
 func get_input() -> void:
-	if _finalizando_juego or GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
+	if _finalizando_juego or _abriendo_puerta or GameManager.is_dialogue_active or (ui_inventario != null and ui_inventario.visible):
 		velocity = Vector2.ZERO
 		update_animation("idle")
 		return
