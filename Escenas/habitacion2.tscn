@@ -102,6 +102,9 @@ shape = SubResource("RectangleShape2D_vbfun")
 
 [node name="AnimatedSprite2D" parent="Cajonera" index="1" unique_id=1528950200]
 visible = false
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
 
 [node name="Armario" parent="." unique_id=517416416 instance=ExtResource("1_4jnyt")]
 position = Vector2(2152, 967.3)
@@ -113,6 +116,9 @@ shape = SubResource("RectangleShape2D_nyvdy")
 
 [node name="AnimatedSprite2D" parent="Armario" index="1" unique_id=1528950200]
 visible = false
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
 color = Color(0.5099403, 0.41995478, 0.44029996, 1)
