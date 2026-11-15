@@ -6,3 +6,11 @@ func _ready():
 	if not GameManager.tutorial_movimiento_completado:
 		GameManager.tutorial_movimiento_completado = true
 		MessageManager.mostrar_mensaje("Muévete con W, A, S, D", 3.0)
+
+func _on_area_cajonera_area_entered(area: Area2D) -> void:
+	if area.name == "AreaRecogida":
+		area.get_parent().cajonera_cerca = true
+
+func _on_area_cajonera_area_exited(area: Area2D) -> void:
+	if area.name == "AreaRecogida":
+		area.get_parent().cajonera_cerca = false
