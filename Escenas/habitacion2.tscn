@@ -102,9 +102,6 @@ shape = SubResource("RectangleShape2D_vbfun")
 
 [node name="AnimatedSprite2D" parent="Cajonera" index="1" unique_id=1528950200]
 visible = false
-animation = &"idle"
-frame = 0
-frame_progress = 0.0
 
 [node name="Armario" parent="." unique_id=517416416 instance=ExtResource("1_4jnyt")]
 position = Vector2(2152, 967.3)
@@ -116,9 +113,6 @@ shape = SubResource("RectangleShape2D_nyvdy")
 
 [node name="AnimatedSprite2D" parent="Armario" index="1" unique_id=1528950200]
 visible = false
-animation = &"idle"
-frame = 0
-frame_progress = 0.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
 color = Color(0.5099403, 0.41995478, 0.44029996, 1)
@@ -153,6 +147,8 @@ scale = Vector2(4.5, 4.5)
 [node name="AnimatedSprite2D" parent="Puerta" index="1" unique_id=1528950200]
 position = Vector2(1269.1396, 499.1972)
 scale = Vector2(1.4627033, 1.4873033)
+animation = &"abrir"
+frame_progress = 0.25038272
 
 [node name="spawn_habitacion2" type="Marker2D" parent="Puerta" unique_id=41924238]
 position = Vector2(1294.1539, 622.2308)
@@ -168,6 +164,8 @@ scale = Vector2(5, 5)
 [node name="AnimatedSprite2D" parent="Puerta2" index="1" unique_id=1528950200]
 position = Vector2(3652.378, 598.5856)
 scale = Vector2(1.4600585, 1.4785062)
+animation = &"abrir"
+frame_progress = 0.25038272
 
 [node name="spawn_retorno_3d" type="Marker2D" parent="Puerta2" unique_id=1951364210]
 position = Vector2(3657.6926, 700)
@@ -179,6 +177,8 @@ mensaje_bloqueo = "La puerta está cerrada."
 
 [node name="AnimatedSprite2D" parent="Puerta3" index="1" unique_id=1528950200]
 visible = false
+animation = &"abrir"
+frame_progress = 0.25038272
 
 [node name="Puerta4" parent="." unique_id=697342636 instance=ExtResource("1_4jnyt")]
 mensaje_bloqueo = "Necesitas una llave para abrir esta puerta."
@@ -189,7 +189,10 @@ position = Vector2(2730.7695, 584.6154)
 scale = Vector2(5, 5)
 
 [node name="AnimatedSprite2D" parent="Puerta4" index="1" unique_id=1528950200]
-visible = false
+position = Vector2(2741.1035, 601.1657)
+scale = Vector2(1.4723834, 1.4831692)
+animation = &"abrir"
+frame_progress = 0.25038272
 
 [editable path="Cajonera"]
 [editable path="Armario"]
