@@ -94,7 +94,7 @@ scale = Vector2(229.99997, 229.99997)
 
 [node name="player" parent="." unique_id=1794548708 instance=ExtResource("4_oqkj6")]
 position = Vector2(34299.996, 34600.004)
-scale = Vector2(500, 500)
+scale = Vector2(520, 520)
 
 [node name="Camera2D" parent="player" index="0" unique_id=387046182]
 position = Vector2(65.6, -21.799976)
@@ -116,13 +116,13 @@ position = Vector2(224, -56)
 scale = Vector2(1.1, 1.1)
 
 [node name="spawn_habitacion1" type="Marker2D" parent="Puerta" unique_id=1209670363]
-position = Vector2(-1.5, -30.5)
+position = Vector2(225, -26.5)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=398684706]
 color = Color(0.06607054, 0.066070534, 0.06607054, 1)
 
-[editable path="player"]
-[editable path="Puerta"]
-
 [connection signal="area_entered" from="AreaCajonera" to="." method="_on_area_cajonera_area_entered"]
 [connection signal="area_exited" from="AreaCajonera" to="." method="_on_area_cajonera_area_exited"]
+
+[editable path="player"]
+[editable path="Puerta"]
