@@ -21,15 +21,8 @@ var id_punto_retorno_2d: String = ""
 var direccion_salida: String = "down"
 var tiene_linterna_equipada: bool = false
 var _finalizando_juego: bool = false
-var reproductor_sonido: AudioStreamPlayer
-var ultima_posicion_pasos: Vector2 = Vector2.ZERO
-var distancia_pasos: float = 0.0
 
 func _ready() -> void:
-	reproductor_sonido = AudioStreamPlayer.new()
-	reproductor_sonido.name = "SonidosJugador"
-	add_child(reproductor_sonido)
-	ultima_posicion_pasos = global_position
 	flash_light.enabled = false
 	sprite_lampara.visible = false
 	update_flashlight_direction()
@@ -71,7 +64,6 @@ func _ready() -> void:
 		GameManager.carga_pendiente = false
 	else:
 		_on_mochila_item_seleccionado_cambiado(mochila.item_seleccionado)
-	ultima_posicion_pasos = global_position
 
 func _process(_delta):
 	if camera:
@@ -81,16 +73,6 @@ func _process(_delta):
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
-	var desplazamiento := global_position - ultima_posicion_pasos
-	ultima_posicion_pasos = global_position
-	if velocity.length() > 1.0 and desplazamiento.length() > 0.01 and not _finalizando_juego and not GameManager.is_dialogue_active and (ui_inventario == null or not ui_inventario.visible):
-		distancia_pasos += desplazamiento.length()
-		var distancia_por_paso := 48.0
-		if distancia_pasos >= distancia_por_paso:
-			distancia_pasos = fmod(distancia_pasos, distancia_por_paso)
-			_reproducir_pisada()
-	else:
-		distancia_pasos = 0.0
 	if item_cerca != null:
 		if not GameManager.ya_aviso_recoger:
 			MessageManager.mostrar_mensaje("Presiona 'E' para recoger el ítem", 2.0)
@@ -105,7 +87,6 @@ func _input(event: InputEvent) -> void:
 		if tiene_linterna_equipada:
 			flash_light.enabled = not flash_light.enabled
 			GameManager.linterna_encendida = flash_light.enabled
-			_reproducir_tono(880.0 if flash_light.enabled else 520.0, 0.09, 0.12)
 		else:
 			flash_light.enabled = false
 			GameManager.linterna_encendida = false
@@ -123,7 +104,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				if id_recogido != "" and not GameManager.partida_actual.items_recogidos.has(id_recogido):
 					GameManager.partida_actual.items_recogidos.append(id_recogido)
 				GameManager.quitar_item_tirado(id_recogido)
-				_reproducir_tono(740.0, 0.16, 0.16)
 				item_cerca.queue_free()
 				item_cerca = null
 				if not GameManager.ya_aviso_inventario:
@@ -229,7 +209,6 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 		item_suelto.global_position.y += borde_inferior_jugador - borde_inferior_item
 	item_suelto.z_index = 1
 	GameManager.registrar_item_tirado(nuevo_id, item_a_tirar, item_suelto.global_position, get_tree().current_scene.scene_file_path)
-	_reproducir_tono(260.0, 0.12, 0.16)
 	mochila.remover_item_por_clave(clave)
 
 func _iniciar_secuencia_final() -> void:
@@ -272,46 +251,6 @@ func get_input() -> void:
 	update_animation("run")
 	update_flashlight_direction()
 	velocity = input_direction * speed
-
-func _reproducir_pisada() -> void:
-	if reproductor_sonido == null:
-		return
-	var frecuencia_muestreo := 22050
-	var duracion := 0.095
-	var cantidad := int(frecuencia_muestreo * duracion)
-	var audio := AudioStreamWAV.new()
-	audio.format = AudioStreamWAV.FORMAT_16_BITS
-	audio.mix_rate = frecuencia_muestreo
-	var datos := PackedByteArray()
-	datos.resize(cantidad * 2)
-	for i in range(cantidad):
-		var t := float(i) / frecuencia_muestreo
-		var envolvente := exp(-t * 34.0)
-		var golpe := sin(TAU * 92.0 * t) * 0.55 + (randf() * 2.0 - 1.0) * 0.45
-		var muestra := int(golpe * envolvente * 0.20 * 32767.0)
-		datos.encode_s16(i * 2, muestra)
-	audio.data = datos
-	reproductor_sonido.stream = audio
-	reproductor_sonido.play()
-
-func _reproducir_tono(frecuencia: float, duracion: float, volumen: float) -> void:
-	if reproductor_sonido == null:
-		return
-	var frecuencia_muestreo := 22050
-	var cantidad := int(frecuencia_muestreo * duracion)
-	var audio := AudioStreamWAV.new()
-	audio.format = AudioStreamWAV.FORMAT_16_BITS
-	audio.mix_rate = frecuencia_muestreo
-	var datos := PackedByteArray()
-	datos.resize(cantidad * 2)
-	for i in range(cantidad):
-		var t := float(i) / frecuencia_muestreo
-		var envolvente := pow(1.0 - float(i) / cantidad, 2.0)
-		var muestra := int(sin(TAU * frecuencia * t) * envolvente * volumen * 32767.0)
-		datos.encode_s16(i * 2, muestra)
-	audio.data = datos
-	reproductor_sonido.stream = audio
-	reproductor_sonido.play()
 
 func update_flashlight_direction() -> void:
 	var offset := Vector2.ZERO
