@@ -1,15 +1,71 @@
 [gd_scene format=3 uid="uid://disbia323ahnv"]
 
 [ext_resource type="Script" uid="uid://cwk83i4888ttl" path="res://Scripts/puerta.gd" id="1_cydqo"]
+[ext_resource type="Texture2D" uid="uid://kstxx4cqaaco" path="res://Imagenes/animaciones/puerta.png" id="2_ylh6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vbfun"]
 size = Vector2(91, 147)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgxfh"]
+atlas = ExtResource("2_ylh6m")
+region = Rect2(186, 0, 355, 543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imcla"]
+atlas = ExtResource("2_ylh6m")
+region = Rect2(186, 543, 355, 543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbcj5"]
+atlas = ExtResource("2_ylh6m")
+region = Rect2(186, 1086, 355, 543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su2wy"]
+atlas = ExtResource("2_ylh6m")
+region = Rect2(186, 1629, 355, 543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u6f8"]
+atlas = ExtResource("2_ylh6m")
+region = Rect2(186, 0, 355, 543)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbfun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgxfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imcla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbcj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su2wy")
+}],
+"loop": 1,
+"name": &"abrir",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u6f8")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="Puerta" type="Area2D" unique_id=1610243142]
 script = ExtResource("1_cydqo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1857541741]
 shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1528950200]
+position = Vector2(0.06250047, 0.8124937)
+scale = Vector2(0.31514084, 0.31744933)
+sprite_frames = SubResource("SpriteFrames_vbfun")
+animation = &"abrir"
+frame_progress = 0.25038272
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

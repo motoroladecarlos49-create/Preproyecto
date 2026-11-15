@@ -123,6 +123,10 @@ id_puerta_destino = "spawn_habitacion2"
 position = Vector2(224, -56)
 scale = Vector2(1.1, 1.1)
 
+[node name="AnimatedSprite2D" parent="Puerta" index="1" unique_id=1528950200]
+position = Vector2(225.39063, -74.54687)
+scale = Vector2(0.4034331, 0.42374542)
+
 [node name="spawn_habitacion1" type="Marker2D" parent="Puerta" unique_id=1209670363]
 position = Vector2(225, -26.5)
 

@@ -89,24 +89,30 @@ shape = SubResource("RectangleShape2D_nyvdy")
 position = Vector2(1079, 959)
 scale = Vector2(3, 3)
 
-[node name="CajoneraColision" type="CollisionShape2D" parent="CajoneraFija"]
+[node name="CajoneraColision" type="CollisionShape2D" parent="CajoneraFija" unique_id=147298283]
 shape = SubResource("RectangleShape2D_vbfun")
 
-[node name="Cajonera" parent="." instance=ExtResource("1_4jnyt")]
+[node name="Cajonera" parent="." unique_id=425255301 instance=ExtResource("1_4jnyt")]
 position = Vector2(1079, 959)
 scale = Vector2(3, 3)
 mensaje_bloqueo = "Está vacío."
 
-[node name="Armario" parent="." instance=ExtResource("1_4jnyt")]
+[node name="CollisionShape2D" parent="Cajonera" index="0" unique_id=1857541741]
+shape = SubResource("RectangleShape2D_vbfun")
+
+[node name="AnimatedSprite2D" parent="Cajonera" index="1" unique_id=1528950200]
+visible = false
+
+[node name="Armario" parent="." unique_id=517416416 instance=ExtResource("1_4jnyt")]
 position = Vector2(2152, 967.3)
 scale = Vector2(3, 3)
 mensaje_bloqueo = "Está vacío."
 
-[node name="CollisionShape2D" parent="Cajonera" index="0"]
-shape = SubResource("RectangleShape2D_vbfun")
-
-[node name="CollisionShape2D" parent="Armario" index="0"]
+[node name="CollisionShape2D" parent="Armario" index="0" unique_id=1857541741]
 shape = SubResource("RectangleShape2D_nyvdy")
+
+[node name="AnimatedSprite2D" parent="Armario" index="1" unique_id=1528950200]
+visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1926768749]
 color = Color(0.5099403, 0.41995478, 0.44029996, 1)
@@ -125,7 +131,6 @@ limit_bottom = 330
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-
 [node name="UI_inventario" parent="player/CanvasLayer" parent_id_path=PackedInt32Array(1418956237, 480012948) index="0" unique_id=1844190648]
 offset_right = 10.0
 offset_bottom = 4.0
@@ -136,8 +141,12 @@ escena_destino = "res://Escenas/habitacion1.tscn"
 id_puerta_destino = "spawn_habitacion1"
 
 [node name="CollisionShape2D" parent="Puerta" index="0" unique_id=1857541741]
-position = Vector2(1259.5387, 510.69235)
-scale = Vector2(5, 5)
+position = Vector2(1278.7693, 514.5385)
+scale = Vector2(4.5, 4.5)
+
+[node name="AnimatedSprite2D" parent="Puerta" index="1" unique_id=1528950200]
+position = Vector2(1269.1396, 499.1972)
+scale = Vector2(1.4627033, 1.4873033)
 
 [node name="spawn_habitacion2" type="Marker2D" parent="Puerta" unique_id=41924238]
 position = Vector2(1294.1539, 622.2308)
@@ -150,6 +159,10 @@ id_punto_retorno_2d = "spawn_retorno_3d"
 position = Vector2(3634.6155, 607.69244)
 scale = Vector2(5, 5)
 
+[node name="AnimatedSprite2D" parent="Puerta2" index="1" unique_id=1528950200]
+position = Vector2(3652.378, 598.5856)
+scale = Vector2(1.4600585, 1.4785062)
+
 [node name="spawn_retorno_3d" type="Marker2D" parent="Puerta2" unique_id=1951364210]
 position = Vector2(3657.6926, 700)
 
@@ -157,6 +170,9 @@ position = Vector2(3657.6926, 700)
 position = Vector2(649.9999, 603.84607)
 scale = Vector2(5, 5)
 mensaje_bloqueo = "La puerta está cerrada."
+
+[node name="AnimatedSprite2D" parent="Puerta3" index="1" unique_id=1528950200]
+visible = false
 
 [node name="Puerta4" parent="." unique_id=697342636 instance=ExtResource("1_4jnyt")]
 mensaje_bloqueo = "Necesitas una llave para abrir esta puerta."
@@ -166,10 +182,13 @@ finalizar_juego = true
 position = Vector2(2730.7695, 584.6154)
 scale = Vector2(5, 5)
 
+[node name="AnimatedSprite2D" parent="Puerta4" index="1" unique_id=1528950200]
+visible = false
+
+[editable path="Cajonera"]
+[editable path="Armario"]
 [editable path="player"]
 [editable path="Puerta"]
 [editable path="Puerta2"]
 [editable path="Puerta3"]
 [editable path="Puerta4"]
-[editable path="Cajonera"]
-[editable path="Armario"]
