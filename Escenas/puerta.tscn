@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_su2wy")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"abrir",
 "speed": 3.0
 }, {
@@ -64,8 +64,9 @@ shape = SubResource("RectangleShape2D_vbfun")
 position = Vector2(0.06250047, 0.8124937)
 scale = Vector2(0.31514084, 0.31744933)
 sprite_frames = SubResource("SpriteFrames_vbfun")
-animation = &"abrir"
-frame_progress = 0.25038272
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
