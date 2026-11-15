@@ -30,6 +30,10 @@ size = Vector2(19860.416, 23131.992)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyvdy"]
 size = Vector2(21035.99, 22099.68)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vbfun"]
+a = Vector2(13.492584, -1961.375)
+b = Vector2(13.492584, 17338.625)
+
 [node name="habitacion1" type="Node2D" unique_id=945615187]
 position = Vector2(-4, 0)
 scale = Vector2(0.01, 0.01)
@@ -81,6 +85,10 @@ position = Vector2(71361.37, 44845.668)
 rotation = -0.46600294
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_nyvdy")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D" unique_id=726846943]
+position = Vector2(186.50742, 48661.375)
+shape = SubResource("SegmentShape2D_vbfun")
 
 [node name="AreaCajonera" type="Area2D" parent="." unique_id=1738200111]
 position = Vector2(46150, 41586.25)
