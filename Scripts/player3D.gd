@@ -24,18 +24,11 @@ var salida_cerca: bool = false
 var item_cerca_3d: Node3D = null
 var mochila: Mochila
 var tiene_linterna_equipada: bool = false
-var reproductor_sonido: AudioStreamPlayer
-var distancia_pasos: float = 0.0
-var ultima_posicion_pasos: Vector3 = Vector3.ZERO
 
 @onready var salida_3d: Area3D = get_tree().current_scene.get_node_or_null("Salida3D") as Area3D
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	reproductor_sonido = AudioStreamPlayer.new()
-	reproductor_sonido.name = "SonidosJugador"
-	add_child(reproductor_sonido)
-	ultima_posicion_pasos = global_position
 	altura_camara_original = camera_3d.position.y
 	altura_camara_objetivo = altura_camara_original
 	altura_collider_objetivo = altura_normal
@@ -60,7 +53,6 @@ func _ready() -> void:
 			pitch = GameManager.partida_actual.pitch_jugador_3d
 			camera_3d.rotation.x = pitch
 		GameManager.carga_pendiente = false
-	ultima_posicion_pasos = global_position
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -71,7 +63,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_linterna") and tiene_linterna_equipada:
 		GameManager.linterna_encendida = not GameManager.linterna_encendida
 		luz_linterna.visible = GameManager.linterna_encendida
-		_reproducir_sonido(880.0 if GameManager.linterna_encendida else 520.0, 0.09)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interactuar"):
@@ -124,18 +115,6 @@ func _physics_process(delta: float) -> void:
 		collider.shape.size.y = lerp(collider.shape.size.y, altura_collider_objetivo, delta * velocidad_transicion)
 
 	move_and_slide()
-	var desplazamiento_pasos := global_position - ultima_posicion_pasos
-	desplazamiento_pasos.y = 0.0
-	ultima_posicion_pasos = global_position
-	if is_on_floor() and desplazamiento_pasos.length() > 0.001:
-		distancia_pasos += desplazamiento_pasos.length()
-		var distancia_por_paso := 0.58 if esta_agachado else 0.68
-		if distancia_pasos >= distancia_por_paso:
-			distancia_pasos = fmod(distancia_pasos, distancia_por_paso)
-			_reproducir_pisada_3d()
-	else:
-		distancia_pasos = 0.0
-
 	if salida_3d != null:
 		var esta_dentro := salida_3d.get_overlapping_bodies().has(self)
 		if esta_dentro and not salida_cerca and not GameManager.ya_aviso_salida_3d:
@@ -190,7 +169,6 @@ func _recoger_item_3d() -> void:
 	GameManager.quitar_item_tirado_3d(id_recogido)
 	if item_data.nombre == "Linterna":
 		GameManager.linterna_encendida = bool(objeto.get("esta_encendida"))
-	_reproducir_sonido(740.0, 0.16, 0.18)
 	objeto.queue_free()
 	item_cerca_3d = null
 	GameManager.ya_aviso_recoger = false
@@ -237,7 +215,6 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 	if item_a_tirar.nombre == "Linterna":
 		item_suelto.global_rotation = Vector3(0, rotation.y + PI / 2.0, 0)
 	item_suelto.linear_velocity = direccion * 0.55 + Vector3.UP * 0.35
-	_reproducir_sonido(260.0, 0.12, 0.16)
 
 	GameManager.registrar_item_tirado_3d(
 		nuevo_id,
@@ -252,47 +229,6 @@ func tirar_item(clave: String, item_a_tirar: Item) -> void:
 func _on_mochila_item_seleccionado_cambiado(item_actual: Item) -> void:
 	tiene_linterna_equipada = item_actual != null and item_actual.nombre == "Linterna"
 	luz_linterna.visible = tiene_linterna_equipada and GameManager.linterna_encendida
-
-func _reproducir_sonido(frecuencia: float, duracion: float, volumen: float = 0.14) -> void:
-	if reproductor_sonido == null:
-		return
-	var frecuencia_muestreo := 22050
-	var cantidad := int(frecuencia_muestreo * duracion)
-	var audio := AudioStreamWAV.new()
-	audio.format = AudioStreamWAV.FORMAT_16_BITS
-	audio.mix_rate = frecuencia_muestreo
-	audio.stereo = false
-	var datos := PackedByteArray()
-	datos.resize(cantidad * 2)
-	for i in range(cantidad):
-		var t := float(i) / frecuencia_muestreo
-		var envolvente := pow(1.0 - float(i) / cantidad, 2.0)
-		var muestra := int(sin(TAU * frecuencia * t) * envolvente * volumen * 32767.0)
-		datos.encode_s16(i * 2, muestra)
-	audio.data = datos
-	reproductor_sonido.stream = audio
-	reproductor_sonido.play()
-
-func _reproducir_pisada_3d() -> void:
-	if reproductor_sonido == null:
-		return
-	var frecuencia_muestreo := 22050
-	var duracion := 0.11
-	var cantidad := int(frecuencia_muestreo * duracion)
-	var audio := AudioStreamWAV.new()
-	audio.format = AudioStreamWAV.FORMAT_16_BITS
-	audio.mix_rate = frecuencia_muestreo
-	var datos := PackedByteArray()
-	datos.resize(cantidad * 2)
-	for i in range(cantidad):
-		var t := float(i) / frecuencia_muestreo
-		var envolvente := exp(-t * 30.0)
-		var golpe := sin(TAU * 78.0 * t) * 0.6 + (randf() * 2.0 - 1.0) * 0.4
-		var muestra := int(golpe * envolvente * 0.18 * 32767.0)
-		datos.encode_s16(i * 2, muestra)
-	audio.data = datos
-	reproductor_sonido.stream = audio
-	reproductor_sonido.play()
 
 func _puede_levantarse() -> bool:
 	var space = get_world_3d().direct_space_state
